@@ -1,0 +1,38 @@
+###
+###
+### Using 'gcc' toolset.
+###
+###
+g++ --version
+g++ (Ubuntu 10.2.0-13ubuntu1) 10.2.0
+Copyright (C) 2020 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+###
+###
+g++ -x c++ -std=c++11 -O3 -ffunction-sections -fdata-sections -O2 -s -DNDEBUG builtins.cpp class.cpp command.cpp compile.cpp constants.cpp cwd.cpp debug.cpp debugger.cpp execcmd.cpp filesys.cpp frames.cpp function.cpp glob.cpp hash.cpp hcache.cpp hdrmacro.cpp headers.cpp jam.cpp jambase.cpp jamgram.cpp lists.cpp make.cpp make1.cpp md5.cpp mem.cpp modules.cpp native.cpp object.cpp option.cpp output.cpp parse.cpp pathsys.cpp regexp.cpp rules.cpp scan.cpp search.cpp strings.cpp subst.cpp sysinfo.cpp timestamp.cpp variable.cpp w32_getreg.cpp modules/order.cpp modules/path.cpp modules/property-set.cpp modules/regex.cpp modules/sequence.cpp modules/set.cpp execunix.cpp fileunix.cpp pathunix.cpp -o b2
+debugger.cpp: In function ‘void debug_mi_format_breakpoint(int)’:
+debugger.cpp:1837:13: warning: zero-length gnu_printf format string [-Wformat-zero-length]
+ 1837 |     printf( "" );
+      |             ^~
+debugger.cpp: In function ‘LIST* debug_list_read(FILE*)’:
+debugger.cpp:165:11: warning: ignoring return value of ‘int fscanf(FILE*, const char*, ...)’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+  165 |     fscanf( in, "%d", &len );
+      |     ~~~~~~^~~~~~~~~~~~~~~~~~
+execcmd.cpp: In function ‘void argv_from_shell(const char**, LIST*, const char*, int)’:
+execcmd.cpp:55:22: warning: ‘%d’ directive writing between 1 and 11 bytes into a region of size 4 [-Wformat-overflow=]
+   55 |     sprintf( jobno, "%d", slot + 1 );
+      |                      ^~
+execcmd.cpp:55:21: note: directive argument in the range [-2147483647, 2147483647]
+   55 |     sprintf( jobno, "%d", slot + 1 );
+      |                     ^~~~
+In file included from /usr/include/stdio.h:866,
+                 from jam.h:343,
+                 from execcmd.cpp:11:
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:38:34: note: ‘__builtin___sprintf_chk’ output between 2 and 12 bytes into a destination of size 4
+   38 |   return __builtin___sprintf_chk (__s, __USE_FORTIFY_LEVEL - 1,
+      |          ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   39 |       __bos (__s), __fmt, __va_arg_pack ());
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cp b2 bjam

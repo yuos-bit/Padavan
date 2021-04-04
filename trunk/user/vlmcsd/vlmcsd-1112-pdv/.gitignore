@@ -1,0 +1,16 @@
+*
+!buildroot-configs
+!bin
+!build
+!etc
+!floppy
+!GNUmakefile
+!hotbird64-mass-build
+!lib
+!Makefile
+!man
+!README
+!README.compile-and-pre-built-binaries
+!src
+!VisualStudio
+!.gitignore
