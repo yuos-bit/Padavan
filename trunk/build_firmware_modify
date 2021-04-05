@@ -41,7 +41,8 @@ echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #adg DNS去AD
 ##DNS服务##
 
 ##文件管理##
-echo "CONFIG_FIRMWARE_INCLUDE_ARIA2=y" >> .config #aria2服务
+echo "CONFIG_FIRMWARE_INCLUDE_ARIA2_NEW_PREBUILD_BIN=y" >> .config #aria2服务
+echo "CONFIG_FIRMWARE_INCLUDE_ARIANG=y" >> .config #aria2前端
 echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config #在线文件管理服务
 echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddu执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
 ##文件管理##
