@@ -34,6 +34,7 @@ password: admin
 >- MI-3A
 >- MI-3C
 >- MI-4C
+>- MI-4A-100M
 - 小米路由3C 网口以及LED灯配置分别如下
 >- wlan and lan: >>>>> kernel-3.4.x.config
 ```shell
