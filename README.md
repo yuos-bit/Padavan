@@ -108,7 +108,26 @@ fakeroot ./build_firmware_modify PSG1218
 #脚本第一个参数为路由型号，在trunk/configs/templates/中
 #编译好的固件在trunk/images里
 ```
-
+* 关于报错
+```shell
+/opt/rt-n56u/trunk/libs/libpcre/pcre-8.43/missing: line 81: aclocal-1.16: command not found
+WARNING: 'aclocal-1.16' is missing on your system.
+         You should only need it if you modified 'acinclude.m4' or
+         'configure.ac' or m4 files included by 'configure.ac'.
+         The 'aclocal' program is part of the GNU Automake package:
+         <https://www.gnu.org/software/automake>
+         It also requires GNU Autoconf, GNU m4 and Perl in order to run:
+         <https://www.gnu.org/software/autoconf>
+         <https://www.gnu.org/software/m4/>
+         <https://www.perl.org/>
+Makefile:1438: recipe for target 'aclocal.m4' failed
+make[3]: *** [aclocal.m4] Error 127
+```
+* 解决方案
+```shell
+cd /opt/rt-n56u/trunk/libs/libpcre/pcre-8.43
+autoreconf -ivf
+```
 ***
 
 ### 请参阅 ###
