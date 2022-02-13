@@ -108,7 +108,8 @@ fakeroot ./build_firmware_modify PSG1218
 #脚本第一个参数为路由型号，在trunk/configs/templates/中
 #编译好的固件在trunk/images里
 ```
-* 关于报错
+### 关于报错
+* 报错 1
 ```shell
 /opt/rt-n56u/trunk/libs/libpcre/pcre-8.43/missing: line 81: aclocal-1.16: command not found
 WARNING: 'aclocal-1.16' is missing on your system.
@@ -127,6 +128,14 @@ make[3]: *** [aclocal.m4] Error 127
 ```shell
 cd /opt/rt-n56u/trunk/libs/libpcre/pcre-8.43
 autoreconf -ivf
+```
+* 报错 2
+```shell
+/opt/rt-n56u/trunk/.config: line 237: CONFIG_FIRMWARE_INCLUDE_LRZSZ: command not found
+```
+* 解决方案
+```shell
+rm -rf /opt/rt-n56u/trunk/.config
 ```
 ***
 
