@@ -1,2 +1,0 @@
-file filter=lfs diff=lfs merge=lfs -text
-runk/tools/go/go1.15.2.linux-amd64.tar.gz filter=lfs diff=lfs merge=lfs -text

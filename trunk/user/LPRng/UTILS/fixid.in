@@ -1,2 +1,0 @@
-#!@PERL@ -spi.bak
-if( /include.*inet_ntop.h/ ){ $_ = ""; }

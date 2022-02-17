@@ -1,1 +1,0 @@
-./configure --includedir=/root/broadcom/src/linux/linux/include --host=mips CC=mipsel-linux-gcc --disable-werror --disable-kerberos --disable-ssl --disable-mit_kerberos4 --with-userid=root --with-groupid=root --disable-setuid --disable-nls --enable-static --enables-shared
