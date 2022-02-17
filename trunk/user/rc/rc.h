@@ -38,6 +38,7 @@
 
 #define DNS_RESOLV_CONF			"/etc/resolv.conf"
 #define DNS_SERVERS_FILE		"/tmp/dnsmasq.servers"
+#define DNS_RELAY_QUERIES_MAX		512
 
 #define SCRIPT_UDHCPC_LAN		"/tmp/udhcpc_lan.script"
 #define SCRIPT_UDHCPC_WAN		"/tmp/udhcpc.script"
@@ -538,8 +539,6 @@ void start_ss_tunnel(void);
 void restart_ss_tunnel(void);
 void update_chnroute(void);
 void update_gfwlist(void);
-void update_dlink(void);
-void reset_dlink(void);
 #endif
 #if defined(APP_VLMCSD)
 void stop_vlmcsd(void);
@@ -548,48 +547,6 @@ void restart_vlmcsd(void);
 #endif
 #if defined(APP_NAPT66)
 void start_napt66(void);
-#endif
-#if defined(APP_KOOLPROXY)
-void stop_koolproxy(void);
-void start_koolproxy(void);
-void restart_koolproxy(void);
-void update_kp(void);
-#endif
-#if defined(APP_ADGUARDHOME)
-void stop_adguardhome(void);
-void start_adguardhome(void);
-void restart_adguardhome(void);
-#endif
-#if defined(APP_ADBYBY)
-void stop_adbyby(void);
-void start_adbyby(void);
-void restart_adbyby(void);
-void update_adb(void);
-#endif
-#if defined(APP_ALIDDNS)
-void stop_aliddns(void);
-void start_aliddns(void);
-void restart_aliddns(void);
-#endif
-#if defined(APP_FRP)
-void stop_frp(void);
-void start_frp(void);
-void restart_frp(void);
-#endif
-#if defined(APP_CADDY)
-void stop_caddy(void);
-void start_caddy(void);
-void restart_caddy(void);
-#endif
-#if defined(APP_WYY)
-void stop_wyy(void);
-void start_wyy(void);
-void restart_wyy(void);
-#endif
-#if defined(APP_ZEROTIER)
-void stop_zerotier(void);
-void start_zerotier(void);
-void restart_zerotier(void);
 #endif
 #if defined(APP_DNSFORWARDER)
 void stop_dnsforwarder(void);

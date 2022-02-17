@@ -85,8 +85,8 @@ function applyRule(){
 
 function restoreNVRAM(){
 	var alert_string = "<#Setting_factorydefault_hint1#>";
-	if(lan_ipaddr != "192.168.2.1")
-		alert_string += '\n<#Setting_factorydefault_iphint#> 默认的局域网 IP 是' + lan_ipaddr + '\n如果无法返回设置页面，请重新获取你的电脑的 IP 地址。\n';
+	if(lan_ipaddr != "192.168.1.1")
+		alert_string += "\n<#Setting_factorydefault_iphint#>\n";
 	alert_string += "\n<#Setting_factorydefault_hint2#>";
 	if(confirm(alert_string)){
 		document.form.action1.blur();
@@ -312,7 +312,7 @@ $j.fn.fileName = function() {
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table">
                                         <tr>
-                                            <th colspan="2" style="background-color: #d2c0c021;"><#Adm_Setting_nvram#></th>
+                                            <th colspan="2" style="background-color: #E3E3E3;"><#Adm_Setting_nvram#></th>
                                         </tr>
                                         <tr id="row_nv_reset" style="display:none">
                                             <th><a class="help_tooltip" href="javascript:void(0);" onmouseover="openTooltip(this,19,1)"><#Setting_factorydefault_itemname#></a></th>
@@ -357,7 +357,7 @@ $j.fn.fileName = function() {
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table" id="tbl_rwfs" style="display:none">
                                         <tr>
-                                            <th colspan="2" style="background-color: #d2c0c021;"><#Adm_Setting_rwfs#></th>
+                                            <th colspan="2" style="background-color: #E3E3E3;"><#Adm_Setting_rwfs#></th>
                                         </tr>
                                         <tr>
                                             <th width="50%"><#Adm_Setting_rwfs_mount#></th>
@@ -372,7 +372,7 @@ $j.fn.fileName = function() {
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table">
                                         <tr>
-                                            <th colspan="3" style="background-color: #d2c0c021;"><#Adm_Setting_store#></th>
+                                            <th colspan="3" style="background-color: #E3E3E3;"><#Adm_Setting_store#></th>
                                         </tr>
                                         <tr id="row_st_reset" style="display:none">
                                             <th><#Setting_factorydefault_itemname#></th>

@@ -2,8 +2,8 @@ THISDIR = $(shell pwd)
 v2ray_dir="v2ray.com/core/main"
 export GO111MODULE=on
 export GOPROXY=https://goproxy.io
-V2ray_VERSION := 4.31.2
-V2ray_URL := https://codeload.github.com/v2ray/v2ray-core/tar.gz/v$(V2ray_VERSION)
+V2ray_VERSION := 4.44.0
+V2ray_URL := https://github.com/v2fly/v2ray-core/releases/download/v$(V2ray_VERSION)/v2ray-linux-mips64le.zip
 V2RAY_SED_ARGS:=
 V2RAY_SED_ARGS += \
 	s/_ "v2ray.com\/core\/main\/json"/\/\/ &/; \
@@ -14,15 +14,15 @@ V2RAY_SED_ARGS += \
 all:download_v2 build_extract build_v2ray
 
 download_v2:
-	( if [ ! -f $(THISDIR)/v2ray-core-$(V2ray_VERSION).tar.gz ]; then \
-	curl --create-dirs -L $(V2ray_URL) -o $(THISDIR)/v2ray-core-$(V2ray_VERSION).tar.gz ; \
+	( if [ ! -f $(THISDIR)/v2ray-core-$(V2ray_VERSION).zip ]; then \
+	curl --create-dirs -L $(V2ray_URL) -o $(THISDIR)/v2ray-core-$(V2ray_VERSION).zip ; \
 	fi )
 
 build_extract:
 	mkdir -p $(THISDIR)/v2ray.com
 	mkdir -p $(THISDIR)/bin
 	( if [ ! -d $(THISDIR)/v2ray.com/core ]; then \
-	tar zxfv $(THISDIR)/v2ray-core-$(V2ray_VERSION).tar.gz -C $(THISDIR)/v2ray.com ; \
+	unzip -qq $(THISDIR)/v2ray-core-$(V2ray_VERSION).zip -C $(THISDIR)/v2ray.com ; \
 	mv $(THISDIR)/v2ray.com/v2ray-core-$(V2ray_VERSION) $(THISDIR)/v2ray.com/core ; \
 	fi )
 

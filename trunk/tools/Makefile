@@ -1,5 +1,3 @@
-THISDIR = $(shell pwd)
-go_version = 1.17.7
 # use host target
 CC        = gcc
 GCC       = gcc
@@ -17,11 +15,9 @@ SSTRIP_NAME = ELFkickers-3.1
 CFLAGS    = -Wall -O2
 LDFLAGS   =
 
-
-
 -include $(LINUX_CONFIG)
 
-all:go_build
+all:
 	make -C mkimage
 	mkdir -p sstrip
 	make -C $(SSTRIP_NAME)
@@ -29,15 +25,6 @@ all:go_build
 ifeq ($(CONFIG_RT2880_ROOTFS_IN_FLASH),y)
 	make -C mksquashfs_xz
 endif
-
-go_build:
-	mkdir -p $(THISDIR)/go
-	( if [ ! -f $(THISDIR)/go/go$(go_version).linux-amd64.tar.gz ]; then \
-	curl --create-dirs -L https://gomirrors.org/dl/go/go$(go_version).linux-amd64.tar.gz -o $(THISDIR)/go/go$(go_version).linux-amd64.tar.gz ; \
-	fi )
-	( if [ ! -d $(THISDIR)/go/go ]; then \
-	tar zxfv $(THISDIR)/go/go$(go_version).linux-amd64.tar.gz -C go ; \
-	fi )
 
 clean:
 	if [ -f $(SSTRIP_NAME)/Makefile ] ; then \
@@ -47,4 +34,3 @@ clean:
 	make -C mkimage clean
 	make -C lzma clean
 	make -C mksquashfs_xz clean
-	rm -rf $(THISDIR)/go/go

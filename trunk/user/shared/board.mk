@@ -1,8 +1,8 @@
 ##################################################################
 # Board PID # Board Name       # PRODUCT # Note
 ##################################################################
-# MI-4C   # Xiaomi Mi 4C   # MT7628  #
+# RT-N56U   # ASUS RT-N56U     # RT3883  #
 ##################################################################
 
-CFLAGS += -DBOARD_MI4C
-BOARD_NUM_USB_PORTS=0
+CFLAGS += -DBOARD_N56U -DVENDOR_ASUS
+BOARD_NUM_USB_PORTS=2

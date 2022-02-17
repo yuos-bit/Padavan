@@ -131,8 +131,12 @@ catch_sig_fatal(int sig)
 	kill(-1, SIGTERM);
 	sleep(1);
 	sync();
-	
+
+#ifdef MTD_FLASH_32M_REBOOT_BUG
+	system("/bin/mtd_write -r unlock mtd1");
+#else
 	reboot(RB_AUTOBOOT);
+#endif
 
 	do {
 		sleep(1);
@@ -549,12 +553,7 @@ init_main_loop(void)
 int
 sys_exit(void)
 {
-#ifdef MTD_FLASH_32M_REBOOT_BUG
-    doSystem("/sbin/mtd_storage.sh %s", "save");
-	system("/bin/mtd_write -r unlock mtd1");
-#else
 	return kill(1, SIGTERM);
-#endif
 }
 
 int

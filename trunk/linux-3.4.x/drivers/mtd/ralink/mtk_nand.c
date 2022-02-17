@@ -26,6 +26,8 @@
 #include "ralink-flash.h"
 #if defined (CONFIG_MTD_NAND_USE_UBI_PART)
 #include "ralink-nand-map-ubi.h"
+#elif defined (CONFIG_MTD_NAND_USE_XIAOMI_PART)
+#include "ralink-nand-map-xiaomi.h"
 #else
 #include "ralink-nand-map.h"
 #endif
@@ -123,7 +125,6 @@ static const flashdev_info gen_FlashTable[]= {
 	{"TC58NVG3S0F",     0x98D3, 0x902676, 5, 8, 1024, 256, 4096, 224, 0x00C25332, 0},
 
 	/* Micron */
-	{"MT29F2G08ABAE",   0x2CDA, 0x909506, 5, 8,  256, 128, 2048,  64, 0x00844333, 0},
 	{"MT29F1G08ABAEA",  0x2CF1, 0x809504, 4, 8,  128, 128, 2048,  64, 0x00844333, 0},
 	{"MT29F16G08ABABA", 0x2C48, 0x0026A9, 5, 8, 2048, 512, 4096, 224, 0x00844333, 0},
 	

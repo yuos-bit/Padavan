@@ -1,8 +1,0 @@
-void DllMainCRTStartup()
-{
-}
-
-void PenKawaKuwaKuwa()
-{
-}
-

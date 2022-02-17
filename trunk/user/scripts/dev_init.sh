@@ -58,14 +58,9 @@ mkdir -p -m 750 /etc/Wireless/iNIC
 mtd_storage.sh load
 
 touch /etc/resolv.conf
-cp -f /etc_ro/ld.so.cache /etc
 
 if [ -f /etc_ro/openssl.cnf ]; then
 	cp -f /etc_ro/openssl.cnf /etc/ssl
-fi
-
-if [ -f /etc_ro/ca-certificates.crt ]; then
-	ln -sf /etc_ro/ca-certificates.crt /etc/ssl/cert.pem
 fi
 
 # create symlinks
@@ -78,7 +73,6 @@ ln -sf /etc_ro/shells /etc/shells
 ln -sf /etc_ro/profile /etc/profile
 ln -sf /etc_ro/e2fsck.conf /etc/e2fsck.conf
 ln -sf /etc_ro/ipkg.conf /etc/ipkg.conf
-ln -sf /etc_ro/ld.so.conf /etc/ld.so.conf
 
 # tune linux kernel
 echo 65536        > /proc/sys/fs/file-max
@@ -93,7 +87,14 @@ if [ -f /etc/storage/authorized_keys ] ; then
 	chmod 600 /home/root/.ssh/authorized_keys
 fi
 
+# setup htop default color
+if [ -f /usr/bin/htop ]; then
+	mkdir -p /home/root/.config/htop
+	echo "color_scheme=6" > /home/root/.config/htop/htoprc
+fi
+
 # perform start script
 if [ -x /etc/storage/start_script.sh ] ; then
 	/etc/storage/start_script.sh
 fi
+

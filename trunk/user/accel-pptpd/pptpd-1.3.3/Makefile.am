@@ -11,7 +11,7 @@ INCLUDES = -I.
 ##  warning with -Wmissing-prototypes).
 ## -Wmissing-prototypes removed (eg, Linux 2.2.6 headers
 ##  aren't up to it).
-CFLAGS = -O2 -fno-builtin -Wall -DSBINDIR='"$(sbindir)"' -I$(kernel_headers)
+CFLAGS += -O2 -fno-builtin -Wall -DSBINDIR='"$(sbindir)"' -I$(kernel_headers)
 #CFLAGS = -O2 -fno-builtin -Wall -ansi -DSBINDIR='"$(sbindir)"'
 #CFLAGS = -O2 -fno-builtin -Wall -ansi -pedantic -Wmissing-prototypes -Werror -DSBINDIR='"$(sbindir)"'
 
@@ -85,9 +85,9 @@ configfile.o: configfile.c config.h defaults.h configfile.h our_syslog.h
 ctrlpacket.o: ctrlpacket.c config.h our_syslog.h pptpdefs.h pptpctrl.h \
  ctrlpacket.h compat.h
 
-getopt1.o: getopt1.c config.h our_getopt.h
-
 getopt.o: getopt.c config.h our_getopt.h
+
+getopt1.o: getopt1.c config.h our_getopt.h
 
 inststr.o: inststr.c config.h inststr.h compat.h
 
