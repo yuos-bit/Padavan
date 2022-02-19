@@ -1,6 +1,0 @@
-*.o
-config.h
-tags
-redsocks
-.depend
-/gen
