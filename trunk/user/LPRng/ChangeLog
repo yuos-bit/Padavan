@@ -1,4 +1,0 @@
-2003-09-04  gettextize  <bug-gnu-gettext@gnu.org>
-
-	* configure.in (AC_OUTPUT): Add po/Makefile.in.
-

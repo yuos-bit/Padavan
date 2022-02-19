@@ -1,8 +1,0 @@
-*.o
-zconf.c
-zconf.lex.c
-.deps
-conf
-lxdialog/.dirstamp
-mconf
-nconf
