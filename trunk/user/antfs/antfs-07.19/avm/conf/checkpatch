@@ -1,4 +1,0 @@
-#!bash
-#
-# Configuration file for AVM's bitbucket checkpatch "build"
-IGNORED_TYPES="LINUX_VERSION_CODE MISSING_SIGN_OFF"
