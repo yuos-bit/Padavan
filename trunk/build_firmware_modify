@@ -34,7 +34,7 @@ echo "CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=n" >> .config
 
 ##内网穿透##
 echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config #zerotier ~1.3M
-echo "CONFIG_FIRMWARE_INCLUDE_NPS=n" >> .config #nps ~0.8M
+echo "CONFIG_FIRMWARE_INCLUDE_NPC=n" >> .config #nps ~0.8M
 ##内网穿透证##
 
 ROOTDIR=`pwd`
