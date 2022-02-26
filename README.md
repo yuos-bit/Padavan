@@ -83,7 +83,7 @@ CONFIG_RAETH_ESW_PORT_LAN4=0
 sudo apt-get update
 sudo apt-get install unzip libtool curl cmake gperf gawk flex bison nano \
 git python-docutils gettext automake autopoint texinfo build-essential fakeroot \
-pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev
+pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev -y
 ```
 * 克隆源码
 ```shell
