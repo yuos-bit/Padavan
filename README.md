@@ -93,8 +93,14 @@ git clone --depth=1 https://github.com/yuos-bit/Padavan.git /opt/rt-n56u
 * 编译工具链
 ```shell
 cd /opt/rt-n56u/toolchain-mipsel
-./clean_sources
-./build_toolchain_3.4.x
+
+# （推荐）使用脚本下载预编译的工具链：
+sh dl_toolchain.sh
+
+# 或者，也可以从源码编译工具链，这需要一些时间：
+./clean_toolchain
+./build_toolchain
+
 ```
 * (可选)修改机型配置文件
 ```shell
