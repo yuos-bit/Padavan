@@ -81,9 +81,10 @@ CONFIG_RAETH_ESW_PORT_LAN4=0
 * 安装依赖包
 ```shell
 sudo apt-get update
-sudo apt-get install unzip libtool curl cmake gperf gawk flex bison nano \
-git python-docutils gettext automake autopoint texinfo build-essential fakeroot \
-pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev -y
+sudo apt install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd \
+    fakeroot kmod cpio git python3-docutils gettext automake autopoint \
+    texinfo build-essential help2man pkg-config zlib1g-dev libgmp3-dev \
+    libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget libc-dev-bin -y
 ```
 * 克隆源码
 ```shell
