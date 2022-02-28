@@ -402,18 +402,16 @@ if (found_app_mentohust()){
 	tabtitle[13] = new Array("", "<#menu5_1_1#>","<#menu5_13_log#>");
 }
 if (found_app_frp()){
-	tabtitle[14] = new Array("", "<#menu5_17_1#>");
-	tabtitle[9] = new Array("", "<#menu5_17_1#>");
+	tabtitle[14] = new Array("", "<#menu5_17_1#>","<#menu5_17_log#>");
 }
 if (found_app_npc()){
-	tabtitle[14] = new Array("", "<#menu5_17_2#>");
-	tabtitle[9] = new Array("", "<#menu5_17_2#>");
+	tabtitle[14] = new Array("", "<#menu5_17_2#>","<#menu5_17_log#>");
 }
 if (found_app_aliddns()){
-	tabtitle[14] = new Array("", "<#menu5_17_3#>");
+	tabtitle[14] = new Array("", "<#menu5_17_3#>","<#menu5_17_log#>");
 }
 if (found_app_zerotier()){
-	tabtitle[14] = new Array("", "<#menu5_17_4#>");
+	tabtitle[14] = new Array("", "<#menu5_17_4#>","<#menu5_17_log#>");
 }
 
 //Level 3 Tab title
@@ -428,6 +426,11 @@ tablink[6] = new Array("", "Advanced_System_Content.asp", "Advanced_Services_Con
 tablink[7] = new Array("", "Advanced_Tweaks_Content.asp", "Advanced_Scripts_Content.asp", "Advanced_InetDetect_Content.asp");
 tablink[8] = new Array("", "Main_WStatus2g_Content.asp", "Main_WStatus_Content.asp", "", "", "", "", "", "", "", "");
 tablink[9] = new Array("", "Main_LogStatus_Content.asp", "Main_DHCPStatus_Content.asp", "Main_IPTStatus_Content.asp", "Main_RouteStatus_Content.asp", "Main_CTStatus_Content.asp");
+tablink[10] = new Array("");
+tablink[11] = new Array("");
+tablink[12] = new Array("");
+tablink[13] = new Array("");
+tablink[14] = new Array("");
 if (found_app_scutclient()){
 	scutclient_array = new Array("", "scutclient.asp", "scutclient_log.asp");
 	tablink[10] = (scutclient_array);
@@ -437,7 +440,7 @@ if (found_app_dnsforwarder()){
 	tablink[11] = (dns_forwarder_array);
 }
 if (found_app_shadowsocks()){
-	shadowsocks_array = new Array("","Shadowsocks.asp","Shadowsocks_log.asp");
+	shadowsocks_array = new Array("","Shadowsocks.asp");
 	tablink[12] = (shadowsocks_array);
 }
 if (found_app_mentohust()){
@@ -464,7 +467,7 @@ if (found_app_zerotier()){
 //Level 2 Menu
 menuL2_title = new Array(15)
 menuL2_title = new Array("", "<#menu5_11#>", "<#menu5_12#>", "<#menu5_2#>", "<#menu5_3#>", "<#menu5_5#>", "<#menu5_4#>", "<#menu5_6#>", "<#menu5_10#>", "<#menu5_9#>", "<#menu5_7#>");
-if (found_app_scutclient()){
+if (found_app_scutclient() || found_app_mentohust()){
 	menuL2_title.push("<#menu5_13#>");
 } else menuL2_title.push("");
 
@@ -478,10 +481,6 @@ if (found_app_shadowsocks()){
 
 if (found_app_frp() || found_app_npc() || found_app_aliddns() || found_app_zerotier()){
 	menuL2_title.push("<#menu5_17#>");
-} else menuL2_title.push("");
-
-if (found_app_mentohust()){
-	menuL2_title.push("mentohust");
 } else menuL2_title.push("");
 
 
@@ -501,9 +500,12 @@ if (found_app_shadowsocks()){
 if (found_app_mentohust()){
 	menuL2_link.push(mentohust_array[1]);
 } else menuL2_link.push("");
+
 if (found_app_frp() || found_app_npc() || found_app_aliddns() || found_app_zerotier()){
 	menuL2_link.push(tablink[14][1]);
 } else menuL2_link.push("");
+
+
 //Level 1 Menu in Gateway, Router mode
 menuL1_title = new Array("", "<#menu1#>", "", "", "", "<#menu4#>", "<#menu5_8#>", "<#menu5#>");
 menuL1_link = new Array("", "index.asp", "", "", "", "Main_TrafficMonitor_realtime.asp", "Advanced_System_Info.asp", "as.asp");
