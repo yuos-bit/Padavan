@@ -26,6 +26,8 @@ SAMBA_ENABLED=n
 SOFTETHERVPN_ENABLE=n
 SHADOWSOCKS_ENABLE=n
 FRP_ENABLE=n
+TROJAN_ENABLE=n
+NPC_ENABLED=y
 
 ifneq ($(CONFIG_FIRMWARE_INCLUDE_OPENSSH),y)
 ifeq ($(CONFIG_FIRMWARE_INCLUDE_DROPBEAR),y)
@@ -85,6 +87,14 @@ ifneq ($(filter y,$(CONFIG_FIRMWARE_INCLUDE_FRPC) $(CONFIG_FIRMWARE_INCLUDE_FRPS
 FRP_ENABLE=y
 endif
 
+ifneq ($(filter y,$(CONFIG_FIRMWARE_INCLUDE_WING) $(CONFIG_FIRMWARE_INCLUDE_TROJAN)),)
+TROJAN_ENABLE=y
+endif
+
+ifneq ($(CONFIG_FIRMWARE_INCLUDE_NPC),y)
+NPC_ENABLED=n
+endif
+
 dir_y =
 dir_n =
 dir_  =
@@ -134,7 +144,6 @@ dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)            +=ipt2socks
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)	        += dns2tcp
 dir_$(CONFIG_FIRMWARE_INCLUDE_SSOBFS)                      += simple-obfs
 dir_$(CONFIG_FIRMWARE_INCLUDE_ZEROTIER)	                       += zerotier
-dir_$(CONFIG_FIRMWARE_INCLUDE_NPC)		+= npc
 dir_$(CONFIG_FIRMWARE_INCLUDE_ALIDDNS)		+= aliddns
 dir_$(CONFIG_FIRMWARE_INCLUDE_SMARTDNS)	+= smartdns
 dir_$(OPENSSH_ENABLED)				+= openssh
@@ -166,6 +175,7 @@ endif
 dir_$(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS)	+= chnroute
 dir_$(CONFIG_FIRMWARE_INCLUDE_TTYD)		+= ttyd
 dir_$(FRP_ENABLE)				+= frp
+dir_$(NPC_ENABLED)                               += npc
 dir_$(SOFTETHERVPN_ENABLE)			+= softethervpn
 dir_$(CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT)         += scutclient
 dir_$(CONFIG_FIRMWARE_INCLUDE_VLMCSD)			+= vlmcsd
@@ -183,6 +193,7 @@ ifeq ($(CONFIG_FIRMWARE_INCLUDE_WING),y)
 dir_y 			+= wing
 dir_y 			+= ipt2socks
 endif
+dir_$(TROJAN_ENABLE) 			+= trojan
 dir_$(CONFIG_FIRMWARE_INCLUDE_REDSOCKS)			+= redsocks
 dir_$(CONFIG_FIRMWARE_INCLUDE_3PROXY)			+= 3proxy
 
