@@ -27,7 +27,45 @@
 user: admin
 password: admin
 ```
+### 编译说明 ###
 
+* 安装依赖包
+```shell
+sudo apt-get update
+sudo apt install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd \
+    fakeroot kmod cpio git python3-docutils gettext automake autopoint \
+    texinfo build-essential help2man pkg-config zlib1g-dev libgmp3-dev \
+    libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget libc-dev-bin libctf-nobfd0 libcunit1-dev libhdf5-dev libopenblas-dev -y
+```
+* 克隆源码
+```shell
+git clone --depth=1 https://github.com/yuos-bit/Padavan.git /opt/rt-n56u
+#git clone --depth=1 https://github.com/yuos-bit/Padavan.git /opt/rt-n56u
+```
+* 编译工具链
+```shell
+cd /opt/rt-n56u/toolchain-mipsel
+
+# （推荐）使用脚本下载预编译的工具链：
+sh dl_toolchain.sh
+
+# 或者，也可以从源码编译工具链，这需要一些时间：
+./clean_toolchain
+./build_toolchain
+
+```
+* (可选)修改机型配置文件
+```shell
+nano /opt/rt-n56u/trunk/configs/templates/PSG1218.config
+```
+* 清理代码树并开始编译
+```shell
+cd /opt/rt-n56u/trunk
+sudo ./clear_tree
+fakeroot ./build_firmware_modify PSG1218
+#脚本第一个参数为路由型号，在trunk/configs/templates/中
+#编译好的固件在trunk/images里
+```
 - 已额外适配除官方适配外的以下机型
 >- MI-3 (USB)
 >- MI-3MI (USB) ```小米路由3硬改SOP flash 16mb```
@@ -76,45 +114,6 @@ CONFIG_RAETH_ESW_PORT_LAN4=0
 ```
 ***
 
-### 编译说明 ###
-
-* 安装依赖包
-```shell
-sudo apt-get update
-sudo apt install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd \
-    fakeroot kmod cpio git python3-docutils gettext automake autopoint \
-    texinfo build-essential help2man pkg-config zlib1g-dev libgmp3-dev \
-    libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget libc-dev-bin libctf-nobfd0 libcunit1-dev libhdf5-dev libopenblas-dev -y
-```
-* 克隆源码
-```shell
-git clone --depth=1 https://github.com/yuos-bit/Padavan.git /opt/rt-n56u
-#git clone --depth=1 https://github.com/yuos-bit/Padavan.git /opt/rt-n56u
-```
-* 编译工具链
-```shell
-cd /opt/rt-n56u/toolchain-mipsel
-
-# （推荐）使用脚本下载预编译的工具链：
-sh dl_toolchain.sh
-
-# 或者，也可以从源码编译工具链，这需要一些时间：
-./clean_toolchain
-./build_toolchain
-
-```
-* (可选)修改机型配置文件
-```shell
-nano /opt/rt-n56u/trunk/configs/templates/PSG1218.config
-```
-* 清理代码树并开始编译
-```shell
-cd /opt/rt-n56u/trunk
-sudo ./clear_tree
-fakeroot ./build_firmware_modify PSG1218
-#脚本第一个参数为路由型号，在trunk/configs/templates/中
-#编译好的固件在trunk/images里
-```
 ### 关于报错
 * 报错 1
 ```shell
