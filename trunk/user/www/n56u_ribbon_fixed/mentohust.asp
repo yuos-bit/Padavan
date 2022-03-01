@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><#Web_Title#> - <#menu5_18#></title>
+<title><#Web_Title#> - <#menu5_13#></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
@@ -134,7 +134,7 @@ function fill_status(status_code){
                                 <div class="row-fluid">
                                     <div id="tabMenu" class="submenuBlock"></div>
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table">
-                                        <tr> <th colspan="2" style="background-color: #E3E3E3;"><#menu5_1_1#></th> </tr>
+                                        <tr> <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#menu5_1_1#></th> </tr>
 
                                         <tr> <th width="50%"><#InetControl#></th>
                                             <td style="border-top: 0 none;" colspan="2">
@@ -199,7 +199,7 @@ function fill_status(status_code){
                                             </td>
                                         </tr>
 
-                                        <tr> <th colspan="2" style="background-color: #E3E3E3;"><#menu5_18_8_0#></th> </tr>
+                                        <tr> <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#menu5_18_8_0#></th> </tr>
 
                                         <tr> <th width="50%"><#menu5_18_8#></th>
                                             <td>

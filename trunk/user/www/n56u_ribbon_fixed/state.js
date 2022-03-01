@@ -402,16 +402,16 @@ if (found_app_mentohust()){
 	tabtitle[13] = new Array("", "<#menu5_1_1#>","<#menu5_13_log#>");
 }
 if (found_app_frp()){
-	tabtitle[14] = new Array("", "<#menu5_17_1#>","<#menu5_17_log#>");
+	tabtitle[14] = new Array("", "<#menu5_1_1#>","<#menu5_17_1#>");
 }
 if (found_app_npc()){
-	tabtitle[14] = new Array("", "<#menu5_17_2#>","<#menu5_17_log#>");
+	tabtitle[14] = new Array("", "<#menu5_1_1#>","<#menu5_17_2#>");
 }
 if (found_app_aliddns()){
-	tabtitle[14] = new Array("", "<#menu5_17_3#>","<#menu5_17_log#>");
+	tabtitle[14] = new Array("", "<#menu5_1_1#>","<#menu5_17_3#>");
 }
 if (found_app_zerotier()){
-	tabtitle[14] = new Array("", "<#menu5_17_4#>","<#menu5_17_log#>");
+	tabtitle[14] = new Array("", "<#menu5_1_1#>","<#menu5_17_4#>");
 }
 
 //Level 3 Tab title

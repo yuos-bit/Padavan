@@ -1403,7 +1403,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			-moz-border-radius: 5px;
 			border-radius: 5px;
 			z-index: 200;
-			background-color: #ffffff;
+			background-color: rgb(60 60 60);
 			margin-left: 15px;
 			top: 80px;
 			width: 650px;
@@ -1729,11 +1729,12 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 													</tr>
 												</table>
 											</div>
+											
 											<!--节点列表-->
 											<div id="wnd_ss_add">
 											<table width="100%" cellpadding="4" cellspacing="0" class="table">
 													<tr>
-														<th colspan="2" style="background-color: #E3E3E3;">
+														<th colspan="2" style="background-color: rgba(255,255,255,0.2);">
 															订阅节点:添加完地址请先点击一下保存设置按钮,再点击更新订阅按钮。</th>
 													</tr>
 													<tr>
@@ -1834,7 +1835,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 												
 										
 													<tr>
-														<th colspan="2" style="background-color: #E3E3E3;">
+														<th colspan="2" style="background-color: rgba(255,255,255,0.2);">
 															<select name="ss_list_mode" style="display: none"
 																id="ss_list_mode" class="input" style="width: 100px;">
 																<option value="a">全部节点</option>
@@ -1863,7 +1864,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 													<table width="100%" cellpadding="4" cellspacing="0" class="table"
 														id="sslist">
 														<tr>
-															<th id="ss_setting_title" colspan="2" style="background-color: #E3E3E3;">
+															<th id="ss_setting_title" colspan="2" style="background-color: rgba(255,255,255,0.2);">
 																添加/删除/编辑节点</th>
 														</tr>
 														<tr>
@@ -2325,7 +2326,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 											<div id="wnd_ss_ssl" style="display:none">
 												<table width="100%" cellpadding="4" cellspacing="0" class="table">
 													<tr>
-														<th colspan="2" style="background-color: #E3E3E3;">节点故障自动切换设置
+														<th colspan="2" style="background-color: rgba(255,255,255,0.2);">节点故障自动切换设置
 														</th>
 													</tr>
 													<tr>
@@ -2392,7 +2393,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 </tr>-->
 
 													<tr>
-														<th colspan="2" style="background-color: #E3E3E3;">SOCKS5代理</th>
+														<th colspan="2" style="background-color: rgba(255,255,255,0.2);">SOCKS5代理</th>
 													</tr>
 													<tr>
 														<th>服务器:
@@ -2427,7 +2428,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 											<div id="wnd_ss_cli" style="display:none">
 												<table width="100%" cellpadding="4" cellspacing="0" class="table">
 													<tr>
-														<th colspan="2" style="background-color: #E3E3E3;">Chnroute</th>
+														<th colspan="2" style="background-color: rgba(255,255,255,0.2);">Chnroute</th>
 													</tr>
 													<tr>
 														<th width="50%">
@@ -2475,7 +2476,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														</td>
 													</tr>
 													<tr>
-														<th colspan="2" style="background-color: #E3E3E3;">gfwlist</th>
+														<th colspan="2" style="background-color: rgba(255,255,255,0.2);">gfwlist</th>
 													</tr>
 													<tr>
 														<th width="50%">
@@ -2623,7 +2624,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 											<div id="wnd_ss_help" style="display:none">
 												<table width="100%" cellpadding="4" cellspacing="0" class="table">
 													<tr>
-														<th colspan="2" style="background-color: #E3E3E3;">
+														<th colspan="2" style="background-color: rgba(255,255,255,0.2);">
 															chinadns-ng说明:</th>
 													</tr>
 													<tr>
