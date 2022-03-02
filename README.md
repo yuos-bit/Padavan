@@ -5,7 +5,7 @@
 # README #
 
 ### UI预览 ###
-[![cKY0w4.png](https://z3.ax1x.com/2021/04/04/cKY0w4.png)](https://imgtu.com/i/cKY0w4)
+![](https://pic.imgdb.cn/item/621f1afaa86b6edc748594f2.jpg)
 
 
 ### 特别说明 ###
