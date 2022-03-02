@@ -5,8 +5,7 @@
 # README #
 
 ### UI预览 ###
-
-![ui](https://pic.imgdb.cn/item/621f1afaa86b6edc748594f2.jpg)
+[![](https://pic.imgdb.cn/item/621f1afaa86b6edc748594f2.jpg)](https://pic.imgdb.cn/item/621f1afaa86b6edc748594f2.jpg)
 
 
 ### 特别说明 ###
