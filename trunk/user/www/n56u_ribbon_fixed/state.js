@@ -390,32 +390,30 @@ tabtitle[7] = new Array("", "<#menu5_10_1#>", "<#menu5_10_2#>", "<#menu5_10_3#>"
 tabtitle[8] = new Array("", "<#menu5_11#>", "<#menu5_12#>", "WAN", "", "", "", "", "", "", "");
 tabtitle[9] = new Array("", "<#menu5_7_2#>", "<#menu5_7_3#>", "<#menu5_7_5#>", "<#menu5_7_6#>", "<#menu5_7_8#>");
 if (found_app_scutclient()){
-	tabtitle[10] = new Array("", "<#menu5_1_1#>","<#menu5_13_log#>");
+	tabtitle[10] = new Array("", "<#menu5_20#>","<#menu5_13_log#>");
 }
 if (found_app_dnsforwarder()){
-	tabtitle[11] = new Array("", "<#menu5_1_1#>");
+	tabtitle[11] = new Array("", "<#menu5_20#>");
 }
 if (found_app_shadowsocks()){
-	tabtitle[12] = new Array("", "<#menu5_1_1#>","<#menu5_16_20#>");
+	tabtitle[12] = new Array("", "<#menu5_20#>","<#menu5_16_20#>");
 }
 if (found_app_mentohust()){
-	tabtitle[13] = new Array("", "<#menu5_1_1#>","<#menu5_13_log#>");
+	tabtitle[13] = new Array("", "<#menu5_20#>","<#menu5_13_log#>");
 }
 if (found_app_frp()){
-	tabtitle[14] = new Array("", "<#menu5_1_1#>","<#menu5_17_1#>");
+	tabtitle[14] = new Array("", "<#menu5_20#>","<#menu5_17_1#>");
 }
 if (found_app_npc()){
-	tabtitle[14] = new Array("", "<#menu5_1_1#>","<#menu5_17_2#>");
+	tabtitle[15] = new Array("", "<#menu5_20#>","<#menu5_17_2#>");
 }
 if (found_app_aliddns()){
-	tabtitle[14] = new Array("", "<#menu5_1_1#>","<#menu5_17_3#>");
+	tabtitle[16] = new Array("", "<#menu5_20#>");
 }
 if (found_app_zerotier()){
-	tabtitle[14] = new Array("", "<#menu5_1_1#>","<#menu5_17_4#>");
+	tabtitle[17] = new Array("", "<#menu5_20#>");
 }
-
 //Level 3 Tab title
-
 tablink[0] = new Array("", "Advanced_Wireless2g_Content.asp", "Advanced_WGuest2g_Content.asp", "Advanced_WMode2g_Content.asp", "Advanced_ACL2g_Content.asp", "Advanced_WSecurity2g_Content.asp", "Advanced_WAdvanced2g_Content.asp");
 tablink[1] = new Array("", "Advanced_Wireless_Content.asp", "Advanced_WGuest_Content.asp", "Advanced_WMode_Content.asp", "Advanced_ACL_Content.asp", "Advanced_WSecurity_Content.asp", "Advanced_WAdvanced_Content.asp");
 tablink[2] = new Array("", "Advanced_LAN_Content.asp", "Advanced_DHCP_Content.asp", "Advanced_GWStaticRoute_Content.asp", "Advanced_IPTV_Content.asp", "Advanced_Switch_Content.asp", "Advanced_WOL_Content.asp");
@@ -426,11 +424,6 @@ tablink[6] = new Array("", "Advanced_System_Content.asp", "Advanced_Services_Con
 tablink[7] = new Array("", "Advanced_Tweaks_Content.asp", "Advanced_Scripts_Content.asp", "Advanced_InetDetect_Content.asp");
 tablink[8] = new Array("", "Main_WStatus2g_Content.asp", "Main_WStatus_Content.asp", "", "", "", "", "", "", "", "");
 tablink[9] = new Array("", "Main_LogStatus_Content.asp", "Main_DHCPStatus_Content.asp", "Main_IPTStatus_Content.asp", "Main_RouteStatus_Content.asp", "Main_CTStatus_Content.asp");
-tablink[10] = new Array("");
-tablink[11] = new Array("");
-tablink[12] = new Array("");
-tablink[13] = new Array("");
-tablink[14] = new Array("");
 if (found_app_scutclient()){
 	scutclient_array = new Array("", "scutclient.asp", "scutclient_log.asp");
 	tablink[10] = (scutclient_array);
@@ -440,7 +433,7 @@ if (found_app_dnsforwarder()){
 	tablink[11] = (dns_forwarder_array);
 }
 if (found_app_shadowsocks()){
-	shadowsocks_array = new Array("","Shadowsocks.asp");
+	shadowsocks_array = new Array("","Shadowsocks.asp","Shadowsocks_log.asp");
 	tablink[12] = (shadowsocks_array);
 }
 if (found_app_mentohust()){
@@ -448,26 +441,26 @@ if (found_app_mentohust()){
 	tablink[13] = (mentohust_array);
 }
 if (found_app_frp()){
-    frp_array = new Array("","Advanced_frp.asp","Advanced_frp_log.asp");
-	tablink[14] = (frp_array);
+	frp_array = new Array("","Advanced_frp.asp","Advanced_frp_log.asp");
+	tabtitle[14] = (frp_array);
 }
 if (found_app_npc()){
-    npc_array = new Array("","Advanced_npc.asp","Advanced_npc_log.asp");
-	tablink[14] = (npc_array);
+	npc_array = new Array("","Advanced_npc.asp","Advanced_npc_log.asp");
+	tabtitle[15] = (npc_array);
 }
 if (found_app_aliddns()){
-    aliddns_array = new Array("","Advanced_aliddns.asp");
-	tablink[14] = (aliddns_array);
+	aliddns_array = new Array("","Advanced_aliddns.asp");
+	tabtitle[16] = (aliddns_array);
 }
 if (found_app_zerotier()){
-    zerotier_array = new Array("","Advanced_zerotier.asp");
-	tablink[14] = (zerotier_array);
+	zerotier_array = new Array("","Advanced_zerotier.asp");
+	tabtitle[17] = (zerotier_array);
 }
 
 //Level 2 Menu
-menuL2_title = new Array(15)
+menuL2_title = new Array(19)
 menuL2_title = new Array("", "<#menu5_11#>", "<#menu5_12#>", "<#menu5_2#>", "<#menu5_3#>", "<#menu5_5#>", "<#menu5_4#>", "<#menu5_6#>", "<#menu5_10#>", "<#menu5_9#>", "<#menu5_7#>");
-if (found_app_scutclient() || found_app_mentohust()){
+if (found_app_scutclient()){
 	menuL2_title.push("<#menu5_13#>");
 } else menuL2_title.push("");
 
@@ -479,10 +472,25 @@ if (found_app_shadowsocks()){
 	menuL2_title.push("<#menu5_16#>");
 } else menuL2_title.push("");
 
-if (found_app_frp() || found_app_npc() || found_app_aliddns() || found_app_zerotier()){
-	menuL2_title.push("<#menu5_17#>");
+if (found_app_mentohust()){
+	menuL2_title.push("<#menu5_13#>");
 } else menuL2_title.push("");
 
+if (found_app_frp()){
+	menuL2_title.push("<#menu5_17#>");
+}else menuL2_title.push("");
+
+if (found_app_npc()){
+	menuL2_title.push("<#menu5_17#>");
+}else menuL2_title.push("");
+
+if (found_app_aliddns()){
+	menuL2_title.push("<#menu5_17#>");
+}else menuL2_title.push("");
+
+if (found_app_zerotier()){
+	menuL2_title.push("<#menu5_17#>");
+}else menuL2_title.push("");
 
 menuL2_link  = new Array("", tablink[0][1], tablink[1][1], tablink[2][1], tablink[3][1], tablink[4][1], tablink[5][1], tablink[6][1], tablink[7][1], support_2g_radio() ? tablink[8][1] : "Main_EStatus_Content.asp", tablink[9][1]);
 if (found_app_scutclient()){
@@ -501,15 +509,27 @@ if (found_app_mentohust()){
 	menuL2_link.push(mentohust_array[1]);
 } else menuL2_link.push("");
 
-if (found_app_frp() || found_app_npc() || found_app_aliddns() || found_app_zerotier()){
-	menuL2_link.push(tablink[14][1]);
-} else menuL2_link.push("");
+if (found_app_frp()){
+	menuL2_link.push(frp_array[1]);
+}else menuL2_link.push("");
 
+if (found_app_npc()){
+	menuL2_link.push(npc_array[1]);
+}else menuL2_link.push("");
+
+if (found_app_aliddns()){
+	menuL2_link.push(aliddns_array[1]);
+}else menuL2_link.push("");
+
+if (found_app_zerotier()){
+	menuL2_link.push(zerotier_array[1]);
+}else menuL2_link.push("");
 
 //Level 1 Menu in Gateway, Router mode
-menuL1_title = new Array("", "<#menu1#>", "", "", "", "<#menu4#>", "<#menu5_8#>", "<#menu5#>");
-menuL1_link = new Array("", "index.asp", "", "", "", "Main_TrafficMonitor_realtime.asp", "Advanced_System_Info.asp", "as.asp");
-menuL1_icon = new Array("", "icon-home", "icon-hdd", "icon-retweet", "icon-globe", "icon-tasks", "icon-random", "icon-wrench");
+menuL1_title = new Array("", "<#menu1#>", "<#menu3#>", "<#menu2#>", "<#menu6#>", "<#menu4#>", "<#menu5_8#>", "<#menu5#>", "<#menu5_20#>");
+menuL1_link = new Array("", "index.asp", "aidisk.asp", "vpnsrv.asp", "vpncli.asp", "Main_TrafficMonitor_realtime.asp", "Advanced_System_Info.asp", "as.asp", "as2.asp");
+menuL1_icon = new Array("", "icon-home", "icon-hdd", "icon-retweet", "icon-globe", "icon-tasks", "icon-random", "icon-wrench", "icon-folder-open");
+
 
 function show_menu(L1, L2, L3){
 	var i;
