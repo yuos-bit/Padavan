@@ -5,7 +5,7 @@
 # README #
 
 ### UI预览 ###
-[![](https://pic.imgdb.cn/item/621f1afaa86b6edc748594f2.jpg)](https://pic.imgdb.cn/item/621f1afaa86b6edc748594f2.jpg)
+[![b84Ru4.jpg](https://s4.ax1x.com/2022/03/02/b84Ru4.jpg)](https://imgtu.com/i/b84Ru4)
 
 
 ### 特别说明 ###
