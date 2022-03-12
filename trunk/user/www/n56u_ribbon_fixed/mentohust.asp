@@ -32,7 +32,7 @@ $j(document).ready(function(){
 
 function initial(){
 	show_banner(2);
-	show_menu(5,14,1);
+	show_menu(5,11,2);
 	show_footer();
 	var o1 = document.form.mentohust_startmode;
 	var o2 = document.form.mentohust_dhcp;
@@ -129,7 +129,7 @@ function fill_status(status_code){
                 <div class="row-fluid">
                     <div class="span12">
                         <div class="box well grad_colour_dark_blue">
-                            <h2 class="box_head round_top"><#menu5_13_2#></h2>
+                            <h2 class="box_head round_top"><#menu5_13#> - <#menu5_13_2#></h2>
                             <div class="round_bottom">
                                 <div class="row-fluid">
                                     <div id="tabMenu" class="submenuBlock"></div>

@@ -3,7 +3,7 @@
 
 <head>
 	<title>
-		<#Web_Title#> - <#menu5_16#>
+		<#Web_Title#> - <#menu5_16_0#>
 	</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta http-equiv="Pragma" content="no-cache">
@@ -76,11 +76,9 @@
 			}
 			}); 
 			$j("#v2_tls").change(function() { 
-			if($j("#v2_tls").is(':checked')){
-			document.getElementById('v2_tls').value=1;
+			if(document.getElementById('v2_tls').value != '0'){
 			showhide_div('row_tj_tls_host', 1);
-			}else{
-			document.getElementById('v2_tls').value=0;
+			}else{			
 			showhide_div('row_tj_tls_host', 0);
 			}
 			});
@@ -117,11 +115,11 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 }
 		function initial() {
 			show_banner(2);
-			show_menu(13, 13, 0);
+			show_menu(5, 14, 1);
 			show_footer();
 			fill_ss_status(shadowsocks_status());
-			$("chnroute_count").innerHTML = '<#menu5_17_3#>' + chnroute_count();
-			$("gfwlist_count").innerHTML = '<#menu5_17_3#>' + gfwlist_count();
+			$("chnroute_count").innerHTML = '<#menu5_16_29#>' + chnroute_count();
+			$("gfwlist_count").innerHTML = '<#menu5_16_29#>' + gfwlist_count();
 			switch_ss_type();
 			showTab(getHash());
 			showMRULESList();
@@ -213,6 +211,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			showhide_div('row_v2_net', 0);
 			showhide_div('row_v2_security', 0);
 			showhide_div('row_v2_tls', 0);
+			showhide_div('row_v2_flow', 0);
 			showhide_div('row_v2_type_tcp', 0);
 			showhide_div('row_v2_type', 0);
 			showhide_div('row_v2_vid', 0);
@@ -596,7 +595,6 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 							formatter: actionFormatter
 						}]
 					});
-
 				
 				
 		}
@@ -693,6 +691,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			document.getElementById("v2_http_path").value = '';
 			document.getElementById("v2_tls").value = '0';
 			document.getElementById("v2_flow").value = '0';
+			//document.getElementById("v2_tls").checked = false;
 			document.getElementById("ssp_tls_host").value = '';
 			//"v2 tcp"
 			document.getElementById("v2_kcp_guise").value = 'none';
@@ -754,8 +753,9 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 				document.getElementById("v2_tcp_guise").value = getProperty(ss, 'tcp_guise', 'none');
 				document.getElementById("v2_http_host").value = getProperty(ss, 'http_host', '');
 				document.getElementById("v2_http_path").value = getProperty(ss, 'http_path', '');
-				document.getElementById("v2_tls").value = getProperty(ss, 'tls', 0);
+				document.getElementById("v2_tls").value = getProperty(ss, 'tls', '0');
 				document.getElementById("v2_flow").value = getProperty(ss, 'flow', '0');
+				//document.getElementById("v2_tls").checked =  document.getElementById("v2_tls").value != 0;
 				document.getElementById("ssp_tls_host").value = getProperty(ss, 'tls_host', '');
 				if (transport == "kcp") {
 					document.getElementById("v2_kcp_guise").value = getProperty(ss, 'kcp_guise', 'none');
@@ -779,8 +779,8 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			} else if (type == "trojan") {
 				document.getElementById("ssp_insecure").value = getProperty(ss, 'insecure', 0);
 				document.getElementById("ssp_insecure").checked =  document.getElementById("ssp_insecure").value != 0;
-				document.getElementById("v2_tls").value = getProperty(ss, 'tls', 0);
-				document.getElementById("v2_tls").checked =  document.getElementById("v2_tls") != 0;
+				document.getElementById("v2_tls").value = getProperty(ss, 'tls', '0');
+				//document.getElementById("v2_tls").checked =  document.getElementById("v2_tls") != 0;
 				document.getElementById("ssp_tls_host").value = getProperty(ss, 'tls_host', '');
 			} else if (type == "socks5") {
 				//
@@ -945,7 +945,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			var s = document.getElementById(urlname + '-status');
 			if (!s)
 				return false;
-				var ssrurl = prompt("在这里黏贴配置链接 ssr:// | ss:// | vmess:// | vless:// | trojan://", "");
+			var ssrurl = prompt("在这里黏贴配置链接 ssr:// | ss:// | vmess:// | vless:// | trojan://", "");
 			if (ssrurl == null || ssrurl == "") {
 				s.innerHTML = "<font color='red'>用户取消</font>";
 				return false;
@@ -1076,8 +1076,8 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 					document.getElementById('v2_h2_path').value = ssm.path;
 				}
 				if (ssm.tls == "tls") {
-					document.getElementById('v2_tls').value = 1;
-					document.getElementById('v2_tls').checked = true;
+					document.getElementById('v2_tls').value = '1';
+					//document.getElementById('v2_tls').checked = true;
 					document.getElementById('ssp_insecure').value = 1;
 					document.getElementById('ssp_insecure').checked = true;
 					document.getElementById('ssp_tls_host').value = ssm.host;
@@ -1192,7 +1192,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			}
 		}
 		//-----------导入链接结束
-function check_Timefield_checkbox() {
+		function check_Timefield_checkbox() {
 			if (document.form.ss_date_x_Sun.checked == true ||
 				document.form.ss_date_x_Mon.checked == true ||
 				document.form.ss_date_x_Tue.checked == true ||
@@ -1403,7 +1403,7 @@ function check_Timefield_checkbox() {
 			-moz-border-radius: 5px;
 			border-radius: 5px;
 			z-index: 200;
-			background-color: rgb(60 60 60);
+			background-color: #57606f;
 			margin-left: 15px;
 			top: 80px;
 			width: 650px;
@@ -1464,34 +1464,32 @@ function check_Timefield_checkbox() {
 						<div class="row-fluid">
 							<div class="span12">
 								<div class="box well grad_colour_dark_blue">
-									<h2 class="box_head round_top">
-										<#menu5_16#> - ShadowSocksR Plus+
-									</h2>
+									<h2 class="box_head round_top"><#menu5_16#> - <#menu5_16_0#></h2>
 									<div class="round_bottom">
-										<div>
-											<ul class="nav nav-tabs" style="margin-bottom: 10px;">
-												<li class="active">
-													<a id="tab_ss_cfg" href="#cfg">客户端</a>
-												</li>
-												<li>
-													<a id="tab_ss_add" href="#add">节点管理</a>
-												</li>
-												<li>
-													<a id="tab_ss_ssl" href="#ssl">高级设置</a>
-												</li>
-												<li>
-													<a id="tab_ss_cli" href="#cli">规则管理</a>
-												</li>
-												<li>
-													<a id="tab_ss_log" href="#log">运行日志</a>
-												</li>
-												<li>
-													<a id="tab_ss_help" href="#help">帮助文档</a>
-												</li>
-											</ul>
-										</div>
 										<div class="row-fluid">
 											<div id="tabMenu" class="submenuBlock"></div>
+											<div>
+												<ul class="nav nav-tabs" style="margin-bottom: 10px;">
+													<li class="active">
+														<a id="tab_ss_cfg" href="#cfg">客户端</a>
+													</li>
+													<li>
+														<a id="tab_ss_add" href="#add">节点管理</a>
+													</li>
+													<li>
+														<a id="tab_ss_ssl" href="#ssl">高级设置</a>
+													</li>
+													<li>
+														<a id="tab_ss_cli" href="#cli">规则管理</a>
+													</li>
+													<li>
+														<a id="tab_ss_log" href="#log">运行日志</a>
+													</li>
+													<li>
+														<a id="tab_ss_help" href="#help">帮助文档</a>
+													</li>
+												</ul>
+											</div>
 											<div id="wnd_ss_cfg">
 												<div class="alert alert-info" style="margin: 10px;">
 													一个兼容Shadowsocks、ShadowsocksR 、Vmess等协议的游戏加速工具。
@@ -2256,8 +2254,7 @@ function check_Timefield_checkbox() {
 														<tr id="row_ssp_insecure" style="display:none;">
 															<th>allowInsecure</th>
 															<td>
-																<input type="checkbox" name="ssp_insecure" id="ssp_insecure" >
-
+																<input type="checkbox" name="ssp_insecure" id="ssp_insecure" >		
 															</td>
 														</tr>
 														<tr id="row_v2_tls" style="display:none;">
@@ -2434,14 +2431,14 @@ function check_Timefield_checkbox() {
 													</tr>
 													<tr>
 														<th width="50%">
-															<#menu5_17_1#>&nbsp;&nbsp;&nbsp;&nbsp;<span
+															<#menu5_16_27#>&nbsp;&nbsp;&nbsp;&nbsp;<span
 																	class="label label-info"
 																	style="padding: 5px 5px 5px 5px;"
 																	id="chnroute_count"></span>
 														</th>
 														<td style="border-top: 0 none;" colspan="2">
 															<input type="button" id="btn_connect_3" class="btn btn-info"
-																value=<#menu5_17_2#>
+																value=<#menu5_16_28#>
 															onclick="submitInternet('Update_chnroute');">
 														</td>
 													</tr>
@@ -2482,14 +2479,14 @@ function check_Timefield_checkbox() {
 													</tr>
 													<tr>
 														<th width="50%">
-															<#menu5_17_1#>&nbsp;&nbsp;&nbsp;&nbsp;<span
+															<#menu5_16_27#>&nbsp;&nbsp;&nbsp;&nbsp;<span
 																	class="label label-info"
 																	style="padding: 5px 5px 5px 5px;"
 																	id="gfwlist_count"></span>
 														</th>
 														<td style="border-top: 0 none;" colspan="2">
 															<input type="button" id="btn_connect_4" class="btn btn-info"
-																value=<#menu5_17_2#>
+																value=<#menu5_16_28#>
 															onclick="submitInternet('Update_gfwlist');">
 														</td>
 													</tr>
