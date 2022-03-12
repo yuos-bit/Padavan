@@ -73,6 +73,7 @@ fakeroot ./build_firmware_modify PSG1218
 >- MI-3C
 >- MI-4C
 >- MI-4A-100M
+>- MI-R4A```小米路由4A千兆版```
 - 小米路由3C 网口以及LED灯配置分别如下
 >- wlan and lan: >>>>> kernel-3.4.x.config
 ```shell
