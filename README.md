@@ -114,6 +114,19 @@ CONFIG_RAETH_ESW_PORT_LAN4=0
 #undef  BOARD_GPIO_LED_WAN
 ```
 ***
+### 捐贈
+
+***
+<center><b>如果你觉得此项目对你有帮助，可以捐助我，用爱发电也挺难的，哈哈。</b></center>
+
+|  微信   | 支付宝  |
+|  ----  | ----  |
+| ![](https://pic.imgdb.cn/item/62502707239250f7c5b8ac3d.png) | ![](https://pic.imgdb.cn/item/62502707239250f7c5b8ac36.png) |
+
+## 赞助名单
+
+![](https://pic.imgdb.cn/item/625028c0239250f7c5bd102b.jpg)
+感谢以上大佬的充电！
 
 ### 关于报错
 * 报错 1
