@@ -22,8 +22,8 @@ download_xray:
 	
 build_extract:
 	( if [ ! -f $(THISDIR)/xray ]; then \
-		mkdir -p $(THISDIR)/xray.com
-		mkdir -p $(THISDIR)/bin
+		mkdir -p $(THISDIR)/xray.com ; \
+		mkdir -p $(THISDIR)/bin ; \
 	( if [ ! -d $(THISDIR)/xray.com/core ]; then \
 	tar zxfv $(THISDIR)/Xray-core-$(xray_VERSION).tar.gz -C $(THISDIR)/xray.com ; \
 	mv $(THISDIR)/xray.com/Xray-core-$(xray_VERSION) $(THISDIR)/xray.com/core ; \
