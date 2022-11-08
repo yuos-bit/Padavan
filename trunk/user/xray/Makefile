@@ -31,7 +31,7 @@ build_extract:
 	fi )
 
 build_xray:
-	( if [ ! -f $(THISDIR)/v2ray ]; then \
+	( if [ ! -f $(THISDIR)/xray ]; then \
 		( cd $(THISDIR)/$(xray_dir); \
 		sed -i \
 			'$(xray_SED_ARGS)' \
@@ -45,7 +45,7 @@ clean:
 	rm -rf $(THISDIR)/bin
 	
 romfs:
-	( if [ ! -f $(THISDIR)/v2ray ]; then \
+	( if [ ! -f $(THISDIR)/xray ]; then \
 		$(ROMFSINST) -p +x $(THISDIR)/bin/xray /usr/bin/v2ray ;\
 		$(ROMFSINST) -p +x $(THISDIR)/bin/xray_softfloat /usr/bin/xray_softfloat ;\
 	else \
