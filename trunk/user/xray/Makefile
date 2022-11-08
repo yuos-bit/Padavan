@@ -39,4 +39,10 @@ clean:
 	rm -rf $(THISDIR)/bin
 	
 romfs:
-	$(ROMFSINST) -p +x $(THISDIR)/bin/xray /usr/bin/v2ray
+	( if [ ! -f $(THISDIR)/v2ray ]; then \
+		$(ROMFSINST) -p +x $(THISDIR)/bin/xray /usr/bin/v2ray ;\
+		$(ROMFSINST) -p +x $(THISDIR)/bin/xray_softfloat /usr/bin/xray_softfloat ;\
+	else \
+		$(ROMFSINST) -p +x $(THISDIR)/xray /usr/bin/v2ray ;\
+		$(ROMFSINST) -p +x $(THISDIR)/xray_softfloat /usr/bin/xray_softfloat ;\
+	fi )
