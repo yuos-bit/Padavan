@@ -14,25 +14,31 @@ xray_URL := https://codeload.github.com/xtls/xray-core/tar.gz/v$(xray_VERSION)
 all:download_xray build_extract build_xray
 
 download_xray:
-	( if [ ! -f $(THISDIR)/Xray-core-$(xray_VERSION).tar.gz ]; then \
-	curl --create-dirs -L $(xray_URL) -o $(THISDIR)/Xray-core-$(xray_VERSION).tar.gz ; \
+	(if [ ! -f $(THISDIR)/xray ]; then \
+		if [ ! -f $(THISDIR)/Xray-core-$(xray_VERSION).tar.gz ]; then \
+			curl --create-dirs -L $(xray_URL) -o $(THISDIR)/Xray-core-$(xray_VERSION).tar.gz ; \
+		fi \
 	fi )
 	
 build_extract:
-	mkdir -p $(THISDIR)/xray.com
-	mkdir -p $(THISDIR)/bin
+	( if [ ! -f $(THISDIR)/xray ]; then \
+		mkdir -p $(THISDIR)/xray.com
+		mkdir -p $(THISDIR)/bin
 	( if [ ! -d $(THISDIR)/xray.com/core ]; then \
 	tar zxfv $(THISDIR)/Xray-core-$(xray_VERSION).tar.gz -C $(THISDIR)/xray.com ; \
 	mv $(THISDIR)/xray.com/Xray-core-$(xray_VERSION) $(THISDIR)/xray.com/core ; \
+		fi ) \
 	fi )
 
 build_xray:
-	( cd $(THISDIR)/$(xray_dir); \
-	sed -i \
+	( if [ ! -f $(THISDIR)/v2ray ]; then \
+		( cd $(THISDIR)/$(xray_dir); \
+		sed -i \
 			'$(xray_SED_ARGS)' \
 			distro/all/all.go ; \
-	GOOS=linux GOARCH=mipsle go build -ldflags "-s -w -buildid=" -o $(THISDIR)/bin/xray; \
-	)
+		GOOS=linux GOARCH=mipsle go build -ldflags "-s -w -buildid=" -o $(THISDIR)/bin/xray; \
+		)\
+	fi )
 	
 clean:
 	rm -rf $(THISDIR)/xray.com
