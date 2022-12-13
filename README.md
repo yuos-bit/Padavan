@@ -39,7 +39,8 @@ sudo apt install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd \
 ```
 * 克隆源码
 ```shell
-git clone --depth=1 https://github.com/yuos-bit/Padavan.git /opt/rt-n56u
+git clone --depth=1 https://github.com/yuos-bit/Padavan.git
+
 #git clone --depth=1 https://github.com/yuos-bit/Padavan.git /opt/rt-n56u
 ```
 * 编译工具链
