@@ -445,7 +445,9 @@ if (found_app_caddy()){
 if (found_app_wyy()){
 	tabtitle[16].push("<#menu5_19_1#>");
 }
-
+if (found_app_sqm()){
+	tabtitle[17] = new Array("", "QoS限速");
+}
 //Level 3 Tab title
 tablink[0] = new Array("", "Advanced_Wireless2g_Content.asp", "Advanced_WGuest2g_Content.asp", "Advanced_WMode2g_Content.asp", "Advanced_ACL2g_Content.asp", "Advanced_WSecurity2g_Content.asp", "Advanced_WAdvanced2g_Content.asp");
 tablink[1] = new Array("", "Advanced_Wireless_Content.asp", "Advanced_WGuest_Content.asp", "Advanced_WMode_Content.asp", "Advanced_ACL_Content.asp", "Advanced_WSecurity_Content.asp", "Advanced_WAdvanced_Content.asp");
@@ -511,8 +513,10 @@ if (found_app_caddy()){
 if (found_app_wyy()){
 	tablink[16].push("Advanced_wyy.asp");
 }
-
-
+if (found_app_sqm()){
+	sqm_array = new Array("","Advanced_SQM.asp");
+	tablink[17] = (sqm_array);
+}
 //Level 2 Menu
 menuL2_title = new Array("", "<#menu5_11#>", "<#menu5_12#>", "<#menu5_2#>", "<#menu5_3#>", "<#menu5_5#>", "<#menu5_4#>", "<#menu5_6#>", "<#menu5_10#>", "<#menu5_9#>", "<#menu5_7#>");
 if (found_app_scutclient() || found_app_mentohust()){
@@ -536,6 +540,9 @@ if (found_app_caddy()){
 if (found_app_wyy()){
 	menuL2_title.push("<#menu5_19#>");
 } else menuL2_title.push("");
+if (found_app_sqm()){
+	menuL2_title.push("QoS限速");
+} else menuL2_title.push("");
 
 menuL2_link  = new Array("", tablink[0][1], tablink[1][1], tablink[2][1], tablink[3][1], tablink[4][1], tablink[5][1], tablink[6][1], tablink[7][1], support_2g_radio() ? tablink[8][1] : "Main_EStatus_Content.asp", tablink[9][1]);
 if (found_app_scutclient() || found_app_mentohust()){
@@ -558,6 +565,9 @@ if (found_app_caddy()){
 } else menuL2_link.push("");
 if (found_app_wyy()){
 	menuL2_link.push(tablink[16][1]);
+} else menuL2_link.push("");
+if (found_app_sqm()){
+	menuL2_link.push(sqm_array[1]);
 } else menuL2_link.push("");
 
 //Level 1 Menu in Gateway, Router mode
