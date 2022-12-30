@@ -31,7 +31,6 @@ $j(document).ready(function() {
 	init_itoggle('crond_enable', change_crond_enabled);
 	init_itoggle('ttyd_enable', change_ttyd_enabled);
 	init_itoggle('vlmcsd_enable');
-	init_itoggle('napt66_enable');
 	init_itoggle('watchdog_cpu');
 });
 
@@ -91,9 +90,6 @@ function initial(){
 		showhide_div('div_vlmcsd', 0);
 	}
 	
-	if(!found_app_napt66()){
-		showhide_div('div_napt66', 0);
-	}
 }
 
 function applyRule(){
@@ -324,7 +320,7 @@ function on_ttyd_link(){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#Adm_System_webs#></th>
+                                            <th colspan="2" style="background-color: #E3E3E3;"><#Adm_System_webs#></th>
                                         </tr>
                                         <tr id="row_http_proto">
                                             <th><#Adm_System_http_proto#></th>
@@ -370,7 +366,7 @@ function on_ttyd_link(){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table" id="tbl_https_certs" style="display:none">
                                         <tr>
-                                            <th colspan="4" style="background-color: rgba(255,255,255,0.2);"><#Adm_System_https_certs#></th>
+                                            <th colspan="4" style="background-color: #E3E3E3;"><#Adm_System_https_certs#></th>
                                         </tr>
                                         <tr id="row_https_gen" style="display:none">
                                             <td align="right" style="text-align:right;">
@@ -432,7 +428,7 @@ function on_ttyd_link(){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#Adm_System_term#></th>
+                                            <th colspan="2" style="background-color: #E3E3E3;"><#Adm_System_term#></th>
                                         </tr>
                                         <tr>
                                             <th width="50%"><#Adm_System_telnetd#></th>
@@ -470,7 +466,7 @@ function on_ttyd_link(){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table" id="tbl_wins" style="display:none">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);">Windows Internet Name Service (WINS)</th>
+                                            <th colspan="2" style="background-color: #E3E3E3;">Windows Internet Name Service (WINS)</th>
                                         </tr>
                                         <tr>
                                             <th width="50%"><#Adm_Svc_wins#></th>
@@ -510,7 +506,7 @@ function on_ttyd_link(){
 
                                     <table width="100%" id="tbl_ttyd" cellpadding="4" cellspacing="0" class="table" style="display:none;">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#Adm_Svc_ttyd_setup#></th>
+                                            <th colspan="2" style="background-color: #E3E3E3;"><#Adm_Svc_ttyd_setup#></th>
                                         </tr>
                                         <tr id="div_ttyd">
                                             <th width="50%"><#Adm_Svc_ttyd_enable#></th>
@@ -540,7 +536,7 @@ function on_ttyd_link(){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#Adm_System_misc#></th>
+                                            <th colspan="2" style="background-color: #E3E3E3;"><#Adm_System_misc#></th>
                                         </tr>
 										
                                         <tr id="div_vlmcsd">
@@ -557,22 +553,6 @@ function on_ttyd_link(){
                                                 </div>
                                             </td>
                                         </tr>
-
-                                        <tr id="div_napt66">
-                                            <th><#Adm_Svc_napt66#></th>
-                                            <td>
-                                                <div class="main_itoggle">
-                                                    <div id="napt66_enable_on_of">
-                                                        <input type="checkbox" id="napt66_enable_fake" <% nvram_match_x("", "napt66_enable", "1", "value=1 checked"); %><% nvram_match_x("", "napt66_enable", "0", "value=0"); %>>
-                                                    </div>
-                                                </div>
-                                                <div style="position: absolute; margin-left: -10000px;">
-                                                    <input type="radio" name="napt66_enable" id="napt66_enable_1" class="input" value="1" <% nvram_match_x("", "napt66_enable", "1", "checked"); %>/><#checkbox_Yes#>
-                                                    <input type="radio" name="napt66_enable" id="napt66_enable_0" class="input" value="0" <% nvram_match_x("", "napt66_enable", "0", "checked"); %>/><#checkbox_No#>
-                                                </div>
-                                            </td>
-                                        </tr>
-
                                         <tr>
                                             <th><#Adm_Svc_lltd#></th>
                                             <td>

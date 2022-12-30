@@ -161,7 +161,6 @@ function validate_ip6_part(o){
 function change_ip6_service(){
 	var ip6_con = document.form.ip6_service.value;
 	var wan_proto = document.form.wan_proto.value;
-	var hw_nat_mode = document.form.hw_nat_mode.value;
 	var wif = 'IPoE: <#BOP_ctype_title5#>';
 	var ppp = (wan_proto == "pppoe" || wan_proto == "pptp" || wan_proto == "l2tp") ? true : false;
 	var warn = false;
@@ -261,16 +260,6 @@ function change_ip6_service(){
 
 	if (!ip6on) {
 		showhide_div('tbl_ip6_sit', 0);
-	}
-
-	if (ip6on && hw_nat_mode != "2" && ((support_ipv6_ppe() > 1) || (support_ipv6_ppe() == 1 && (ip6_con=="static" || ip6_con=="dhcp6")))) {
-		$('row_wan_ppe').style.display="";
-		if (support_ipv6_ppe() > 1){
-			if (hw_nat_mode == "1" || hw_nat_mode == "4")
-				$('ip6_ppe_on').options[1].text = "Offload for LAN/WLAN";
-		}
-	} else {
-		$('row_wan_ppe').style.display="none";
 	}
 
 	if (wan_proto == "dhcp")
@@ -391,7 +380,6 @@ function change_ip6_lan_dhcp(){
     <input type="hidden" name="action_mode" value="">
     <input type="hidden" name="action_script" value="">
     <input type="hidden" name="wan_proto" value="<% nvram_get_x("", "wan_proto"); %>" readonly="1">
-    <input type="hidden" name="hw_nat_mode" value="<% nvram_get_x("", "hw_nat_mode"); %>" readonly="1">
     <input type="hidden" name="ip6_lan_sfps" value="<% nvram_get_x("", "ip6_lan_sfps"); %>">
     <input type="hidden" name="ip6_lan_sfpe" value="<% nvram_get_x("", "ip6_lan_sfpe"); %>">
 
@@ -436,15 +424,6 @@ function change_ip6_lan_dhcp(){
                                                 </select>
                                             </td>
                                         </tr>
-                                        <tr id="row_wan_ppe">
-                                            <th><#IP6_WAN_PPE#></th>
-                                            <td align="left">
-                                                <select class="input" name="ip6_ppe_on" id="ip6_ppe_on">
-                                                    <option value="0" <% nvram_match_x("", "ip6_ppe_on", "0", "selected"); %>><#checkbox_No#></option>
-                                                    <option value="1" <% nvram_match_x("", "ip6_ppe_on", "1", "selected"); %>>Offload for LAN</option>
-                                                </select>
-                                            </td>
-                                        </tr>
                                         <tr id="row_wan_if">
                                             <th><#IP6_WAN_IF#></th>
                                             <td align="left">
@@ -462,7 +441,7 @@ function change_ip6_lan_dhcp(){
 
                                     <table width="100%" align="center" cellpadding="4" cellspacing="0" class="table" id="tbl_ip6_sit" style="display:none;">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#IP6_SIT_desc#></th>
+                                            <th colspan="2" style="background-color: #E3E3E3;"><#IP6_SIT_desc#></th>
                                         </tr>
                                         <tr id="row_ip6_6in4_remote">
                                             <th width="50%"><#IP6_SIT_6in4R#></th>
@@ -504,7 +483,7 @@ function change_ip6_lan_dhcp(){
 
                                     <table width="100%" align="center" cellpadding="4" cellspacing="0" class="table" id="tbl_ip6_wan" style="display:none;">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#IP6_WAN_desc#></th>
+                                            <th colspan="2" style="background-color: #E3E3E3;"><#IP6_WAN_desc#></th>
                                         </tr>
                                         <tr id="row_ip6_wan_dhcp">
                                             <th width="50%"><#IP6_WAN_DHCP#></th>
@@ -556,7 +535,7 @@ function change_ip6_lan_dhcp(){
 
                                     <table width="100%" align="center" cellpadding="4" cellspacing="0" class="table" id="tbl_ip6_dns" style="display:none;">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#IP6_DNS_desc#></th>
+                                            <th colspan="2" style="background-color: #E3E3E3;"><#IP6_DNS_desc#></th>
                                         </tr>
                                         <tr id="row_ip6_dns_auto">
                                             <th width="50%"><#IP6_DNS_Auto#></th>
@@ -595,7 +574,7 @@ function change_ip6_lan_dhcp(){
 
                                     <table width="100%" align="center" cellpadding="4" cellspacing="0" class="table" id="tbl_ip6_lan" style="display:none;">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#IP6_LAN_desc#></th>
+                                            <th colspan="2" style="background-color: #E3E3E3;"><#IP6_LAN_desc#></th>
                                         </tr>
                                         <tr id="row_ip6_lan_auto">
                                             <th width="50%"><#IP6_LAN_Auto#></th>

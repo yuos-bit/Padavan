@@ -363,7 +363,7 @@ function getHash(){
                             </table>
                             <table class="table" id="tbl_vpnc_config" style="display:none">
                                 <tr>
-                                    <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#VPNC_Base#></th>
+                                    <th colspan="2" style="background-color: #E3E3E3;"><#VPNC_Base#></th>
                                 </tr>
                                 <tr>
                                     <th width="50%"><#VPNC_Type#></th>
@@ -563,7 +563,7 @@ function getHash(){
                             </table>
                             <table class="table" id="tbl_vpnc_server">
                                 <tr>
-                                    <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#VPNC_VPNS#></th>
+                                    <th colspan="2" style="background-color: #E3E3E3;"><#VPNC_VPNS#></th>
                                 </tr>
                                 <tr>
                                     <th width="50%"><#VPNC_SFW#></th>
@@ -606,7 +606,7 @@ function getHash(){
                             </table>
                             <table class="table" id="tbl_vpnc_route" style="display:none">
                                 <tr>
-                                    <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#VPNC_Route#></th>
+                                    <th colspan="2" style="background-color: #E3E3E3;"><#VPNC_Route#></th>
                                 </tr>
                                 <tr>
                                     <th width="50%"><#VPNC_RNet#></th>

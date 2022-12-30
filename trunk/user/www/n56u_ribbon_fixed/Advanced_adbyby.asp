@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><#Web_Title#> - <#menu5_15_1#></title>
+<title><#Web_Title#> - adbyby</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
@@ -85,8 +85,7 @@ var isMenuopen = 0;
 
 function initial(){
 	show_banner(2);
-	show_menu(5,13,1);
-	showmenu();
+	show_menu(5,15);
 	show_footer();
 	fill_adbyby_status(adbyby_status());
 	//change_adbyby_enable();
@@ -98,10 +97,6 @@ function initial(){
 	if (!login_safe())
 		textarea_scripts_enabled(0);
 		//load_body();
-}
-
-function showmenu(){
-showhide_div('adlink', found_app_koolproxy());
 }
 
 function textarea_scripts_enabled(v){
@@ -448,8 +443,19 @@ function changeBgColorrl(obj, num){
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="box well grad_colour_dark_blue">
-							<h2 class="box_head round_top"><#menu5_15#> - <#menu5_15_1#></h2>
+							<h2 class="box_head round_top"><#menu5_20_1#> - <#menu5_20#></h2>
 							<div class="round_bottom">
+							<div>
+                            <ul class="nav nav-tabs" style="margin-bottom: 10px;">
+								
+								<li class="active">
+                                    <a href="Advanced_adbyby.asp"><#menu5_20_1#></a>
+                                </li>
+								 <li id="adlink" style="display:none">
+                                    <a href="Advanced_koolproxy.asp"><#menu5_26_1#></a>
+                                </li>
+                            </ul>
+                        </div>
 								<div class="row-fluid">
 									<div id="tabMenu" class="submenuBlock"></div>
 									<div class="alert alert-info" style="margin: 10px;">广告屏蔽大师 Plus + 可以全面过滤各种横幅、弹窗、视频广告，同时阻止跟踪、隐私窃取及各种恶意网站<br />
@@ -483,8 +489,8 @@ function changeBgColorrl(obj, num){
 											<a class="help_tooltip" href="javascript: void(0)" onmouseover="openTooltip(this, 0, 1);">过滤方案选择:</a></th>
 											<td>
 												<select name="adbyby_set" class="input">
-													<option value="0" <% nvram_match_x("","adbyby_set", "0","selected"); %>>全局模式（推荐），全部IP走adbyby过滤</option>
-													<option value="1" <% nvram_match_x("","adbyby_set", "1","selected"); %>>Plus + 模式(只过滤列表内域名结合ABP名单)</option>
+													<option value="0" <% nvram_match_x("","adbyby_set", "0","selected"); %>>全局模式，过滤效果最强，但可能造成网络卡顿</option>
+													<option value="1" <% nvram_match_x("","adbyby_set", "1","selected"); %>>Plus + 模式(只过滤列表内域名结合ABP名单,推荐)</option>
 													<option value="2" <% nvram_match_x("","adbyby_set", "2","selected"); %>>内网IP列表控制模式</option>
 												</select>
 											</td>
@@ -581,7 +587,7 @@ function changeBgColorrl(obj, num){
 										</table>
 										<table width="100%" align="center" cellpadding="4" cellspacing="0" class="table">
                                         <tr>
-                                            <th colspan="5" id="GWStatic" style="background-color: rgba(255,255,255,0.2);">自定义IP过滤设置</th>
+                                            <th colspan="5" id="GWStatic" style="background-color: #E3E3E3;">自定义IP过滤设置</th>
                                         </tr>
                                         <tr>
                                             <th colspan="2" width="50%">启用内网过滤控制</th>
@@ -650,7 +656,7 @@ function changeBgColorrl(obj, num){
                                     </table>
 									 <table width="100%" align="center" cellpadding="5" cellspacing="0" class="table">
                                         <tr>
-                                            <th colspan="5" id="GWStatic" style="background-color: rgba(255,255,255,0.2);">第三方过滤规则</th>
+                                            <th colspan="5" id="GWStatic" style="background-color: #E3E3E3;">第三方过滤规则</th>
                                         </tr>
                                         <tr>
                                             <th width="50%">启用第三方过滤规则</th>

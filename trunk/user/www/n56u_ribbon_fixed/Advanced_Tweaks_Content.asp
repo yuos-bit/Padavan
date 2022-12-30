@@ -154,6 +154,11 @@ function initial(){
 	if (!support_led_pwr())
 		showhide_div("row_led_pwr", 0);
 
+	if (!support_led_usb_trig()) {
+		var o4 = document.form.front_led_usb;
+		o4.remove(3);
+	}
+
 	showhide_div("row_led_wan", support_led_wan());
 	showhide_div("row_led_lan", support_led_lan());
 	showhide_div("row_led_usb", support_led_usb());
@@ -251,7 +256,7 @@ function change_led_all(){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table" id="tbl_wps_actions">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#TweaksWPSAction#></th>
+                                            <th colspan="2" style="background-color: #E3E3E3;"><#TweaksWPSAction#></th>
                                         </tr>
                                         <tr>
                                             <th width="50%"><#TweaksEventShort#></th>
@@ -305,7 +310,7 @@ function change_led_all(){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table" id="tbl_fn1_actions" style="display:none;">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#TweaksFN1Action#></th>
+                                            <th colspan="2" style="background-color: #E3E3E3;"><#TweaksFN1Action#></th>
                                         </tr>
                                         <tr>
                                             <th width="50%"><#TweaksEventShort#></th>
@@ -359,7 +364,7 @@ function change_led_all(){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table" id="tbl_fn2_actions" style="display:none;">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#TweaksFN2Action#></th>
+                                            <th colspan="2" style="background-color: #E3E3E3;"><#TweaksFN2Action#></th>
                                         </tr>
                                         <tr>
                                             <th width="50%"><#TweaksEventShort#></th>
@@ -413,7 +418,7 @@ function change_led_all(){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#TweaksLEDEvents#></th>
+                                            <th colspan="2" style="background-color: #E3E3E3;"><#TweaksLEDEvents#></th>
                                         </tr>
                                         <tr>
                                             <th width="50%"><#TweaksLEDALL#></th>

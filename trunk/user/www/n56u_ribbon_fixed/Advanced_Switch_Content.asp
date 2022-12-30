@@ -24,7 +24,6 @@ var $j = jQuery.noConflict();
 
 $j(document).ready(function() {
 	init_itoggle('ether_green');
-	init_itoggle('ether_eee');
 });
 
 </script>
@@ -241,7 +240,7 @@ function done_validating(action){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#SwitchBase#></th>
+                                            <th colspan="2" style="background-color: #E3E3E3;"><#SwitchBase#></th>
                                         </tr>
                                         <tr id="row_ether_jumbo">
                                             <th><#SwitchJumbo#></th>
@@ -267,26 +266,11 @@ function done_validating(action){
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <th width="50%"><#btn_Enable#><#SwitchEEE#>(802.3az)</th>
-                                            <td>
-                                                <div class="main_itoggle">
-                                                    <div id="ether_eee_on_of">
-                                                        <input type="checkbox" id="ether_eee_fake" <% nvram_match_x("", "ether_eee", "1", "value=1 checked"); %><% nvram_match_x("", "ether_eee", "0", "value=0"); %>>
-                                                    </div>
-                                                </div>
-
-                                                <div style="position: absolute; margin-left: -10000px;">
-                                                    <input type="radio" value="1" name="ether_eee" id="ether_eee_1" class="input" <% nvram_match_x("", "ether_eee", "1", "checked"); %> /><#checkbox_Yes#>
-                                                    <input type="radio" value="0" name="ether_eee" id="ether_eee_0" class="input" <% nvram_match_x("", "ether_eee", "0", "checked"); %> /><#checkbox_No#>
-                                                </div>
-                                            </td>
-                                        </tr>
                                     </table>
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table">
                                         <tr>
-                                            <th colspan="2" align="center" style="background-color: rgba(255,255,255,0.2);">WAN</th>
+                                            <th colspan="2" align="center" style="background-color: #E3E3E3;">WAN</th>
                                         </tr>
                                         <tr>
                                             <th width="50%"><#SwitchFlow#></th>
@@ -310,7 +294,7 @@ function done_validating(action){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);">LAN 1</th>
+                                            <th colspan="2" style="background-color: #E3E3E3;">LAN 1</th>
                                         </tr>
                                         <tr>
                                             <th width="50%"><#SwitchFlow#></th>
@@ -334,7 +318,7 @@ function done_validating(action){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table" id="tbl_ephy_l2" style="display:none;">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);">LAN 2</th>
+                                            <th colspan="2" style="background-color: #E3E3E3;">LAN 2</th>
                                         </tr>
                                         <tr>
                                             <th width="50%"><#SwitchFlow#></th>
@@ -358,7 +342,7 @@ function done_validating(action){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table" id="tbl_ephy_l3" style="display:none;">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);">LAN 3</th>
+                                            <th colspan="2" style="background-color: #E3E3E3;">LAN 3</th>
                                         </tr>
                                         <tr>
                                             <th width="50%"><#SwitchFlow#></th>
@@ -382,7 +366,7 @@ function done_validating(action){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table" id="tbl_ephy_l4" style="display:none;">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);">LAN 4</th>
+                                            <th colspan="2" style="background-color: #E3E3E3;">LAN 4</th>
                                         </tr>
                                         <tr>
                                             <th width="50%"><#SwitchFlow#></th>
@@ -406,7 +390,7 @@ function done_validating(action){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table" id="tbl_ephy_l5" style="display:none;">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);">LAN 5</th>
+                                            <th colspan="2" style="background-color: #E3E3E3;">LAN 5</th>
                                         </tr>
                                         <tr>
                                             <th width="50%"><#SwitchFlow#></th>
@@ -430,7 +414,7 @@ function done_validating(action){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table" id="tbl_ephy_l6" style="display:none;">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);">LAN 6</th>
+                                            <th colspan="2" style="background-color: #E3E3E3;">LAN 6</th>
                                         </tr>
                                         <tr>
                                             <th width="50%"><#SwitchFlow#></th>
@@ -454,7 +438,7 @@ function done_validating(action){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table" id="tbl_ephy_l7" style="display:none;">
                                         <tr>
-                                            <th colspan="2" style="background-color: rgba(255,255,255,0.2);">LAN 7</th>
+                                            <th colspan="2" style="background-color: #E3E3E3;">LAN 7</th>
                                         </tr>
                                         <tr>
                                             <th width="50%"><#SwitchFlow#></th>
