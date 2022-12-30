@@ -31,7 +31,7 @@ $j(document).ready(function(){
 
 function initial(){
 	show_banner(2);
-	show_menu(5,14,2);
+	show_menu(5,13,2);
 	show_footer();
 }
 </script>
@@ -80,7 +80,7 @@ function initial(){
                 <div class="row-fluid">
                     <div class="span12">
                         <div class="box well grad_colour_dark_blue">
-                            <h2 class="box_head round_top"><#menu5_16#> - <#menu5_16_20#></h2>
+                            <h2 class="box_head round_top"><#menu5_16#></h2>
                             <div class="round_bottom">
                                 <div class="row-fluid">
                                     <div id="tabMenu" class="submenuBlock"></div>
