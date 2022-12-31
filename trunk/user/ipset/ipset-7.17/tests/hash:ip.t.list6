@@ -1,0 +1,9 @@
+Name: test
+Type: hash:ip
+Revision: 6
+Header: family inet hashsize 128 maxelem 65536 bitmask 255.255.0.255 bucketsize 12 initval 0xd7d821e1
+Size in memory: 296
+References: 0
+Number of entries: 1
+Members:
+1.2.0.4

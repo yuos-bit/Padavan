@@ -1,0 +1,9 @@
+Name: test
+Type: hash:net,net
+Revision: 4
+Header: family inet hashsize 128 maxelem 65536 bucketsize 12 initval 0x6223fef7 bitmask 255.255.0.255
+Size in memory: 736
+References: 0
+Number of entries: 1
+Members:
+1.2.0.4,22.23.0.25
