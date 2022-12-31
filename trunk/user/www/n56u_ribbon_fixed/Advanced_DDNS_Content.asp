@@ -555,7 +555,7 @@ function checkDDNSReturnCode(){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table" id="tbl_ddns2" style="display:none;">
                                         <tr>
-                                            <th colspan="2" style="background-color: #E3E3E3;"><#DDNS_Second#></th>
+                                            <th colspan="2" style="background-color: rgba(171, 168, 167,0.2);"><#DDNS_Second#></th>
                                         </tr>
                                         <tr>
                                             <th width="50%"><#LANHostConfig_x_DDNSServer_itemname#></th>
@@ -608,7 +608,7 @@ function checkDDNSReturnCode(){
 
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table" id="tbl_common" style="display:none;">
                                         <tr>
-                                            <th colspan="2" style="background-color: #E3E3E3;"><#DDNS_Common#></th>
+                                            <th colspan="2" style="background-color: rgba(171, 168, 167,0.2);"><#DDNS_Common#></th>
                                         </tr>
                                         <tr>
                                             <th width="50%"><#DDNS_Source#></th>

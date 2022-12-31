@@ -137,7 +137,7 @@ function fill_status(status_code){
                                 <div class="row-fluid">
                                     <div id="tabMenu" class="submenuBlock"></div>
                                     <table width="100%" cellpadding="4" cellspacing="0" class="table">
-                                        <tr> <th colspan="2" style="background-color: #E3E3E3;"><#menu5_1_1#></th> </tr>
+                                        <tr> <th colspan="2" style="background-color: rgba(171, 168, 167,0.2);"><#menu5_1_1#></th> </tr>
 
                                         <tr> <th width="50%"><#InetControl#></th>
                                             <td style="border-top: 0 none;" colspan="2">

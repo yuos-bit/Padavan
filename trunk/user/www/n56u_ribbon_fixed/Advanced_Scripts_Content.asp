@@ -118,7 +118,7 @@ function done_validating(action){
 
                                     <table  width="100%" cellpadding="4" cellspacing="0" class="table">
                                         <tr>
-                                            <th style="background-color: #E3E3E3;"><#UserScripts#></th>
+                                            <th style="background-color: rgba(171, 168, 167,0.2);"><#UserScripts#></th>
                                         </tr>
                                         <tr>
                                             <td>

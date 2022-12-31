@@ -581,7 +581,7 @@ function changeBgColorrl(obj, num){
 										</table>
 										<table width="100%" align="center" cellpadding="4" cellspacing="0" class="table">
                                         <tr>
-                                            <th colspan="5" id="GWStatic" style="background-color: #E3E3E3;">自定义IP过滤设置</th>
+                                            <th colspan="5" id="GWStatic" style="background-color: rgba(171, 168, 167,0.2);">自定义IP过滤设置</th>
                                         </tr>
                                         <tr>
                                             <th colspan="2" width="50%">启用内网过滤控制</th>
@@ -650,7 +650,7 @@ function changeBgColorrl(obj, num){
                                     </table>
 									 <table width="100%" align="center" cellpadding="5" cellspacing="0" class="table">
                                         <tr>
-                                            <th colspan="5" id="GWStatic" style="background-color: #E3E3E3;">第三方过滤规则</th>
+                                            <th colspan="5" id="GWStatic" style="background-color: rgba(171, 168, 167,0.2);">第三方过滤规则</th>
                                         </tr>
                                         <tr>
                                             <th width="50%">启用第三方过滤规则</th>

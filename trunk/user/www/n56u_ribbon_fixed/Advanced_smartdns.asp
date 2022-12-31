@@ -644,7 +644,7 @@ function showMRULESList(){
 												</select>
                                             </td>
                                             </tr>
-											<tr><th colspan="2" style="background-color: #E3E3E3;">指定服务器组可用于单独解析gfwlist,如果不需要配合SS解析gfwlist,可以不填</th></tr>
+											<tr><th colspan="2" style="background-color: rgba(171, 168, 167,0.2);">指定服务器组可用于单独解析gfwlist,如果不需要配合SS解析gfwlist,可以不填</th></tr>
 											 <tr>
 											 <th>服务器组(留空为不指定):</th>
 										 <td>
