@@ -1,4 +1,4 @@
-SRC_NAME=iproute2-5.12.0
+SRC_NAME=iproute2-3.4.0
 
 THISDIR = $(shell pwd)
 
