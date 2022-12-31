@@ -119,8 +119,8 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			show_footer();
 			fill_ss_status(shadowsocks_status());
 			fill_dns2tcp_status(dns2tcp_status())
-			$("chnroute_count").innerHTML = '<#menu5_17_3#>' + chnroute_count();
-			$("gfwlist_count").innerHTML = '<#menu5_17_3#>' + gfwlist_count();
+			$("chnroute_count").innerHTML = '<#menu5_16_29#>' + chnroute_count();
+			$("gfwlist_count").innerHTML = '<#menu5_16_29#>' + gfwlist_count();
 			switch_ss_type();
 			showTab(getHash());
 			showMRULESList();
@@ -1519,7 +1519,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 							<div class="span12">
 								<div class="box well grad_colour_dark_blue">
 									<h2 class="box_head round_top">
-										<#menu5_16#> - ShadowSocksR Plus+
+										<#menu5_16#> - <#menu5_16_0#>
 									</h2>
 									<div class="round_bottom">
 										<div>
@@ -2488,14 +2488,14 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 													</tr>
 													<tr>
 														<th width="50%">
-															<#menu5_17_1#>&nbsp;&nbsp;&nbsp;&nbsp;<span
+															<#menu5_16_27#>&nbsp;&nbsp;&nbsp;&nbsp;<span
 																	class="label label-info"
 																	style="padding: 5px 5px 5px 5px;"
 																	id="chnroute_count"></span>
 														</th>
 														<td style="border-top: 0 none;" colspan="2">
 															<input type="button" id="btn_connect_3" class="btn btn-info"
-																value=<#menu5_17_2#>
+																value=<#menu5_16_28#>
 															onclick="submitInternet('Update_chnroute');">
 														</td>
 													</tr>
@@ -2536,14 +2536,14 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 													</tr>
 													<tr>
 														<th width="50%">
-															<#menu5_17_1#>&nbsp;&nbsp;&nbsp;&nbsp;<span
+															<#menu5_16_27#>&nbsp;&nbsp;&nbsp;&nbsp;<span
 																	class="label label-info"
 																	style="padding: 5px 5px 5px 5px;"
 																	id="gfwlist_count"></span>
 														</th>
 														<td style="border-top: 0 none;" colspan="2">
 															<input type="button" id="btn_connect_4" class="btn btn-info"
-																value=<#menu5_17_2#>
+																value=<#menu5_16_28#>
 															onclick="submitInternet('Update_gfwlist');">
 														</td>
 													</tr>
