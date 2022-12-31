@@ -1,10 +1,13 @@
+USERDIR = $(ROOTDIR)/user
+SHDIR = $(ROOTDIR)/user/shared
+
 EXEC = mtd_write
+OBJS = mtd.o
 
-OBJS = mtd.o crc32.o md5.o jffs2.o
-
-CFLAGS += -D__BYTE_ORDER=__LITTLE_ENDIAN
+CFLAGS += -I$(SHDIR)/include
 CFLAGS += -ffunction-sections -fdata-sections
 
+LDFLAGS += -static
 LDFLAGS += -Wl,--gc-sections
 
 all: $(EXEC)
@@ -17,3 +20,4 @@ romfs:
 
 clean:
 	rm -f $(EXEC) *.o
+
