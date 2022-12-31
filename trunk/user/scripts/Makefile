@@ -20,6 +20,7 @@ endif
 ifdef CONFIG_MTD_UBI
 	$(ROMFSINST) /sbin/rwfs2ubi.sh
 endif
+	$(ROMFSINST) /etc_ro/ld.so.conf
 	$(ROMFSINST) /etc_ro/protocols
 	$(ROMFSINST) /etc_ro/services
 	$(ROMFSINST) /etc_ro/profile
@@ -29,4 +30,3 @@ endif
 	mkdir -p $(INSTALLDIR)/usr/share/terminfo
 	tar -xzf ./terminfo.tar.gz -C $(INSTALLDIR)/usr/share
 	$(ROMFSINST) /sbin/check_crontab.sh
-	$(ROMFSINST) $(THISDIR)/certs.tgz /etc_ro/certs.tgz

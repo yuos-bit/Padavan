@@ -446,7 +446,7 @@ function markGroupMDHCP(o, c, b) {
 										</tr>
 										<table width="100%" align="center" cellpadding="4" cellspacing="0" class="table">
 										<tr>
-                                            <th colspan="5" id="GWStatic" style="background-color: rgba(255,255,255,0.2);">例外客户端规则（可以为局域网客户端分别设置不同的例外模式，默认无需设置）</th>
+                                            <th colspan="5" id="GWStatic" style="background-color: #E3E3E3;">例外客户端规则（可以为局域网客户端分别设置不同的例外模式，默认无需设置）</th>
                                         </tr>
                                         <tr>
                                             <th width="25%">

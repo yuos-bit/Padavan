@@ -797,7 +797,7 @@ function getHash(){
                             </table>
                             <table class="table" id="tbl_vpn_config" style="display:none">
                                 <tr>
-                                    <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#VPNS_Base#></th>
+                                    <th colspan="2" style="background-color: #E3E3E3;"><#VPNS_Base#></th>
                                 </tr>
                                 <tr>
                                     <th width="50%"><#VPNS_Type#></th>
@@ -963,7 +963,7 @@ function getHash(){
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#VPNS_CTun#></th>
+                                    <th colspan="2" style="background-color: #E3E3E3;"><#VPNS_CTun#></th>
                                 </tr>
                                 <tr id="row_vpns_vuse" style="display:none">
                                     <th><#VPNS_VUse#></th>
@@ -1014,7 +1014,7 @@ function getHash(){
                             </table>
                             <table class="table" id="tbl_vpn_pool" style="display:none">
                                 <tr>
-                                    <th colspan="2" style="background-color: rgba(255,255,255,0.2);"><#VPNS_PInfo#></th>
+                                    <th colspan="2" style="background-color: #E3E3E3;"><#VPNS_PInfo#></th>
                                 </tr>
                                 <tr>
                                     <th width="50%"><#VPNS_VAddr#></th>

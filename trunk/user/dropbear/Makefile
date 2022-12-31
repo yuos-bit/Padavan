@@ -34,7 +34,6 @@ configure:
 		--disable-loginfunc \
 		--disable-pututline \
 		--disable-pututxline \
-		--disable-harden \
 		--enable-zlib \
 		--enable-bundled-libtom \
 		--host=$(HOST_TARGET) \

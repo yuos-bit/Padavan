@@ -10,11 +10,11 @@ mkdir -p /tmp/frp
 cat > "/tmp/frp/myfrpc.ini" <<-\EOF
 # ==========客户端配置：==========
 [common]
-server_addr = 1192.0.0.3
+server_addr = 211.10.10.1
 server_port = 7000
 token = 12345
 
-#log_file = /dev/null
+#log_file = /tmp/frpc.log
 #log_level = info
 #log_max_days = 3
 
@@ -41,7 +41,7 @@ vhost_http_port = 88
 token = 12345
 subdomain_host = frps.com
 max_pool_count = 50
-#log_file = /dev/null
+#log_file = /tmp/frps.log
 #log_level = info
 #log_max_days = 3
 # ====================
@@ -50,10 +50,48 @@ EOF
 #启动：
 frpc_enable=`nvram get frpc_enable`
 frps_enable=`nvram get frps_enable`
+
 if [ "$frpc_enable" = "1" ] ; then
-    frpc -c /tmp/frp/myfrpc.ini 2>&1 &
+	frpc_bin="/usr/bin/frpc"
+	if [ ! -f "$frpc_bin" ]; then
+		if [ ! -f "/tmp/frp/frpc" ];then
+			wget -c -P /tmp/frp https://github.com/etion2008/aaron/raw/main/frpc/frpc
+			if [ ! -f "/tmp/frp/frpc" ]; then
+				logger -t "FRPC" "frpc二进制文件下载失败，可能是地址失效或者网络异常！"
+				nvram set frpc_enable=0
+				frpc_close
+			else
+				logger -t "FRPC" "frpc二进制文件下载成功"
+				chmod -R 777 /tmp/frp/frpc
+				frpc_bin="/tmp/frp/frpc"
+			fi
+		else
+			frpc_bin="/tmp/frp/frpc"
+		fi
+	fi
+
+	$frpc_bin -c /tmp/frp/myfrpc.ini 2>&1 &
 fi
+
 if [ "$frps_enable" = "1" ] ; then
-    frps -c /tmp/frp/myfrps.ini 2>&1 &
+	frps_bin="/usr/bin/frps"
+	if [ ! -f "$frps_bin" ]; then
+		if [ ! -f "/tmp/frp/frps" ];then
+			wget -c -P /tmp/frp https://github.com/etion2008/aaron/raw/main/frps/frps
+			if [ ! -f "/tmp/frp/frps" ]; then
+				logger -t "FRPS" "frps二进制文件下载失败，可能是地址失效或者网络异常！"
+				nvram set frps_enable=0
+				frps_close
+			else
+				logger -t "FRPS" "frps二进制文件下载成功"
+				chmod -R 777 /tmp/frp/frps
+				frps_bin="/tmp/frp/frps"
+			fi
+		else
+			frps_bin="/tmp/frp/frps"
+		fi
+	fi
+
+	$frps_bin -c /tmp/frp/myfrps.ini 2>&1 &
 fi
  

@@ -390,6 +390,8 @@ case $FW in
 		;;
 esac
 
+# UUID API
+#echo "#define LIB_UUID" >> ${CONFIGFILE}
 
 # set V6SOCKETS_ARE_V6ONLY to 0 if it was not set above
 if [ -z "$V6SOCKETS_ARE_V6ONLY" ] ; then
@@ -480,8 +482,13 @@ fi
 echo "" >> ${CONFIGFILE}
 
 echo "/* Uncomment the following line to enable port in use check */" >> ${CONFIGFILE}
-echo "#define CHECK_PORTINUSE" >> ${CONFIGFILE}
+if [ -n "$PORTINUSE" ]; then
+	echo "#define CHECK_PORTINUSE" >> ${CONFIGFILE}
+else
+	echo "/*#define CHECK_PORTINUSE*/" >> ${CONFIGFILE}
+fi
 echo "" >> ${CONFIGFILE}
+
 echo "/* Define one or none of the two following macros in order to make some" >> ${CONFIGFILE}
 echo " * clients happy. It will change the XML Root Description of the IGD." >> ${CONFIGFILE}
 echo " * Enabling the Layer3Forwarding Service seems to be the more compatible" >> ${CONFIGFILE}

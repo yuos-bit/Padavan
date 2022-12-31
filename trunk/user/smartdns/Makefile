@@ -1,4 +1,4 @@
-SRC_NAME = smartdns-ba282c8
+SRC_NAME = smartdns-Release33
 THISDIR = $(shell pwd)
 
 all: extract_test config_test
@@ -6,7 +6,7 @@ all: extract_test config_test
 
 extract_test:
 	( if [ ! -d $(SRC_NAME) ]; then \
-		tar zxf $(SRC_NAME).tar.gz ; \
+		tar -xf $(SRC_NAME).tar.gz ; \
 	fi )
 
 config_test:

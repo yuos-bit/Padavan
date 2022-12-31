@@ -236,10 +236,10 @@ func_fill()
 
 	# create gfwlist
 	#if [ ! -d "$dir_gfwlist" ] ; then
-		#if [ -f "$gfwlist_conf_file" ]; then	
-			#mkdir -p "$dir_gfwlist" && tar jxf "$gfwlist_conf_file" -C "$dir_gfwlist"
-		#fi
-	#fi
+	#	if [ -f "$gfwlist_conf_file" ]; then	
+#			mkdir -p "$dir_gfwlist" && tar jxf "$gfwlist_conf_file" -C "$dir_gfwlist"
+	#	fi
+#	fi
 
 	# create start script
 	if [ ! -f "$script_start" ] ; then
@@ -248,7 +248,7 @@ func_fill()
 
 	# create started script
 	if [ ! -f "$script_started" ] ; then
-		cat > "$script_started" <<EOF
+		cat > "$script_started" <<'EOF'
 #!/bin/sh
 
 ### Custom user script
@@ -261,9 +261,7 @@ func_fill()
 #modprobe ip_set_bitmap_ip
 #modprobe ip_set_list_set
 #modprobe xt_set
-echo 4096 131072  6291456 > /proc/sys/net/ipv4/tcp_rmem
-echo 4194304 >/proc/sys/net/core/rmem_max
-echo 212992 > /proc/sys/net/core/rmem_default
+
 #drop caches
 sync && echo 3 > /proc/sys/vm/drop_caches
 
@@ -272,6 +270,7 @@ sync && echo 3 > /proc/sys/vm/drop_caches
 #iwpriv ra0 set AssocReqRssiThres=-80
 #iwpriv rai0 set KickStaRssiLow=-85
 #iwpriv rai0 set AssocReqRssiThres=-80
+>>>>>>> a321e6940bb0cb44619e21b8b3df6e91f892751a
 
 # Mount SATA disk
 #mdev -s
@@ -633,7 +632,7 @@ EOF
 # Please add needed params only!
 
 ### If your server certificates with the nsCertType field set to "server"
-remote-cert-tls server
+ns-cert-type server
 
 ### Process priority level (0..19)
 nice 0

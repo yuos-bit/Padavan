@@ -19,10 +19,10 @@ div.main_itoggle label.ilabel{
 div.main_itoggle label.itoggle,
 div.main_itoggle label.itoggle span{
     display: block;
-    width: 59px;
+    width: 93px;
     height: 27px;
     /*margin-bottom: 20px;*/
-    background: url("../img/itoggle.png") left bottom no-repeat;
+    background: url(../img/itoggle.png) left bottom no-repeat;
     cursor:pointer;
     text-indent:-5000px;
 }
@@ -41,7 +41,7 @@ div.main_itoggle input.iT_checkbox{
 
 div.main_itoggle label.disabled span
 {
-    background: url("../img/loading_bg.png") repeat scroll 50% 50% #AAAAAA;
+    background: url("/bootstrap/img/loading_bg.png") repeat scroll 50% 50% #AAAAAA;
     text-indent: 0px;
     opacity: 0.6;
 }
