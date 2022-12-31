@@ -14,15 +14,12 @@ check_frp ()
 		if [ -z "`pidof frps`" ] && [ "$frps_enable" = "1" ];then
 			frp_start
 		fi
-	else
-
-		logger -t "frp" "frp断线重连"
 	fi
 }
 
 check_net() 
 {
-	/bin/ping -c 3 www.baidu.com -w 5 >/dev/null 2>&1
+	/bin/ping -c 3 223.5.5.5 -w 5 >/dev/null 2>&1
 	if [ "$?" == "0" ]; then
 		return 1
 	else

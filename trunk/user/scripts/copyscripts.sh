@@ -17,10 +17,6 @@ if [ ! -f "/etc/storage/frp_script.sh" ] ; then
 cp -rf /etc_ro/frp_script.sh /etc/storage/
 chmod 755 "/etc/storage/frp_script.sh"
 fi
-if [ ! -f "/etc/storage/npc_script.sh" ] ; then
-cp -rf /etc_ro/npc_script.sh /etc/storage/
-chmod 755 "/etc/storage/npc_script.sh"
-fi
 if [ ! -f "/etc/storage/caddy_script.sh" ] ; then
 cp -rf /etc_ro/caddy_script.sh /etc/storage/
 chmod 755 "/etc/storage/caddy_script.sh"
@@ -88,6 +84,10 @@ fi
 if [ ! -f "/etc/storage/ss_lan_bip.sh" ] ; then
 cp -rf /etc_ro/ss_lan_bip.sh /etc/storage/
 chmod 755 "/etc/storage/ss_lan_bip..sh"
+fi
+if [ ! -f "/etc/storage/ss_lan_gmip.sh" ] ; then
+cp -rf /etc_ro/ss_lan_gmip.sh /etc/storage/
+chmod 755 "/etc/storage/ss_lan_gmip..sh"
 fi
 if [ ! -f "/etc/storage/ss_lan_ip.sh" ] ; then
 cp -rf /etc_ro/ss_lan_ip.sh /etc/storage/
