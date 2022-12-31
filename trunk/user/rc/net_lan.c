@@ -32,7 +32,6 @@
 
 #include "rc.h"
 #include "switch.h"
-#include <gpioutils.h>
 
 #if BOARD_RAM_SIZE < 32
 #define SHRINK_TX_QUEUE_LEN	(300)
@@ -244,12 +243,13 @@ init_bridge(int is_ap_mode)
 	start_wifi_apcli_rt(rt_radio_on);
 #endif
 
+#if defined (BOARD_GPIO_LED_SW2G)
 	if (rt_radio_on)
-		LED_CONTROL(LED_SW2G, LED_ON);
-
-#if BOARD_HAS_5G_RADIO
+		LED_CONTROL(BOARD_GPIO_LED_SW2G, LED_ON);
+#endif
+#if defined (BOARD_GPIO_LED_SW5G) && BOARD_HAS_5G_RADIO
 	if (wl_radio_on)
-		LED_CONTROL(LED_SW5G, LED_ON);
+		LED_CONTROL(BOARD_GPIO_LED_SW5G, LED_ON);
 #endif
 
 	sleep(1);
@@ -372,6 +372,7 @@ switch_config_base(void)
 
 	phy_jumbo_frames(nvram_get_int("ether_jumbo"));
 	phy_green_ethernet(nvram_get_int("ether_green"));
+	phy_eee_lpi(nvram_get_int("ether_eee"));
 }
 
 void
@@ -764,7 +765,6 @@ full_restart_lan(void)
 	start_networkmap(1);
 
 	/* force httpd logout */
-	system("/usr/bin/iappd.sh restart");
 	doSystem("killall %s %s", "-SIGUSR1", "httpd");
 }
 
@@ -932,7 +932,7 @@ udhcpc_lan_deconfig(char *lan_ifname)
 		 nvram_safe_get("lan_netmask"));
 
 	lan_down_auto(lan_ifname);
-	
+
 	logmessage("DHCP LAN Client", "%s: lease is lost", udhcpc_lan_state);
 
 	return 0;
@@ -996,7 +996,7 @@ udhcpc_lan_bound(char *lan_ifname, int is_renew)
 		create_hosts_lan(lan_ipaddr, lan_domain);
 		
 		lan_up_auto(lan_ifname, lan_gateway, lan_domain);
-		system("/usr/bin/iappd.sh restart");
+		
 		logmessage("DHCP LAN Client", "%s, IP: %s/%s, GW: %s, lease time: %d",
 			udhcpc_lan_state, lan_ipaddr, lan_ipmask, lan_gateway, lease_dur);
 	}

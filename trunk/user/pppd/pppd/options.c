@@ -122,7 +122,6 @@ bool	dump_options;		/* print out option values */
 bool	dryrun;			/* print out option values and exit */
 char	*domain;		/* domain name set by domain option */
 int	child_wait = 5;		/* # seconds to wait for children at exit */
-int	npppd = 0;		/* synchronize between multiple pppd */
 struct userenv *userenv_list;	/* user environment variables */
 
 #ifdef MAXOCTETS
@@ -304,8 +303,6 @@ option_t general_options[] = {
     { "unset", o_special, (void *)user_unsetenv,
       "Unset user environment variable",
       OPT_A2PRINTER | OPT_NOPRINT, (void *)user_unsetprint },
-    { "syncppp", o_int, &npppd,
-      "sync among multiple pppd when sending chap/pap respond", OPT_PRIO },
 
 #ifdef HAVE_MULTILINK
     { "multilink", o_bool, &multilink,

@@ -30,20 +30,12 @@
 #include "rc.h"
 #include "switch.h"
 #include "gpio_pins.h"
-#include <gpioutils.h>
 
 static int
 wif_control(const char *wifname, int is_up)
 {
-	int ret;
 	logmessage(LOGNAME, "%s: ifname: %s, isup: %d", __func__, wifname, is_up);
-	ret = doSystem("ifconfig %s %s 2>/dev/null", wifname, (is_up) ? "up" : "down");
-#if defined (USE_MT7615_AP) || defined (USE_MT7915_AP) || defined (USE_MT76X2_AP)
-	if (is_up && is_module_loaded("hw_nat")) {
-		doSystem("iwpriv %s set hw_nat_register=%d", wifname, 1);
-	}
-#endif
-	return ret;
+	return doSystem("ifconfig %s %s 2>/dev/null", wifname, (is_up) ? "up" : "down");
 }
 
 void
@@ -71,8 +63,9 @@ mlme_radio_wl(int is_on)
 #endif
 	mlme_state_wl(is_on);
 
-	LED_CONTROL(LED_SW5G, (is_on) ? LED_ON : LED_OFF);
-
+#if defined(BOARD_GPIO_LED_SW5G)
+	LED_CONTROL(BOARD_GPIO_LED_SW5G, (is_on) ? LED_ON : LED_OFF);
+#endif
 }
 
 void
@@ -87,7 +80,9 @@ mlme_radio_rt(int is_on)
 
 	mlme_state_rt(is_on);
 
-	LED_CONTROL(LED_SW2G, (is_on) ? LED_ON : LED_OFF);
+#if defined(BOARD_GPIO_LED_SW2G)
+	LED_CONTROL(BOARD_GPIO_LED_SW2G, (is_on) ? LED_ON : LED_OFF);
+#endif
 
 #if defined(USE_RT3352_MII)
 	if (is_on) {
@@ -396,7 +391,9 @@ stop_wifi_all_wl(void)
 	wif_control(IFNAME_5G_GUEST, 0);
 	wif_control(IFNAME_5G_MAIN, 0);
 
-	LED_CONTROL(LED_SW5G, LED_OFF);
+#if defined (BOARD_GPIO_LED_SW5G)
+	LED_CONTROL(BOARD_GPIO_LED_SW5G, LED_OFF);
+#endif
 #endif
 }
 
@@ -422,7 +419,29 @@ stop_wifi_all_rt(void)
 	wif_control(IFNAME_2G_GUEST, 0);
 	wif_control(IFNAME_2G_MAIN, 0);
 
-	LED_CONTROL(LED_SW2G, LED_OFF);
+#if defined (BOARD_GPIO_LED_SW2G)
+	LED_CONTROL(BOARD_GPIO_LED_SW2G, LED_OFF);
+#endif
+}
+
+void
+set_wifi_rssi_threshold(const char* ifname, int is_aband)
+{
+	int kickrssi = 0;
+	int assocrssi = 0;
+
+	if (is_aband) {
+		kickrssi = nvram_get_int("wl_KickStaRssiLow");
+		assocrssi = nvram_get_int("wl_AssocReqRssiThres");
+	} else {
+		kickrssi = nvram_get_int("rt_KickStaRssiLow");
+		assocrssi = nvram_get_int("rt_AssocReqRssiThres");
+	}
+
+	if (kickrssi <= 0 && kickrssi >= -100)
+		doSystem("iwpriv %s set %s=%d", ifname, "KickStaRssiLow", kickrssi);
+	if (assocrssi <= 0 && assocrssi >= -100)
+		doSystem("iwpriv %s set %s=%d", ifname, "AssocReqRssiThres", assocrssi);
 }
 
 void 
@@ -446,12 +465,14 @@ start_wifi_ap_wl(int radio_on)
 		wif_control(IFNAME_5G_MAIN, 1);
 		br_add_del_if(IFNAME_BR, IFNAME_5G_MAIN, 1);
 		wif_control_m2u(1, IFNAME_5G_MAIN);
+		set_wifi_rssi_threshold(IFNAME_5G_MAIN, 1);
 		
 		if (is_guest_allowed_wl())
 		{
 			wif_control(IFNAME_5G_GUEST, 1);
 			br_add_del_if(IFNAME_BR, IFNAME_5G_GUEST, 1);
 			wif_control_m2u(1, IFNAME_5G_GUEST);
+			set_wifi_rssi_threshold(IFNAME_5G_GUEST, 1);
 		}
 	}
 #endif
@@ -501,12 +522,14 @@ start_wifi_ap_rt(int radio_on)
 		wif_control(IFNAME_2G_MAIN, 1);
 		br_add_del_if(IFNAME_BR, IFNAME_2G_MAIN, 1);
 		wif_control_m2u(0, IFNAME_2G_MAIN);
+		set_wifi_rssi_threshold(IFNAME_2G_MAIN, 0);
 		
 		if (is_guest_allowed_rt())
 		{
 			wif_control(IFNAME_2G_GUEST, 1);
 			br_add_del_if(IFNAME_BR, IFNAME_2G_GUEST, 1);
 			wif_control_m2u(0, IFNAME_2G_GUEST);
+			set_wifi_rssi_threshold(IFNAME_2G_GUEST, 0);
 		}
 	}
 #endif
@@ -752,11 +775,13 @@ restart_wifi_wl(int radio_on, int need_reload_conf)
 
 	check_apcli_wan(1, radio_on);
 
-	if (radio_on) {
+	if (radio_on)
 		update_vga_clamp_wl(0);
-		LED_CONTROL(LED_SW5G, LED_ON);
-	}
-	system("/usr/bin/iappd.sh restart");
+
+#if defined (BOARD_GPIO_LED_SW5G)
+	if (radio_on)
+		LED_CONTROL(BOARD_GPIO_LED_SW5G, LED_ON);
+#endif
 #endif
 }
 
@@ -798,11 +823,13 @@ restart_wifi_rt(int radio_on, int need_reload_conf)
 
 	check_apcli_wan(0, radio_on);
 
-	if (radio_on) {
+	if (radio_on)
 		update_vga_clamp_rt(0);
-		LED_CONTROL(LED_SW2G, LED_ON);
-	}
-	system("/usr/bin/iappd.sh restart");
+
+#if defined (BOARD_GPIO_LED_SW2G)
+	if (radio_on)
+		LED_CONTROL(BOARD_GPIO_LED_SW2G, LED_ON);
+#endif
 }
 
 int is_need_8021x(char *auth_mode)
