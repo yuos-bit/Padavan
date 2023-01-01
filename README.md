@@ -5,7 +5,7 @@
 # README #
 
 ### UI预览 ###
-[![b84Ru4.jpg](https://s4.ax1x.com/2022/03/02/b84Ru4.jpg)](https://imgtu.com/i/b84Ru4)
+![](https://s3.bmp.ovh/imgs/2023/01/02/000f1652c928e921.png)
 
 
 ### 特别说明 ###
