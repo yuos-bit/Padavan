@@ -1403,7 +1403,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			-moz-border-radius: 5px;
 			border-radius: 5px;
 			z-index: 200;
-			background-color: #ffffff;
+			background-color: rgba(99, 110, 114,0.98);
 			margin-left: 15px;
 			top: 80px;
 			width: 650px;
