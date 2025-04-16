@@ -15,6 +15,7 @@ config/configure.in
 config/gen/
 config/versions/
 .config
+.config.*
 verbatim-data.mk
 maintainer/package-versions
 
@@ -23,7 +24,6 @@ maintainer/package-versions
 *.zip
 *.xz
 *.7zip
-!.tarball-version
 
 # Temporaries
 .*.swp
@@ -37,12 +37,10 @@ testing/docker/*/build
 testing/docker/*/install
 testing/docker/*/xtools
 
+# This is the place where toolchains are built
 .build/
+# .. and log for 'build-all'
 .build-all/
-
-toolchain-3.4.x/
-dl/
-
-mipsel-linux-uclibc.tar.xz
-
-docs/ct-ng.1
+# .. and release creation
+release/
+out/

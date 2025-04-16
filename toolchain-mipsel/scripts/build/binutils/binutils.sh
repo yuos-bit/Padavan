@@ -131,37 +131,36 @@ do_binutils_backend() {
 
     CT_DoLog EXTRA "Configuring binutils"
 
-    if [ "${CT_BINUTILS_HAS_GOLD}" = "y" ]; then
-        case "${CT_BINUTILS_LINKERS_LIST}" in
-            ld)
-                extra_config+=( --enable-ld=yes --enable-gold=no )
-                ;;
-            gold)
-                extra_config+=( --enable-ld=no --enable-gold=yes )
-                ;;
-            ld,gold)
-                extra_config+=( --enable-ld=default --enable-gold=yes )
-                ;;
-            gold,ld)
-                extra_config+=( --enable-ld=yes --enable-gold=default )
-                ;;
-        esac
-        if [ "${CT_BINUTILS_GOLD_THREADS}" = "y" ]; then
-            extra_config+=( --enable-threads )
-        fi
+    case "${CT_BINUTILS_LINKERS_LIST}" in
+        ld)
+            extra_config+=( --enable-ld=yes --enable-gold=no )
+            ;;
+        gold)
+            extra_config+=( --enable-ld=no --enable-gold=yes )
+            ;;
+        ld,gold)
+            extra_config+=( --enable-ld=default --enable-gold=yes )
+            ;;
+        gold,ld)
+            extra_config+=( --enable-ld=yes --enable-gold=default )
+            ;;
+    esac
+    if [ "${CT_BINUTILS_GOLD_THREADS}" = "y" ]; then
+        extra_config+=( --enable-threads )
     fi
     if [ "${CT_BINUTILS_PLUGINS}" = "y" ]; then
         extra_config+=( --enable-plugins )
     fi
-    if [ "${CT_BINUTILES_RELRO}" = "y" ]; then
+    if [ "${CT_BINUTILS_RELRO}" = "y" ]; then
         extra_config+=( --enable-relro )
     elif [ "${CT_BINUTILS_RELRO}" != "m" ]; then
         extra_config+=( --disable-relro )
     fi
-    if [ "${CT_BINUTILS_HAS_PKGVERSION_BUGURL}" = "y" ]; then
-        [ -n "${CT_PKGVERSION}" ] && extra_config+=("--with-pkgversion=${CT_PKGVERSION}")
-        [ -n "${CT_TOOLCHAIN_BUGURL}" ] && extra_config+=("--with-bugurl=${CT_TOOLCHAIN_BUGURL}")
+    if [ "${CT_BINUTILS_DETERMINISTIC_ARCHIVES}" = "y" ]; then
+        extra_config+=( --enable-deterministic-archives )
     fi
+    [ -n "${CT_PKGVERSION}" ] && extra_config+=("--with-pkgversion=${CT_PKGVERSION}")
+    [ -n "${CT_TOOLCHAIN_BUGURL}" ] && extra_config+=("--with-bugurl=${CT_TOOLCHAIN_BUGURL}")
     if [ "${CT_MULTILIB}" = "y" ]; then
         extra_config+=("--enable-multilib")
     else
@@ -172,7 +171,20 @@ do_binutils_backend() {
     extra_config+=("--disable-sim")
     extra_config+=("--disable-gdb")
 
+    # libdebuginfod in incompatible with static linking
+    [ "${CT_STATIC_TOOLCHAIN}" = "y" ] && extra_config+=("--without-debuginfod")
+
     [ "${CT_TOOLCHAIN_ENABLE_NLS}" != "y" ] && extra_config+=("--disable-nls")
+
+    if [ "${CT_COMP_LIBS_ZSTD}}" = "y" ]; then
+        extra_config+=("--with-zstd=${complibs}")
+    else
+        extra_config+=("--without-zstd")
+    fi
+
+    # Disable usage of glob for higher compatibility.
+    # Not strictly needed for anything but GDB anyways.
+    export ac_cv_func_glob=no
 
     CT_DoLog DEBUG "Extra config passed: '${extra_config[*]}'"
 
@@ -283,7 +295,7 @@ do_elf2flt_backend() {
         --prefix=${prefix}                                      \
         --with-bfd-include-dir=${binutils_bld}/bfd              \
         --with-binutils-include-dir=${binutils_src}/include     \
-        --with-libbfd=${binutils_bld}/bfd/libbfd.a              \
+        --with-libbfd=${binutils_bld}/bfd/.libs/libbfd.a        \
         --with-libiberty=${binutils_bld}/libiberty/libiberty.a  \
         --disable-werror                                        \
         ${elf2flt_opts}                                         \
@@ -304,8 +316,9 @@ do_binutils_for_target() {
     local -a install_targets
     local t
 
-    [ "${CT_BINUTILS_FOR_TARGET_IBERTY}" = "y" ] && targets+=("libiberty")
-    [ "${CT_BINUTILS_FOR_TARGET_BFD}"    = "y" ] && targets+=("bfd")
+    [ "${CT_BINUTILS_FOR_TARGET_IBERTY}"  = "y" ] && targets+=("libiberty")
+    [ "${CT_BINUTILS_FOR_TARGET_BFD}"     = "y" ] && targets+=("bfd")
+    [ "${CT_BINUTILS_FOR_TARGET_OPCODES}" = "y" ] && targets+=("opcodes")
     for t in "${targets[@]}"; do
         build_targets+=("all-${t}")
         install_targets+=("install-${t}")
@@ -318,10 +331,8 @@ do_binutils_for_target() {
 
         CT_DoLog EXTRA "Configuring binutils for target"
 
-        if [ "${CT_BINUTILS_HAS_PKGVERSION_BUGURL}" = "y" ]; then
-            [ -n "${CT_PKGVERSION}" ] && extra_config+=("--with-pkgversion=${CT_PKGVERSION}")
-            [ -n "${CT_TOOLCHAIN_BUGURL}" ] && extra_config+=("--with-bugurl=${CT_TOOLCHAIN_BUGURL}")
-        fi
+        [ -n "${CT_PKGVERSION}" ] && extra_config+=("--with-pkgversion=${CT_PKGVERSION}")
+        [ -n "${CT_TOOLCHAIN_BUGURL}" ] && extra_config+=("--with-bugurl=${CT_TOOLCHAIN_BUGURL}")
         if [ "${CT_MULTILIB}" = "y" ]; then
             extra_config+=("--enable-multilib")
         else
