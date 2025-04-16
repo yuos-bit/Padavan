@@ -1,0 +1,143 @@
+SRC_NAME = transmission-4.0.5
+SRC_URL = https://github.com/transmission/transmission/releases/download/4.0.5/transmission-4.0.5.tar.xz
+
+# 定义所有依赖库 URL
+SRC_URL_FMT = https://github.com/fmtlib/fmt/archive/refs/tags/10.0.0.tar.gz
+SRC_URL_DHT = https://github.com/transmission-dht/dht/archive/refs/tags/v0.26.tar.gz
+SRC_URL_FAST_FLOAT = https://github.com/fastfloat/fast_float/archive/refs/tags/v5.2.0.tar.gz
+SRC_URL_B64 = https://github.com/libb64/libb64/archive/refs/tags/v2.0.0.1.tar.gz
+SRC_URL_PSL = https://github.com/rockdaboot/libpsl/archive/refs/tags/0.21.1.tar.gz
+SRC_URL_MINIUPNPC = https://github.com/miniupnp/miniupnpc/archive/refs/tags/miniupnpd_2_3_0.tar.gz
+SRC_URL_UTFCPP = https://github.com/nemtrif/utfcpp/archive/refs/tags/v3.2.1.tar.gz
+SRC_URL_SMALL = https://github.com/Seachaos/small/archive/refs/tags/v0.1.2.tar.gz
+
+# 定义关键路径（基于 trunk/user/transmission 目录）
+THISDIR = $(shell pwd)
+PATCH_DIR = $(THISDIR)/../../libs/libngtcp2
+PATCH_FILE = $(PATCH_DIR)/disabled-examples-in-cmakelists.patch
+
+CFLAGS   += -O2 -ffunction-sections -fdata-sections -fvisibility=hidden -fPIC \
+            -D_LARGEFILE64_SOURCE -D_LFS64_LARGEFILE
+LDFLAGS  += -Wl,--gc-sections -lcurl -lssl -lcrypto -lz
+
+all: download_test extract_test config_test
+	$(MAKE) -j$(HOST_NCPU) -C $(SRC_NAME)/build && \
+	$(MAKE) -C $(SRC_NAME)/build install DESTDIR=$(THISDIR)/install
+
+download_test:
+	@# 下载主程序
+	if [ ! -f $(SRC_NAME).tar.xz ]; then \
+		wget -t5 --timeout=20 --no-check-certificate -O $(SRC_NAME).tar.xz $(SRC_URL); \
+	fi
+	@# 下载所有依赖库
+	if [ ! -f fmt-10.0.0.tar.gz ]; then \
+		wget -t5 --timeout=20 --no-check-certificate -O fmt-10.0.0.tar.gz $(SRC_URL_FMT); \
+	fi
+	if [ ! -f dht-0.26.tar.gz ]; then \
+		wget -t5 --timeout=20 --no-check-certificate -O dht-0.26.tar.gz $(SRC_URL_DHT); \
+	fi
+	if [ ! -f fast_float-5.2.0.tar.gz ]; then \
+		wget -t5 --timeout=20 --no-check-certificate -O fast_float-5.2.0.tar.gz $(SRC_URL_FAST_FLOAT); \
+	fi
+	if [ ! -f libb64-2.0.0.1.tar.gz ]; then \
+		wget -t5 --timeout=20 --no-check-certificate -O libb64-2.0.0.1.tar.gz $(SRC_URL_B64); \
+	fi
+	if [ ! -f libpsl-0.21.1.tar.gz ]; then \
+		wget -t5 --timeout=20 --no-check-certificate -O libpsl-0.21.1.tar.gz $(SRC_URL_PSL); \
+	fi
+	if [ ! -f miniupnpc-2.3.0.tar.gz ]; then \
+		wget -t5 --timeout=20 --no-check-certificate -O miniupnpc-2.3.0.tar.gz $(SRC_URL_MINIUPNPC); \
+	fi
+	if [ ! -f utfcpp-3.2.1.tar.gz ]; then \
+		wget -t5 --timeout=20 --no-check-certificate -O utfcpp-3.2.1.tar.gz $(SRC_URL_UTFCPP); \
+	fi
+	if [ ! -f small-0.1.2.tar.gz ]; then \
+		wget -t5 --timeout=20 --no-check-certificate -O small-0.1.2.tar.gz $(SRC_URL_SMALL); \
+	fi
+
+extract_test:
+	@# 解压主程序并打补丁
+	if [ ! -d $(SRC_NAME) ]; then \
+		tar -xf $(SRC_NAME).tar.xz; \
+		patch -p1 -d $(SRC_NAME) < $(PATCH_FILE); \
+		mkdir -p $(SRC_NAME)/third-party; \
+	fi
+	@# 解压所有依赖库到 third-party 目录
+	if [ ! -d $(SRC_NAME)/third-party/fmt ]; then \
+		tar -xf fmt-10.0.0.tar.gz -C $(SRC_NAME)/third-party && \
+		mv $(SRC_NAME)/third-party/fmt-10.0.0 $(SRC_NAME)/third-party/fmt; \
+	fi
+	if [ ! -d $(SRC_NAME)/third-party/dht ]; then \
+		tar -xf dht-0.26.tar.gz -C $(SRC_NAME)/third-party && \
+		mv $(SRC_NAME)/third-party/dht-0.26 $(SRC_NAME)/third-party/dht; \
+	fi
+	if [ ! -d $(SRC_NAME)/third-party/fast_float ]; then \
+		tar -xf fast_float-5.2.0.tar.gz -C $(SRC_NAME)/third-party && \
+		mv $(SRC_NAME)/third-party/fast_float-5.2.0 $(SRC_NAME)/third-party/fast_float; \
+	fi
+	if [ ! -d $(SRC_NAME)/third-party/libb64 ]; then \
+		tar -xf libb64-2.0.0.1.tar.gz -C $(SRC_NAME)/third-party && \
+		mv $(SRC_NAME)/third-party/libb64-2.0.0.1 $(SRC_NAME)/third-party/libb64; \
+	fi
+	if [ ! -d $(SRC_NAME)/third-party/libpsl ]; then \
+		tar -xf libpsl-0.21.1.tar.gz -C $(SRC_NAME)/third-party && \
+		mv $(SRC_NAME)/third-party/libpsl-0.21.1 $(SRC_NAME)/third-party/libpsl; \
+	fi
+	if [ ! -d $(SRC_NAME)/third-party/miniupnpc ]; then \
+		tar -xf miniupnpc-2.3.0.tar.gz -C $(SRC_NAME)/third-party && \
+		mv $(SRC_NAME)/third-party/miniupnpc-miniupnpd_2_3_0 $(SRC_NAME)/third-party/miniupnpc; \
+	fi
+	if [ ! -d $(SRC_NAME)/third-party/utfcpp ]; then \
+		tar -xf utfcpp-3.2.1.tar.gz -C $(SRC_NAME)/third-party && \
+		mv $(SRC_NAME)/third-party/utfcpp-3.2.1 $(SRC_NAME)/third-party/utfcpp; \
+	fi
+	if [ ! -d $(SRC_NAME)/third-party/small ]; then \
+		tar -xf small-0.1.2.tar.gz -C $(SRC_NAME)/third-party && \
+		mv $(SRC_NAME)/third-party/small-0.1.2 $(SRC_NAME)/third-party/small; \
+	fi
+
+config_test:
+	( if [ -f ./config_done ]; then \
+		echo "the same configuration"; \
+	else \
+		make configure && touch config_done; \
+	fi )
+
+configure:
+	( mkdir -p $(SRC_NAME)/build && cd $(SRC_NAME)/build ; \
+	cmake -DCMAKE_TOOLCHAIN_FILE=../../cross-mipsel-linux.cmake \
+		  -DCMAKE_INSTALL_PREFIX=/usr \
+		  -DCMAKE_BUILD_TYPE=Release \
+		  -DENABLE_CLI=OFF \
+		  -DENABLE_DAEMON=ON \
+		  -DENABLE_GTK=OFF \
+		  -DENABLE_LIGHTWEIGHT=ON \
+		  -DENABLE_NLS=OFF \
+		  -DENABLE_MAC=OFF \
+		  -DENABLE_TESTS=OFF \
+		  -DINSTALL_DOC=OFF \
+		  -DUSE_SYSTEM_MINIUPNPC=OFF \
+		  -DUSE_SYSTEM_NATPMP=OFF \
+		  -DUSE_SYSTEM_UTP=OFF \
+		  -DWITH_SYSTEMD=OFF \
+		  -DWITH_INOTIFY=ON \
+		  -DWITH_CRYPTO=openssl \
+		  .. \
+	)
+
+clean:
+	if [ -d $(SRC_NAME)/build ]; then \
+		rm -rf $(SRC_NAME)/build; \
+	fi
+	rm -f config_done
+	rm -rf install
+
+romfs:
+ifeq ($(CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL),y)
+	mkdir -p $(INSTALLDIR)/usr/share/transmission
+	cp -rf $(THISDIR)/transmission-control/public_html $(INSTALLDIR)/usr/share/transmission
+else
+	cp -rf $(THISDIR)/install/usr/share/transmission $(INSTALLDIR)/usr/share
+endif
+	$(ROMFSINST) $(THISDIR)/install/usr/bin/transmission-daemon /usr/bin/transmission-daemon
+	$(ROMFSINST) -p +x /usr/bin/transmission.sh
