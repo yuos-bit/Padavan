@@ -1,9 +1,8 @@
-conf
-?conf
 *.o
-.deps
 zconf.c
 zconf.lex.c
-*.exe
-Makefile
-.dirstamp
+.deps
+conf
+lxdialog/.dirstamp
+mconf
+nconf

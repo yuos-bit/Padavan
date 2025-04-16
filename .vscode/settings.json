@@ -1,6 +1,0 @@
-{
-    "githubPullRequests.ignoredPullRequestBranches": [
-        "master"
-    ],
-    "git.ignoreLimitWarning": true
-}

@@ -1,6 +1,0 @@
-.debhelper
-*.log
-*.substvars
-crosstool-ng
-debhelper-build-stamp
-files

@@ -249,9 +249,6 @@ config OBSOLETE
 config EXPERIMENTAL
     def_bool y
 
-config CONFIGURE_has_lzip
-    def_bool y
-
 config CONFIGURE_has_wget
     def_bool y
 

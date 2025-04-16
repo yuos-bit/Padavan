@@ -1,11 +1,11 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.71])
+AC_PREREQ([2.67])
 
 AC_INIT(
     [crosstool-NG],
-    [MIPS32],
+    [m4_esyscmd_s([maintainer/git-version-gen --prefix crosstool-ng- .tarball-version])],
     [crossgcc@sourceware.org],
     [crosstool-ng],
     [http://crosstool-ng.org])
@@ -207,25 +207,25 @@ CTNG_PROG_VERSION_REQ_ANY([LIBTOOLIZE],
     [libtoolize_2_4_or_newer])
 
 CTNG_PROG_VERSION([AUTOCONF],
-    [GNU autoconf >= 2.71],
+    [GNU autoconf >= 2.65],
     [autoconf],
     [autoconf],
     [\(GNU Autoconf\) ([3-9]\.|2\.[7-9][0-9]|2\.6[5-9])],
-    [autoconf_2_71_or_newer])
+    [autoconf_2_65_or_newer])
 
 CTNG_PROG_VERSION([AUTORECONF],
-    [GNU autoreconf >= 2.71],
+    [GNU autoreconf >= 2.63],
     [autoreconf],
     [autoreconf],
     [\(GNU Autoconf\) ([3-9]\.|2\.[7-9][0-9]|2\.6[5-9])],
-    [autoreconf_2_71_or_newer])
+    [autoreconf_2_65_or_newer])
 
 CTNG_PROG_VERSION([AUTOMAKE],
-    [GNU automake >= 1.16],
+    [GNU automake >= 1.15],
     [automake],
     [automake],
     [\(GNU automake\) ([2-9]\.|1\.[2-9][0-9]|1\.1[5-9])],
-    [automake_1_16_or_newer])
+    [automake_1_15_or_newer])
 
 CTNG_PROG_VERSION([M4],
     [GNU m4 >= 1.4.12],
@@ -254,13 +254,6 @@ CTNG_PROG_VERSION([BISON],
     [bison],
     [\(GNU Bison\) (2\.[7-9]|2\.[1-9][0-9]|[3-9]\.)],
     [bison_2_7_or_newer])
-
-CTNG_PROG_VERSION_REQ_ANY([BISON],
-    [bison >= 3.0.4],
-    [bison],
-    [bison],
-    [\(GNU Bison\) (3\.0\.[4-9]|3\.[1-9]|[4-9]\.)],
-    [bison_3_0_4_or_newer])
 
 AC_SUBST([kconfig_options])
 
