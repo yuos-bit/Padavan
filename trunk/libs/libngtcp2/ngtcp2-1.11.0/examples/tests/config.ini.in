@@ -1,0 +1,32 @@
+[ngtcp2]
+version = @PACKAGE_VERSION@
+examples = @EXAMPLES_ENABLED@
+
+[crypto]
+quictls = @have_openssl@
+gnutls = @have_gnutls@
+boringssl = @have_boringssl@
+picotls = @have_picotls@
+wolfssl = @have_wolfssl@
+
+[examples]
+port = 4433
+quictls = @EXAMPLES_QUICTLS@
+gnutls = @EXAMPLES_GNUTLS@
+boringssl = @EXAMPLES_BORINGSSL@
+picotls = @EXAMPLES_PICOTLS@
+wolfssl = @EXAMPLES_WOLFSSL@
+
+[clients]
+quictls = qtlsclient
+gnutls = gtlsclient
+boringssl = bsslclient
+picotls = ptlsclient
+wolfssl = wsslclient
+
+[servers]
+quictls = qtlsserver
+gnutls = gtlsserver
+boringssl = bsslserver
+picotls = ptlsserver
+wolfssl = wsslserver
