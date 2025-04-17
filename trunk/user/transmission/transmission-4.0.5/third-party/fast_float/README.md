@@ -1,8 +1,4 @@
-
 ## fast_float number parsing library: 4x faster than strtod
-[![Fuzzing Status](https://oss-fuzz-build-logs.storage.googleapis.com/badges/fast_float.svg)](https://bugs.chromium.org/p/oss-fuzz/issues/list?sort=-opened&can=1&q=proj:fast_float)
-[![VS17-CI](https://github.com/fastfloat/fast_float/actions/workflows/vs17-ci.yml/badge.svg)](https://github.com/fastfloat/fast_float/actions/workflows/vs17-ci.yml)
-[![Ubuntu 22.04 CI (GCC 11)](https://github.com/fastfloat/fast_float/actions/workflows/ubuntu22.yml/badge.svg)](https://github.com/fastfloat/fast_float/actions/workflows/ubuntu22.yml)
 
 The fast_float library provides fast header-only implementations for the C++ from_chars
 functions for `float` and `double` types.  These functions convert ASCII strings representing
@@ -70,50 +66,11 @@ The library seeks to follow the C++17 (see [20.19.3](http://eel.is/c++draft/char
 Furthermore, we have the following restrictions:
 * We only support `float` and `double` types at this time.
 * We only support the decimal format: we do not support hexadecimal strings.
-* For values that are either very large or very small (e.g., `1e9999`), we represent it using the infinity or negative infinity value and the returned `ec` is set to `std::errc::result_out_of_range`.
+* For values that are either very large or very small (e.g., `1e9999`), we represent it using the infinity or negative infinity value.
 
 We support Visual Studio, macOS, Linux, freeBSD. We support big and little endian. We support 32-bit and 64-bit systems.
 
 We assume that the rounding mode is set to nearest (`std::fegetround() == FE_TONEAREST`).
-
-## C++20: compile-time evaluation (constexpr)
-
-In C++20, you may use `fast_float::from_chars` to parse strings
-at compile-time, as in the following example:
-
-```C++
-// consteval forces compile-time evaluation of the function in C++20.
-consteval double parse(std::string_view input) {
-  double result;
-  auto answer = fast_float::from_chars(input.data(), input.data()+input.size(), result);
-  if(answer.ec != std::errc()) { return -1.0; }
-  return result;
-}
-
-// This function should compile to a function which
-// merely returns 3.1415.
-constexpr double constexptest() {
-  return parse("3.1415 input");
-}
-```
-
-## Non-ASCII Inputs
-
-We also support UTF-16 and UTF-32 inputs, as well as ASCII/UTF-8, as in the following example:
-
-``` C++
-#include "fast_float/fast_float.h"
-#include <iostream>
-
-int main() {
-    const std::u16string input =  u"3.1416 xyz ";
-    double result;
-    auto answer = fast_float::from_chars(input.data(), input.data()+input.size(), result);
-    if(answer.ec != std::errc()) { std::cerr << "parsing failure\n"; return EXIT_FAILURE; }
-    std::cout << "parsed the number " << result << std::endl;
-    return EXIT_SUCCESS;
-}
-```
 
 ## Using commas as decimal separator
 
@@ -167,26 +124,9 @@ You can parse delimited numbers:
   // we have result == 324562.645.
 ```
 
-
-## Relation With Other Work
-
-The fast_float library is part of:
-
-- GCC (as of version 12): the `from_chars` function in GCC relies on fast_float.
-- [WebKit](https://github.com/WebKit/WebKit), the engine behind Safari (Apple's web browser)
-
-
-The fastfloat algorithm is part of the [LLVM standard libraries](https://github.com/llvm/llvm-project/commit/87c016078ad72c46505461e4ff8bfa04819fe7ba).
-
-There is a [derived implementation part of AdaCore](https://github.com/AdaCore/VSS).
-
-
-The fast_float library provides a performance similar to that of the [fast_double_parser](https://github.com/lemire/fast_double_parser) library but using an updated algorithm reworked from the ground up, and while offering an API more in line with the expectations of C++ programmers. The fast_double_parser library is part of the [Microsoft LightGBM machine-learning framework](https://github.com/microsoft/LightGBM).
-
-## References
+## Reference
 
 - Daniel Lemire, [Number Parsing at a Gigabyte per Second](https://arxiv.org/abs/2101.11408), Software: Practice and Experience 51 (8), 2021.
-- Noble Mushtak, Daniel Lemire, [Fast Number Parsing Without Fallback](https://arxiv.org/abs/2212.06644), Software: Practice and Experience 53 (7), 2023.
 
 ## Other programming languages
 
@@ -195,6 +135,16 @@ The fast_float library provides a performance similar to that of the [fast_doubl
 - [There is a Java port of the fast_float library](https://github.com/wrandelshofer/FastDoubleParser) called `FastDoubleParser`. It used for important systems such as [Jackson](https://github.com/FasterXML/jackson-core).
 - [There is a C# port of the fast_float library](https://github.com/CarlVerret/csFastFloat) called `csFastFloat`.
 
+
+## Relation With Other Work
+
+The fast_float library is part of GCC (as of version 12): the `from_chars` function in GCC relies on fast_float.
+
+The fastfloat algorithm is part of the [LLVM standard libraries](https://github.com/llvm/llvm-project/commit/87c016078ad72c46505461e4ff8bfa04819fe7ba).
+
+The fast_float library provides a performance similar to that of the [fast_double_parser](https://github.com/lemire/fast_double_parser) library but using an updated algorithm reworked from the ground up, and while offering an API more in line with the expectations of C++ programmers. The fast_double_parser library is part of the [Microsoft LightGBM machine-learning framework](https://github.com/microsoft/LightGBM).
+
+There is a [derived implementation part of AdaCore](https://github.com/AdaCore/VSS).
 
 ## Users
 
@@ -211,11 +161,11 @@ It can parse random floating-point numbers at a speed of 1 GB/s on some systems.
 $ ./build/benchmarks/benchmark
 # parsing random integers in the range [0,1)
 volume = 2.09808 MB
-netlib                                  :   271.18 MB/s (+/- 1.2 %)    12.93 Mfloat/s
-doubleconversion                        :   225.35 MB/s (+/- 1.2 %)    10.74 Mfloat/s
-strtod                                  :   190.94 MB/s (+/- 1.6 %)     9.10 Mfloat/s
-abseil                                  :   430.45 MB/s (+/- 2.2 %)    20.52 Mfloat/s
-fastfloat                               :  1042.38 MB/s (+/- 9.9 %)    49.68 Mfloat/s
+netlib                                  :   271.18 MB/s (+/- 1.2 %)    12.93 Mfloat/s 
+doubleconversion                        :   225.35 MB/s (+/- 1.2 %)    10.74 Mfloat/s 
+strtod                                  :   190.94 MB/s (+/- 1.6 %)     9.10 Mfloat/s 
+abseil                                  :   430.45 MB/s (+/- 2.2 %)    20.52 Mfloat/s 
+fastfloat                               :  1042.38 MB/s (+/- 9.9 %)    49.68 Mfloat/s 
 ```
 
 See https://github.com/lemire/simple_fastfloat_benchmark for our benchmarking code.
@@ -264,7 +214,7 @@ the command line help.
 
 You may directly download automatically generated single-header files:
 
-https://github.com/fastfloat/fast_float/releases/download/v5.2.0/fast_float.h
+https://github.com/fastfloat/fast_float/releases/download/v3.4.0/fast_float.h
 
 ## Credit
 
@@ -279,7 +229,7 @@ under the Apache 2.0 license.
 
 <sup>
 Licensed under either of <a href="LICENSE-APACHE">Apache License, Version
-2.0</a> or <a href="LICENSE-MIT">MIT license</a> or <a href="LICENSE-BOOST">BOOST license</a> .
+2.0</a> or <a href="LICENSE-MIT">MIT license</a> at your option.
 </sup>
 
 <br>
@@ -287,5 +237,5 @@ Licensed under either of <a href="LICENSE-APACHE">Apache License, Version
 <sub>
 Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in this repository by you, as defined in the Apache-2.0 license,
-shall be triple licensed as above, without any additional terms or conditions.
+shall be dual licensed as above, without any additional terms or conditions.
 </sub>

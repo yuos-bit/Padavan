@@ -9,7 +9,7 @@ option(SYSTEM_DOCTEST "Use system copy of doctest" OFF)
 if (NOT SYSTEM_DOCTEST)
   FetchContent_Declare(doctest
     GIT_REPOSITORY https://github.com/onqtam/doctest.git
-    GIT_TAG v2.4.10)
+    GIT_TAG 2.4.6)
 endif()
 FetchContent_Declare(supplemental_test_files
   GIT_REPOSITORY https://github.com/fastfloat/supplemental_test_files.git
@@ -38,11 +38,7 @@ add_library(supplemental-data INTERFACE)
 target_compile_definitions(supplemental-data INTERFACE SUPPLEMENTAL_TEST_DATA_DIR="${supplemental_test_files_BINARY_DIR}/data")
 function(fast_float_add_cpp_test TEST_NAME)
     add_executable(${TEST_NAME} ${TEST_NAME}.cpp)
-    if(CMAKE_CROSSCOMPILING)
-        set(ccemulator ${CMAKE_CROSSCOMPILING_EMULATOR})
-    endif()
-    add_test(NAME ${TEST_NAME}
-        COMMAND ${ccemulator} $<TARGET_FILE:${TEST_NAME}>)
+    add_test(${TEST_NAME} ${TEST_NAME})
     if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
       target_compile_options(${TEST_NAME} PUBLIC /EHsc)
     endif()
@@ -56,17 +52,11 @@ function(fast_float_add_cpp_test TEST_NAME)
     endif()
 endfunction(fast_float_add_cpp_test)
 
-fast_float_add_cpp_test(rcppfastfloat_test)
+
 fast_float_add_cpp_test(example_test)
 fast_float_add_cpp_test(example_comma_test)
 fast_float_add_cpp_test(basictest)
-option(FASTFLOAT_CONSTEXPR_TESTS "Require constexpr tests (build will fail if the compiler won't support it)" OFF)
-if (FASTFLOAT_CONSTEXPR_TESTS)
-  target_compile_features(basictest PRIVATE cxx_std_20)
-  target_compile_definitions(basictest PRIVATE FASTFLOAT_CONSTEXPR_TESTS)
-else()
-  target_compile_features(basictest PRIVATE cxx_std_17)
-endif()
+target_compile_features(basictest PRIVATE cxx_std_17)
 
 fast_float_add_cpp_test(long_test)
 fast_float_add_cpp_test(powersoffive_hardround)
@@ -89,4 +79,3 @@ if (FASTFLOAT_EXHAUSTIVE)
 endif(FASTFLOAT_EXHAUSTIVE)
 
 add_subdirectory(build_tests)
-add_subdirectory(bloat_analysis)

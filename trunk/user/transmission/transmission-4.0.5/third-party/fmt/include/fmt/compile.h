@@ -14,8 +14,8 @@ FMT_BEGIN_NAMESPACE
 namespace detail {
 
 template <typename Char, typename InputIt>
-FMT_CONSTEXPR inline counting_iterator copy_str(InputIt begin, InputIt end,
-                                                counting_iterator it) {
+inline counting_iterator copy_str(InputIt begin, InputIt end,
+                                  counting_iterator it) {
   return it + (end - begin);
 }
 
@@ -341,7 +341,7 @@ constexpr parse_specs_result<T, Char> parse_specs(basic_string_view<Char> str,
                                          next_arg_id);
   auto f = formatter<T, Char>();
   auto end = f.parse(ctx);
-  return {f, pos + fmt::detail::to_unsigned(end - str.data()),
+  return {f, pos + fmt::detail::to_unsigned(end - str.data()) + 1,
           next_arg_id == 0 ? manual_indexing_id : ctx.next_arg_id()};
 }
 
@@ -397,20 +397,13 @@ constexpr auto parse_replacement_field_then_tail(S format_str) {
     return parse_tail<Args, END_POS + 1, NEXT_ID>(
         field<char_type, typename field_type<T>::type, ARG_INDEX>(),
         format_str);
-  } else if constexpr (c != ':') {
-    FMT_THROW(format_error("expected ':'"));
-  } else {
+  } else if constexpr (c == ':') {
     constexpr auto result = parse_specs<typename field_type<T>::type>(
         str, END_POS + 1, NEXT_ID == manual_indexing_id ? 0 : NEXT_ID);
-    if constexpr (result.end >= str.size() || str[result.end] != '}') {
-      FMT_THROW(format_error("expected '}'"));
-      return 0;
-    } else {
-      return parse_tail<Args, result.end + 1, result.next_arg_id>(
-          spec_field<char_type, typename field_type<T>::type, ARG_INDEX>{
-              result.fmt},
-          format_str);
-    }
+    return parse_tail<Args, result.end, result.next_arg_id>(
+        spec_field<char_type, typename field_type<T>::type, ARG_INDEX>{
+            result.fmt},
+        format_str);
   }
 }
 
@@ -575,8 +568,7 @@ format_to_n_result<OutputIt> format_to_n(OutputIt out, size_t n,
 
 template <typename S, typename... Args,
           FMT_ENABLE_IF(detail::is_compiled_string<S>::value)>
-FMT_CONSTEXPR20 size_t formatted_size(const S& format_str,
-                                      const Args&... args) {
+size_t formatted_size(const S& format_str, const Args&... args) {
   return fmt::format_to(detail::counting_iterator(), format_str, args...)
       .count();
 }
