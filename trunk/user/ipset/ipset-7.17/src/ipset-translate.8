@@ -1,0 +1,91 @@
+.\"
+.\" (C) Copyright 2021, Pablo Neira Ayuso <pablo@netfilter.org>
+.\"
+.\" %%%LICENSE_START(GPLv2+_DOC_FULL)
+.\" This is free documentation; you can redistribute it and/or
+.\" modify it under the terms of the GNU General Public License as
+.\" published by the Free Software Foundation; either version 2 of
+.\" the License, or (at your option) any later version.
+.\"
+.\" The GNU General Public License's references to "object code"
+.\" and "executables" are to be interpreted as the output of any
+.\" document formatting or typesetting system, including
+.\" intermediate and printed output.
+.\"
+.\" This manual is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\" GNU General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU General Public
+.\" License along with this manual; if not, see
+.\" <http://www.gnu.org/licenses/>.
+.\" %%%LICENSE_END
+.\"
+.TH IPSET-TRANSLATE 8 "May 31, 2021"
+
+.SH NAME
+ipset-translate \(em translation tool to migrate from ipset to nftables
+.SH DESCRIPTION
+This tool allows system administrators to translate a given IP sets file
+to \fBnftables(8)\fP.
+
+The only available command is:
+
+.IP \[bu] 2
+ipset-translate restore < file.ipt
+
+.SH USAGE
+The \fBipset-translate\fP tool reads an IP sets file in the syntax produced by
+\fBipset(8)\fP save. No set modifications occur, this tool is a text converter.
+
+.SH EXAMPLES
+Basic operation examples.
+
+Single command translation, assuming the original file:
+
+.nf
+create test1 hash:ip,port family inet counters timeout 300 hashsize 1024 maxelem 65536 bucketsize 12 initval 0xb5c4be5d
+add test1 1.1.1.1,udp:20
+add test1 1.1.1.1,21
+create test2 hash:ip,port family inet hashsize 1024 maxelem 65536 bucketsize 12 initval 0xb5c4be5d
+.fi
+
+which results in the following translation:
+
+.nf
+root@machine:~# ipset-translate restore < file.ipt
+add set inet global test1 { type ipv4_addr . inet_proto . inet_service; counter; timeout 300s; size 65536; }
+add element inet global test1 { 1.1.1.1 . udp . 20 }
+add element inet global test1 { 1.1.1.1 . tcp . 21 }
+add set inet global test2 { type ipv4_addr . inet_proto . inet_service; size 65536; }
+.fi
+
+.SH LIMITATIONS
+A few IP sets options may be not supported because they are not yet implemented
+in \fBnftables(8)\fP.
+
+Contrary to \fBnftables(8)\fP, IP sets are not attached to a specific table.
+The translation utility assumes that sets are created in a table whose name
+is \fBglobal\fP and family is \fBinet\fP. You might want to update the
+resulting translation to use a different table name and family for your sets.
+
+To get up-to-date information about this, please head to
+\fBhttps://wiki.nftables.org/\fP.
+
+.SH SEE ALSO
+\fBnft(8)\fP, \fBipset(8)\fP
+
+.SH AUTHORS
+The nftables framework has been written by the Netfilter Project
+(https://www.netfilter.org).
+
+This manual page was written by Pablo Neira Ayuso
+<pablo@netfilter.org>.
+
+This documentation is free/libre under the terms of the GPLv2+.
+
+This tool was funded through the NGI0 PET Fund, a fund established by NLnet with
+financial support from the European Commission's Next Generation Internet
+programme, under the aegis of DG Communications Networks, Content and Technology
+under grant agreement No 825310.

@@ -1,0 +1,58 @@
+add table inet global
+add set inet global hip1 { type ipv4_addr; }
+add element inet global hip1 { 192.168.10.2 }
+add element inet global hip1 { 192.168.10.3 }
+add set inet global hip2 { type ipv4_addr; timeout 4s; }
+add element inet global hip2 { 192.168.10.3 }
+add element inet global hip2 { 192.168.10.4 timeout 10s }
+add set inet global hip3 { type ipv4_addr; counter; }
+add element inet global hip3 { 192.168.10.3 counter packets 5 bytes 3456 }
+add set inet global hip4 { type ipv4_addr; flags interval; }
+add element inet global hip4 { 192.168.10.0/24 }
+add set inet global hip5 { type ipv4_addr; size 24; }
+add element inet global hip5 { 192.168.10.0 }
+add set inet global hip6 { type ipv4_addr; }
+add element inet global hip5 { 192.168.10.1 }
+add element inet global hip5 { 192.168.10.2 comment "this is a comment" }
+add set inet global ipp1 { type ipv4_addr . inet_proto . inet_service; }
+add element inet global ipp1 { 192.168.10.1 . tcp . 0 }
+add element inet global ipp1 { 192.168.10.2 . tcp . 5 }
+add set inet global ipp2 { type ipv4_addr . inet_proto . inet_service; timeout 4s; }
+add element inet global ipp2 { 192.168.10.1 . tcp . 0 timeout 12s }
+add element inet global ipp2 { 192.168.10.2 . tcp . 5 }
+add set inet global ipp3 { type ipv4_addr . inet_proto . inet_service; counter; }
+add element inet global ipp3 { 192.168.10.3 . tcp . 20 counter packets 5 bytes 3456 }
+add set inet global ipp4 { type ipv4_addr . inet_proto . inet_service; counter; timeout 4s; }
+add element inet global ipp4 { 192.168.10.3 . tcp . 20 counter packets 5 bytes 3456 }
+add set inet global bip1 { type ipv4_addr; timeout 5s; }
+add set inet global bip2 { type ipv4_addr; timeout 5s; flags interval; }
+add element inet global bip2 { 10.10.10.0/24 }
+add element inet global bip2 { 10.10.20.0/24 timeout 12s }
+add set inet global net1 { type ipv4_addr; flags interval; }
+add element inet global net1 { 192.168.10.0/24 }
+add set inet global net2 { type ipv4_addr . ipv4_addr; flags interval; }
+add element inet global net2 { 192.168.10.0/24 . 192.168.20.0/24 }
+add set inet global hm1 { type ether_addr; }
+add element inet global hm1 { aa:bb:cc:dd:ee:ff }
+add set inet global him1 { type ipv4_addr . ether_addr; }
+add element inet global him1 { 1.1.1.1 . aa:bb:cc:dd:ee:ff }
+add set inet global ni1 { type ipv4_addr . ifname; flags interval; }
+add element inet global ni1 { 1.1.1.0/24 . eth0 }
+add set inet global nip1 { type ipv4_addr . inet_proto . inet_service; flags interval; }
+add element inet global nip1 { 1.1.1.0/24 . tcp . 22 }
+add set inet global npn1 { type ipv4_addr . inet_proto . inet_service . ipv4_addr; flags interval; }
+add element inet global npn1 { 1.1.1.0/24 . tcp . 22 . 2.2.2.0/24 }
+add set inet global nn1 { type ipv4_addr . ipv4_addr; flags interval; }
+add element inet global nn1 { 1.1.1.0/24 . 2.2.2.0/24 }
+add set inet global ipn1 { type ipv4_addr . inet_proto . inet_service . ipv4_addr; flags interval; }
+add element inet global ipn1 { 1.1.1.1 . tcp . 22 . 2.2.2.0/24 }
+add set inet global ipi1 { type ipv4_addr . inet_proto . inet_service . ipv4_addr; }
+add element inet global ipi1 { 1.1.1.1 . tcp . 22 . 2.2.2.2 }
+add set inet global im1 { type ipv4_addr . mark; }
+add element inet global im1 { 1.1.1.1 . 0x00123456 }
+add set inet global bp1 { type inet_service; }
+add element inet global bp1 { 22 }
+add set inet global bim1 { type ipv4_addr . ether_addr; }
+add element inet global bim1 { 1.1.1.1 . aa:bb:cc:dd:ee:ff }
+add set inet global hn6 { type ipv6_addr; flags interval; }
+add element inet global hn6 { fe80::/64 }
