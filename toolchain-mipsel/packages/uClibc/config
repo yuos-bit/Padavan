@@ -257,6 +257,10 @@ PROPOLICE_BLOCK_ABRT=y
 UCLIBC_BUILD_RELRO=y
 UCLIBC_BUILD_NOW=y
 UCLIBC_BUILD_NOEXECSTACK=y
+# 禁用 64 位时间支持
+UCLIBC_HAS_TIME64=n
+# 强制使用 32 位时间
+UCLIBC_HAS_32BIT_TIME=y
 
 #
 # uClibc development/debugging options
