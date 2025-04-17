@@ -8,7 +8,7 @@ SRC_NAME = transmission-4.0.5
 SRC_URL  = https://github.com/transmission/transmission/releases/download/4.0.5/transmission-4.0.5.tar.xz
 
 CFLAGS   += -O2 -ffunction-sections -fdata-sections -fvisibility=hidden \
-            -D_LARGEFILE64_SOURCE -D_LFS64_LARGEFILE -Wno-implicit-fallthrough
+			-D_LARGEFILE64_SOURCE -D_LFS64_LARGEFILE -Wno-implicit-fallthrough
 LDFLAGS  += -Wl,--gc-sections
 
 THISDIR  = $(shell pwd)
@@ -24,10 +24,10 @@ download_test:
 
 extract_test:
     @if [ ! -d $(SRC_NAME) ]; then \
-        tar -xf $(SRC_NAME).tar.xz; \
-        patch -p1 -d $(SRC_NAME) < $(TRUNK_DIR)/libs/libngtcp2/disabled-examples-in-cmakelists.patch; \
-        mkdir -p $(SRC_NAME)/third-party/miniupnpc/include/miniupnp; \
-        cp -r $(SRC_NAME)/third-party/miniupnpc/*.h $(SRC_NAME)/third-party/miniupnpc/include/miniupnp; \
+		tar -xf $(SRC_NAME).tar.xz; \
+		patch -p1 -d $(SRC_NAME) < $(TRUNK_DIR)/libs/libngtcp2/disabled-examples-in-cmakelists.patch; \
+		mkdir -p $(SRC_NAME)/third-party/miniupnpc/include/miniupnp; \
+		cp -r $(SRC_NAME)/third-party/miniupnpc/*.h $(SRC_NAME)/third-party/miniupnpc/include/miniupnp; \
     fi
 
 config_test:
@@ -40,24 +40,24 @@ config_test:
 configure:
 	@mkdir -p $(SRC_NAME)/build && cd $(SRC_NAME)/build; \
 	cmake \
-	  -DCMAKE_TOOLCHAIN_FILE=../../cross-mipsel-linux.cmake \
-	  -DCMAKE_INSTALL_PREFIX=/usr \
-	  -DCMAKE_BUILD_TYPE=Release \
-	  -DENABLE_CLI=OFF \
-	  -DENABLE_DAEMON=ON \
-	  -DENABLE_GTK=OFF \
-	  -DENABLE_LIGHTWEIGHT=ON \
-	  -DENABLE_NLS=OFF \
-	  -DENABLE_QT=OFF \
-	  -DENABLE_TESTS=OFF \
-	  -DINSTALL_DOC=OFF \
-	  -DUSE_SYSTEM_MINIUPNPC=OFF \
-	  -DUSE_SYSTEM_NATPMP=OFF \
-	  -DUSE_SYSTEM_UTP=OFF \
-	  -DWITH_SYSTEMD=OFF \
-	  -DWITH_INOTIFY=ON \
-	  -DWITH_CRYPTO=openssl \
-	  ..
+		-DCMAKE_TOOLCHAIN_FILE=../../cross-mipsel-linux.cmake \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DENABLE_CLI=OFF \
+		-DENABLE_DAEMON=ON \
+		-DENABLE_GTK=OFF \
+		-DENABLE_LIGHTWEIGHT=ON \
+		-DENABLE_NLS=OFF \
+		-DENABLE_QT=OFF \
+		-DENABLE_TESTS=OFF \
+		-DINSTALL_DOC=OFF \
+		-DUSE_SYSTEM_MINIUPNPC=OFF \
+		-DUSE_SYSTEM_NATPMP=OFF \
+		-DUSE_SYSTEM_UTP=OFF \
+		-DWITH_SYSTEMD=OFF \
+		-DWITH_INOTIFY=ON \
+		-DWITH_CRYPTO=openssl \
+		..
 
 clean:
 	@if [ -f $(SRC_NAME)/Makefile ]; then \
