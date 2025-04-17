@@ -1,7 +1,0 @@
-extraction:
-  cpp:
-    prepare:
-      packages:
-        - lzip
-    configure:
-      command: ./autogen.sh && ./configure --disable-gtk-doc
