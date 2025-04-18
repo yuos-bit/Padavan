@@ -21,15 +21,15 @@ ifeq ($(GITHUB_ACTION),n)
 	$(ROMFSINST) -p +x $(THISDIR)/$(VIM_BIN) /usr/bin/vim
 	$(ROMFSINST) $(THISDIR)/$(VIMRC) /etc/vimrc
 	$(ROMFSINST) -d -m 755 /usr/share/terminfo
-	$(ROMFSINST) -p -r $(TERMINFODIR)/* /usr/share/terminfo/
+	$(ROMFSINST) -r $(TERMINFODIR) /usr/share/terminfo
 	
 	@mkdir -p $(THISDIR)/romfs_patch
-	echo 'export VIMINIT="source /etc/vimrc"' > $(THISDIR)/romfs_patch/profile_vim
-	echo 'export TERMINFO=$(THISDIR)/terminfo' >> $(THISDIR)/romfs_patch/profile_vim
-	$(ROMFSINST) -p +x $(THISDIR)/romfs_patch/profile_vim /usr/bin/vim.sh
+    echo 'export VIMINIT="source /etc/vimrc"' > $(THISDIR)/romfs_patch/profile_vim
+    echo 'export TERMINFO=/usr/share/terminfo' >> $(THISDIR)/romfs_patch/profile_vim
+	$(ROMFSINST) -p +x $(THISDIR)/romfs_patch/profile_vim /etc/storage/vim.sh
 else
 	$(ROMFSINST) -p +x $(THISDIR)/$(VIM_BIN) /usr/bin/vim
 	$(ROMFSINST) $(THISDIR)/$(VIMRC) /etc/vimrc
 	$(ROMFSINST) -d -m 755 /usr/share/terminfo
-	$(ROMFSINST) -p -r $(TERMINFODIR)/* /usr/share/terminfo/
+	$(ROMFSINST) -r $(TERMINFODIR) /usr/share/terminfo
 endif
