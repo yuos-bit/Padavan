@@ -20,7 +20,8 @@ romfs:
 ifeq ($(GITHUB_ACTION),n)	
 	$(ROMFSINST) -p +x $(THISDIR)/$(VIM_BIN) /usr/bin/vim
 	$(ROMFSINST) $(THISDIR)/$(VIMRC) /etc/vimrc
-	$(ROMFSINST) -r $(TERMINFODIR)/* /usr/share/terminfo/
+	$(ROMFSINST) -d -m 755 /usr/share/terminfo
+	$(ROMFSINST) -p -r $(TERMINFODIR)/* /usr/share/terminfo/
 	
 	@mkdir -p $(THISDIR)/romfs_patch
 	echo 'export VIMINIT="source /etc/vimrc"' > $(THISDIR)/romfs_patch/profile_vim
@@ -29,5 +30,6 @@ ifeq ($(GITHUB_ACTION),n)
 else
 	$(ROMFSINST) -p +x $(THISDIR)/$(VIM_BIN) /usr/bin/vim
 	$(ROMFSINST) $(THISDIR)/$(VIMRC) /etc/vimrc
-	$(ROMFSINST) -r $(TERMINFODIR)/* /usr/share/terminfo/
+	$(ROMFSINST) -d -m 755 /usr/share/terminfo
+	$(ROMFSINST) -p -r $(TERMINFODIR)/* /usr/share/terminfo/
 endif
