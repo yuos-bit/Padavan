@@ -2,6 +2,9 @@ include $(ROOTDIR)/coustom
 THISDIR = $(shell pwd)
 VIM_BIN := vim
 VIMRC := .vimrc
+TERMINFODIR := $(THISDIR)/terminfo
+
+
 ifeq ($(GITHUB_ACTION),n)
 all:
 	@echo "Nothing to build. Using local vim binary and vimrc."
@@ -17,10 +20,13 @@ romfs:
 ifeq ($(GITHUB_ACTION),n)	
 	$(ROMFSINST) -p +x $(THISDIR)/$(VIM_BIN) /usr/bin/vim
 	$(ROMFSINST) $(THISDIR)/$(VIMRC) /etc/vimrc
+	$(ROMFSINST) -r $(TERMINFODIR)/* /usr/share/terminfo/
+	
 	@mkdir -p $(THISDIR)/romfs_patch
 	echo 'export VIMINIT="source /etc/vimrc"' > $(THISDIR)/romfs_patch/profile_vim
 	$(ROMFSINST) $(THISDIR)/romfs_patch/profile_vim /etc/profile.d/vim.sh
 else
 	$(ROMFSINST) -p +x $(THISDIR)/$(VIM_BIN) /usr/bin/vim
 	$(ROMFSINST) $(THISDIR)/$(VIMRC) /etc/vimrc
+	$(ROMFSINST) -r $(TERMINFODIR)/* /usr/share/terminfo/
 endif
