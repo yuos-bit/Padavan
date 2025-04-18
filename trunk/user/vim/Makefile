@@ -24,6 +24,7 @@ ifeq ($(GITHUB_ACTION),n)
 	
 	@mkdir -p $(THISDIR)/romfs_patch
 	echo 'export VIMINIT="source /etc/vimrc"' > $(THISDIR)/romfs_patch/profile_vim
+	echo 'export TERMINFO=$(THISDIR)/terminfo' >> $(THISDIR)/romfs_patch/profile_vim
 	$(ROMFSINST) $(THISDIR)/romfs_patch/profile_vim /etc/profile.d/vim.sh
 else
 	$(ROMFSINST) -p +x $(THISDIR)/$(VIM_BIN) /usr/bin/vim
