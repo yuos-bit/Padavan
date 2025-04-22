@@ -20,6 +20,7 @@ ifeq ($(GITHUB_ACTION),n)
 	$(ROMFSINST) $(THISDIR)/$(VIMRC) /usr/share/vim/defaults.vim
 	$(ROMFSINST) -d -m 755 /usr/share/terminfo
 	$(ROMFSINST) -r $(TERMINFODIR) /usr/share/terminfo
+
 	@mkdir -p $(THISDIR)/romfs_patch
 	echo 'export VIMINIT="source /usr/share/vim/defaults.vim"' > $(THISDIR)/romfs_patch/profile_vim
 	echo 'export TERMINFO=/usr/share/terminfo' >> $(THISDIR)/romfs_patch/profile_vim
