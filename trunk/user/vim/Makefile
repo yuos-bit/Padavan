@@ -19,17 +19,17 @@ clean:
 romfs:
 ifeq ($(GITHUB_ACTION),n)	
 	$(ROMFSINST) -p +x $(THISDIR)/$(VIM_BIN) /usr/bin/vim
-	$(ROMFSINST) $(THISDIR)/$(VIMRC) /etc/vimrc
+	$(ROMFSINST) $(THISDIR)/$(VIMRC) /usr/bin/defaults.vim
 	$(ROMFSINST) -d -m 755 /usr/share/terminfo
 	$(ROMFSINST) -r $(TERMINFODIR) /usr/share/terminfo
 	
 	@mkdir -p $(THISDIR)/romfs_patch
-	echo 'export VIMINIT="source /etc/vimrc"' > $(THISDIR)/romfs_patch/profile_vim
+	echo 'export VIMINIT="source /usr/bin/defaults.vim"' > $(THISDIR)/romfs_patch/profile_vim
 	echo 'export TERMINFO=/usr/share/terminfo' >> $(THISDIR)/romfs_patch/profile_vim
 	$(ROMFSINST) -p +x $(THISDIR)/romfs_patch/profile_vim /etc/storage/vim.sh
 else
 	$(ROMFSINST) -p +x $(THISDIR)/$(VIM_BIN) /usr/bin/vim
-	$(ROMFSINST) $(THISDIR)/$(VIMRC) /etc/vimrc
+	$(ROMFSINST) $(THISDIR)/$(VIMRC) /usr/bin/defaults.vim
 	$(ROMFSINST) -d -m 755 /usr/share/terminfo
 	$(ROMFSINST) -r $(TERMINFODIR) /usr/share/terminfo
 endif
