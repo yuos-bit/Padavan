@@ -11,9 +11,7 @@ all:
 endif
 
 clean:
-
 	rm -rf $(THISDIR)/bin
-
 romfs:
 ifeq ($(GITHUB_ACTION),n)
 	$(ROMFSINST) -d -m 755 /opt/bin
