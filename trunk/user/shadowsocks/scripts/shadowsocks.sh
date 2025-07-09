@@ -8,7 +8,6 @@
 # This is free software, licensed under the GNU General Public License v3.
 # See /LICENSE for more information.
 #
-pppoemwan=`nvram get pppoemwan_enable`
 NAME=shadowsocksr
 http_username=`nvram get http_username`
 CONFIG_FILE=/tmp/${NAME}.json
@@ -28,7 +27,6 @@ chinadnsng_enable_flag=0
 wan_bp_ips="/tmp/whiteip.txt"
 wan_fw_ips="/tmp/blackip.txt"
 lan_fp_ips="/tmp/lan_ip.txt"
-lan_gm_ips="/tmp/lan_gmip.txt"
 run_mode=`nvram get ss_run_mode`
 ss_turn=`nvram get ss_turn`
 lan_con=`nvram get lan_con`
@@ -42,20 +40,7 @@ find_bin() {
 	ssr) ret="/usr/bin/ssr-redir" ;;
 	ssr-local) ret="/usr/bin/ssr-local" ;;
 	ssr-server) ret="/usr/bin/ssr-server" ;;
-	v2ray) 
-		if [ -f "/usr/bin/v2ray" ]; then
-			ret="/usr/bin/v2ray" 
-		else
-			ret="/usr/bin/xray" 
-		fi
-		;;
-	xray) 
-		if [ -f "/usr/bin/xray" ]; then
-			ret="/usr/bin/xray" 
-		else
-			ret="/usr/bin/v2ray"
-		fi
-		;;
+	v2ray) ret="/usr/bin/v2ray" ;;
 	trojan) ret="/usr/bin/trojan" ;;
 	socks5) ret="/usr/bin/ipt2socks" ;;
 	esac
@@ -101,17 +86,6 @@ local type=$stype
 		sed -i 's/\\//g' $v2_json_file
 		fi
 		;;
-	xray)
-		v2_bin="/usr/bin/v2ray"
-		v2ray_enable=1
-		if [ "$2" = "1" ]; then
-		lua /etc_ro/ss/genxrayconfig.lua $1 udp 1080 >/tmp/v2-ssr-reudp.json
-		sed -i 's/\\//g' /tmp/v2-ssr-reudp.json
-		else
-		lua /etc_ro/ss/genxrayconfig.lua $1 tcp 1080 >$v2_json_file
-		sed -i 's/\\//g' $v2_json_file
-		fi
-		;;	
 	esac
 }
 
@@ -135,7 +109,7 @@ start_rules() {
 	elif [ "$server" != "${server#*:[0-9a-fA-F]}" ]; then
 		server=${server}
 	else
-		server=$(resolveip -4 -t 3 $server | awk 'NR==1{print}')
+		server=$(ping ${server} -s 1 -c 1 | grep PING | cut -d'(' -f 2 | cut -d')' -f1)
 		if echo $server | grep -E "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$" >/dev/null; then
 			echo $server >/etc/storage/ssr_ip
 		else
@@ -180,8 +154,6 @@ start_rules() {
 		lancons="指定IP走代理,请到规则管理页面添加需要走代理的IP。"
 		cat /etc/storage/ss_lan_bip.sh | grep -v '^!' | grep -v "^$" >$lan_fp_ips
 	fi
-		rm -f $lan_gm_ips
-		cat /etc/storage/ss_lan_gmip.sh | grep -v '^!' | grep -v "^$" >$lan_gm_ips
 	dports=$(nvram get s_dports)
 	if [ $dports = "0" ]; then
 		proxyport=" "
@@ -198,6 +170,7 @@ start_rules() {
 	-b "$wan_bp_ips" \
 	-w "$wan_fw_ips" \
 	-p "$lan_fp_ips" \
+	-G "$lan_gm_ips" \
 	-G "$lan_gm_ips" \
 	-D "$proxyport" \
 	-k "$lancon" \
@@ -239,10 +212,6 @@ start_redir_tcp() {
 		$bin -config $v2_json_file >/dev/null 2>&1 &
 		echo "$(date "+%Y-%m-%d %H:%M:%S") $($bin -version | head -1) 启动成功!" >>/tmp/ssrplus.log
 		;;
-	xray)
-		$bin -config $v2_json_file >/dev/null 2>&1 &
-		echo "$(date "+%Y-%m-%d %H:%M:%S") $($bin -version | head -1) 启动成功!" >>/tmp/ssrplus.log
-		;;	
 	socks5)
 		for i in $(seq 1 $threads); do
 		lua /etc_ro/ss/gensocks.lua $GLOBAL_SERVER 1080 >/dev/null 2>&1 &
@@ -272,10 +241,6 @@ start_redir_udp() {
 			gen_config_file $UDP_RELAY_SERVER 1
 			$bin -config /tmp/v2-ssr-reudp.json >/dev/null 2>&1 &
 			;;
-		xray)
-			gen_config_file $UDP_RELAY_SERVER 1
-			$bin -config /tmp/v2-ssr-reudp.json >/dev/null 2>&1 &
-			;;	
 		trojan)
 			gen_config_file $UDP_RELAY_SERVER 1
 			$bin --config /tmp/trojan-ssr-reudp.json >/dev/null 2>&1 &
@@ -300,30 +265,44 @@ start_redir_udp() {
 
 
 start_dns() {
+case "$run_mode" in
+	router)
 		echo "create china hash:net family inet hashsize 1024 maxelem 65536" >/tmp/china.ipset
 		awk '!/^$/&&!/^#/{printf("add china %s'" "'\n",$0)}' /etc/storage/chinadns/chnroute.txt >>/tmp/china.ipset
 		ipset -! flush china
 		ipset -! restore </tmp/china.ipset 2>/dev/null
 		rm -f /tmp/china.ipset
-case "$run_mode" in
-	router)
-		dnsstr="$(nvram get tunnel_forward)"
-		dnsserver=$(echo "$dnsstr" | awk -F '#' '{print $1}')
-		#dnsport=$(echo "$dnsstr" | awk -F '#' '{print $2}')
-		logger -st "SS" "启动dns2tcp：5353端口..."
-		dns2tcp -L"127.0.0.1#5353" -R"$dnsstr" >/dev/null 2>&1 &
-		pdnsd_enable_flag=0	
-		logger -st "SS" "开始处理gfwlist..."
+		if [ $(nvram get ss_chdns) = 1 ]; then
+			chinadnsng_enable_flag=1
+			logger -t "SS" "下载cdn域名文件..."
+			wget --no-check-certificate --timeout=8 -qO - https://gitee.com/bkye/rules/raw/master/cdn.txt > /tmp/cdn.txt
+			if [ ! -f "/tmp/cdn.txt" ]; then
+				logger -t "SS" "cdn域名文件下载失败，可能是地址失效或者网络异常！可能会影响部分国内域名解析了国外的IP！"
+			else
+				logger -t "SS" "cdn域名文件下载成功"
+			fi
+			logger -st "SS" "启动chinadns..."
+			dns2tcp -L"127.0.0.1#5353" -R"$(nvram get tunnel_forward)" >/dev/null 2>&1 &
+			chinadns-ng -b 0.0.0.0 -l 65353 -c $(nvram get china_dns) -t 127.0.0.1#5353 -4 china -M -m /tmp/cdn.txt >/dev/null 2>&1 &
+			sed -i '/no-resolv/d' /etc/storage/dnsmasq/dnsmasq.conf
+			sed -i '/server=127.0.0.1/d' /etc/storage/dnsmasq/dnsmasq.conf
+			cat >> /etc/storage/dnsmasq/dnsmasq.conf << EOF
+no-resolv
+server=127.0.0.1#65353
+EOF
+    		fi
 	;;
 	gfw)
-		dnsstr="$(nvram get tunnel_forward)"
-		dnsserver=$(echo "$dnsstr" | awk -F '#' '{print $1}')
-		#dnsport=$(echo "$dnsstr" | awk -F '#' '{print $2}')
-		ipset add gfwlist $dnsserver 2>/dev/null
-		logger -st "SS" "启动dns2tcp：5353端口..."
-		dns2tcp -L"127.0.0.1#5353" -R"$dnsstr" >/dev/null 2>&1 &
-		pdnsd_enable_flag=0	
-		logger -st "SS" "开始处理gfwlist..."
+		if [ $(nvram get pdnsd_enable) = 0 ]; then
+			dnsstr="$(nvram get tunnel_forward)"
+			dnsserver=$(echo "$dnsstr" | awk -F '#' '{print $1}')
+			#dnsport=$(echo "$dnsstr" | awk -F '#' '{print $2}')
+			ipset add gfwlist $dnsserver 2>/dev/null
+			logger -st "SS" "启动dns2tcp：5353端口..."
+			dns2tcp -L"127.0.0.1#5353" -R"$dnsstr" >/dev/null 2>&1 &
+			pdnsd_enable_flag=0	
+			logger -st "SS" "开始处理gfwlist..."
+		fi
 		;;
 	oversea)
 		ipset add gfwlist $dnsserver 2>/dev/null
@@ -383,12 +362,6 @@ start_local() {
 		;;
 	v2ray)
 		lua /etc_ro/ss/genv2config.lua $local_server tcp 0 $s5_port >/tmp/v2-ssr-local.json
-		sed -i 's/\\//g' /tmp/v2-ssr-local.json
-		$bin -config /tmp/v2-ssr-local.json >/dev/null 2>&1 &
-		echo "$(date "+%Y-%m-%d %H:%M:%S") Global_Socks5:$($bin -version | head -1) Started!" >>/tmp/ssrplus.log
-		;;
-	xray)
-		lua /etc_ro/ss/genxrayconfig.lua $local_server tcp 0 $s5_port >/tmp/v2-ssr-local.json
 		sed -i 's/\\//g' /tmp/v2-ssr-local.json
 		$bin -config /tmp/v2-ssr-local.json >/dev/null 2>&1 &
 		echo "$(date "+%Y-%m-%d %H:%M:%S") Global_Socks5:$($bin -version | head -1) Started!" >>/tmp/ssrplus.log
@@ -468,9 +441,6 @@ if rules; then
         logger -t "SS" "启动成功。"
         logger -t "SS" "内网IP控制为:$lancons"
         nvram set check_mode=0
-        if [ "$pppoemwan" -ne 0 ]; then
-        /usr/bin/detect.sh
-        fi
 }
 
 # ================================= 关闭SS ===============================
@@ -491,9 +461,6 @@ ssp_close() {
 	fi
 	clear_iptable
 	/sbin/restart_dhcpd
-	if [ "$pppoemwan" -ne 0 ]; then
-        /usr/bin/detect.sh
-        fi
 }
 
 
@@ -628,5 +595,4 @@ reserver)
 	#exit 0
 	;;
 esac
-
 
