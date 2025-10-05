@@ -40,8 +40,11 @@ clean:
 	rm -rf $(THISDIR)/bin
 
 romfs:
-ifeq ($(GITHUB_ACTION),n)	
-	$(ROMFSINST) -p +x $(THISDIR)/bin/xray /usr/bin/v2ray
-else
-	$(ROMFSINST) -p +x $(THISDIR)/xray /usr/bin/v2ray
-endif
+	( if [ ! -f $(THISDIR)/xray ]; then \
+		$(ROMFSINST) -p +x $(THISDIR)/bin/xray /usr/bin/v2ray ;\
+		$(ROMFSINST) -p +x $(THISDIR)/bin/geosite.dat /usr/bin/geosite.dat ;\
+	else \
+		$(ROMFSINST) -p +x $(THISDIR)/xray /usr/bin/v2ray ;\
+		$(ROMFSINST) -p +x $(THISDIR)/geosite.dat /usr/bin/geosite.dat ;\
+		
+	fi )
