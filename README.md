@@ -75,8 +75,6 @@ fakeroot ./build_firmware_modify PSG1218
 >- MI-4C
 >- MI-4A-100M
 >- MI-R4A```小米路由4A千兆版```
-- 小米路由3C 网口以及LED灯配置分别如下
->- wlan and lan: >>>>> kernel-3.4.x.config
 
 - 所有适配机型
 >- 360P2
@@ -140,6 +138,9 @@ fakeroot ./build_firmware_modify PSG1218
 >- YK-L1
 >- ZTE_E8820S
 
+
+- 小米路由3C 网口以及LED灯配置分别如下
+>- wlan and lan: >>>>> kernel-3.4.x.config
 ```shell
 # CONFIG_RAETH_ESW_IGMP_SNOOP_OFF is not set
 CONFIG_RAETH_ESW_IGMP_SNOOP_SW=y
