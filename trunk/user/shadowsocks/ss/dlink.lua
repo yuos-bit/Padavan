@@ -131,9 +131,9 @@ local function processData(szType, content)
 		end
 		result.alias = result.alias .. base64Decode(params.remarks)
 	elseif szType == 'vmess' then
-	local content2 = "[[" .. content .. "]]"
+	        local content2 = "[[" .. content .. "]]"
 		local info = cjson.decode(content)
-        result.type = 'v2ray'
+                result.type = 'v2ray'
 		result.server = info.add
 		result.server_port = info.port
 		result.transport = info.net
@@ -183,6 +183,93 @@ local function processData(szType, content)
 		else
 			result.tls = "0"
 		end
+	elseif szType == 'vless' then
+		local idx_sp = 0
+		local alias = ""
+		if content:find("#") then
+			idx_sp = content:find("#")
+			alias = content:sub(idx_sp + 1, -1)
+		end
+		local info = content:sub(1, idx_sp - 1)
+		local hostInfo = split(info, "@")
+		local host = split(hostInfo[2], ":")
+		local userinfo = hostInfo[1]
+		local password = userinfo		
+		result.alias = UrlDecode(alias)
+		result.type = "xray"
+		result.server = host[1]
+		-- 按照官方的建议 默认验证ssl证书
+		result.insecure = "0"
+		result.security = "none"
+		result.tls = "1"
+		if host[2]:find("?") then
+			local query = split(host[2], "?")
+			result.server_port = query[1]
+			local params = {}
+			for _, v in pairs(split(UrlDecode(query[2]), '&')) do
+				local t = split(v, '=')
+				params[t[1]] = t[2]
+			end
+			
+			
+			result.transport = params.type --vless的传输方式tcp/kcp/ws/http/quic
+			result.network = params.type
+			
+			if result.transport == 'ws' then
+				result.ws_host = params.host
+				result.ws_path = params.path
+			end
+			if result.transport == 'h2' then
+				result.h2_host = params.host
+				result.h2_path = params.path
+			end
+			if result.transport == 'tcp' then
+				if params.type and params.type ~= "http" then
+					params.type = "none"
+				end
+				result.tcp_guise = params.type
+				result.http_host = params.host
+				result.http_path = params.path
+			end
+			if result.transport == 'kcp' then
+				result.kcp_guise = params.type
+				result.mtu = 1350
+				result.tti = 50
+				result.uplink_capacity = 5
+				result.downlink_capacity = 20
+				result.read_buffer_size = 2
+				result.write_buffer_size = 2
+			end
+			if result.transport == 'quic' then
+				result.quic_guise = params.type
+				result.quic_key = params.key
+				result.quic_security = params.security
+			end
+			if params.encryption then
+				result.security = params.encryption --vless security默认none
+			end
+			if params.security == "tls" or params.security == "1" then --传输层security
+				result.tls = "1"
+				result.tls_host = params.host
+				result.insecure = 0
+				result.flow = "0"
+			elseif params.security == "xtls" or params.security == "2" then
+				result.tls = "2"
+				result.tls_host = params.host
+				result.insecure = 0
+				if params.flow == "xtls-rprx-splice" then
+					result.flow = "2"
+				else
+					result.flow = "1"
+				end
+			else
+				result.tls = "0"
+			end
+		else
+			result.server_port = host[2]
+		end
+		result.alter_id = 0 --设为level
+		result.vmess_id = password
 	elseif szType == "ss" then
 		local idx_sp = 0
 		local alias = ""
@@ -216,9 +303,12 @@ local function processData(szType, content)
 				else
 					result.plugin = plugin_info
 				end
+				if result.plugin == "simple-obfs" then
+					result.plugin = "obfs-local"
+				end
 			end
 		else
-			result.server_port = host[2]
+			result.server_port = host[2]:gsub("/","")
 		end
 		result.encrypt_method_ss = method
 		result.password = password
@@ -231,6 +321,15 @@ local function processData(szType, content)
 		result.plugin = content.plugin
 		result.plugin_opts = content.plugin_options
 		result.alias = "[" .. content.airport .. "] " .. content.remarks
+	elseif szType == "sip008" then
+		result.type = "ss"
+		result.server = content.server
+		result.server_port = content.server_port
+		result.password = content.password
+		result.encrypt_method_ss = content.method
+		result.plugin = content.plugin
+		result.plugin_opts = content.plugin_opts
+		result.alias = content.remarks
 	elseif szType == "trojan" then
 		local idx_sp = 0
 		local alias = ""
@@ -258,9 +357,9 @@ local function processData(szType, content)
 				params[t[1]] = t[2]
 			end
 			
-			if params.peer then
+			if params.sni then
 				-- 未指定peer（sni）默认使用remote addr
-				result.tls_host = params.peer
+				result.tls_host = params.sni
 			end
 			
 			if params.allowInsecure == "1" then
@@ -339,6 +438,13 @@ end
 						tinsert(servers, setmetatable(server, { __index = extra }))
 					end
 					nodes = servers
+				-- SS SIP008 直接使用 Json 格式
+					local info = cjson.decode(raw)
+				elseif info then
+					nodes = info.servers or info
+					if nodes[1].server and nodes[1].method then
+						szType = 'sip008'
+					end
 				else
 					-- ssd 外的格式
 					nodes = split(base64Decode(raw):gsub(" ", "_"), "\n")
@@ -346,7 +452,7 @@ end
 				for _, v in ipairs(nodes) do
 					if v then
 						local result
-						if szType == 'ssd' then
+						if szType  then
 							result = processData(szType, v)
 						elseif not szType then
 							local node = trim(v)
@@ -356,7 +462,7 @@ end
 								if dat[3] then
 									dat3 = "://" .. dat[3]
 								end
-								if dat[1] == 'ss' or dat[1] == 'trojan' then
+								if dat[1] == 'ss' or dat[1] == 'trojan' or dat[1] == 'vless' then
 									result = processData(dat[1], dat[2] .. dat3)
 								else
 									result = processData(dat[1], base64Decode(dat[2]))
@@ -442,3 +548,5 @@ end
 		log('新增节点数量: ' .. add, '删除节点数量: ' .. del)
 		log('订阅更新成功')
 		end
+
+
