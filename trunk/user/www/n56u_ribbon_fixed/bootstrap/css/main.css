@@ -598,7 +598,7 @@ textarea[readonly] {
 }
 
 .ddown-list {
-    width: 330px;
+    width: 320px;
     margin-top: 28px;
     position:absolute;
     text-align:left;
@@ -617,7 +617,7 @@ textarea[readonly] {
 }
 
 .ddown-list a {
-    color:#000;
+    color:#ffffff;
     font-size:12px;
     text-decoration:none;
 }
