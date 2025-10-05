@@ -77,6 +77,69 @@ fakeroot ./build_firmware_modify PSG1218
 >- MI-R4A```小米路由4A千兆版```
 - 小米路由3C 网口以及LED灯配置分别如下
 >- wlan and lan: >>>>> kernel-3.4.x.config
+
+- 所有适配机型
+>- 360P2
+>- 5K-W20
+>- A3004NS
+>- B70
+>- CMCC_L1-1
+>- CR660x
+>- DIR-878
+>- DIR-882
+>- E8820V2
+>- GHL
+>- HC5661A
+>- HC5761A
+>- HC5861B
+>- JCG-836PRO
+>- JCG-AC836M
+>- JCG-AC856M
+>- JCG-AC860M
+>- JCG-Q20
+>- JCG-Y2
+>- JDC-1
+>- K2P
+>- K2P-USB
+>- K2P-USB-512
+>- MI-3
+>- MI-3A
+>- MI-3C
+>- MI-3MI
+>- MI-4
+>- MI-4A-100M
+>- MI-4C
+>- MI-MINI
+>- MI-NANO
+>- MI-R3G
+>- MI-R3P
+>- MI-R4A
+>- MR2600
+>- MSG1500
+>- MSG1500-7615
+>- MZ-R13
+>- MZ-R13P
+>- MZ-R18
+>- NETGEAR-BZV
+>- NETGEAR-CHJ
+>- NEWIFI3
+>- NEWIFI-D1
+>- NEWIFI-MINI
+>- OYE-001
+>- PSG1208
+>- PSG1218
+>- PSG712
+>- R2100
+>- R6220
+>- RE6500
+>- RM2100
+>- RT-AC1200GU
+>- WR1200JS
+>- WDR7300
+>- XY-C1
+>- YK-L1
+>- ZTE_E8820S
+
 ```shell
 # CONFIG_RAETH_ESW_IGMP_SNOOP_OFF is not set
 CONFIG_RAETH_ESW_IGMP_SNOOP_SW=y
