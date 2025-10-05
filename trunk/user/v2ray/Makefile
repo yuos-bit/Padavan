@@ -47,8 +47,6 @@ clean:
 romfs:
 	( if [ ! -f $(THISDIR)/v2ray ]; then \
 		$(ROMFSINST) -p +x $(THISDIR)/bin/v2ray /usr/bin/v2ray ;\
-		$(ROMFSINST) -p +x $(THISDIR)/bin/v2ctl /usr/bin/v2ctl ; \
 	else \
 		$(ROMFSINST) -p +x $(THISDIR)/v2ray /usr/bin/v2ray ;\
-		$(ROMFSINST) -p +x $(THISDIR)/v2ctl /usr/bin/v2ctl ; \
 	fi )
