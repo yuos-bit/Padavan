@@ -3,7 +3,7 @@
 
 <head>
 	<title>
-		<#Web_Title#> - <#menu5_16#>
+		<#Web_Title#> - <#menu5_16_0#>
 	</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta http-equiv="Pragma" content="no-cache">
@@ -115,12 +115,12 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 }
 		function initial() {
 			show_banner(2);
-			show_menu(13, 13, 0);
+			show_menu(5, 14, 1);
 			show_footer();
 			fill_ss_status(shadowsocks_status());
 			fill_dns2tcp_status(dns2tcp_status())
-			$("chnroute_count").innerHTML = '<#menu5_17_3#>' + chnroute_count();
-			$("gfwlist_count").innerHTML = '<#menu5_17_3#>' + gfwlist_count();
+			$("chnroute_count").innerHTML = '<#menu5_16_29#>' + chnroute_count();
+			$("gfwlist_count").innerHTML = '<#menu5_16_29#>' + gfwlist_count();
 			switch_ss_type();
 			showTab(getHash());
 			showMRULESList();
@@ -1457,7 +1457,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 			-moz-border-radius: 5px;
 			border-radius: 5px;
 			z-index: 200;
-			background-color: #ffffff;
+			background-color: rgba(99, 110, 114,0.98);
 			margin-left: 15px;
 			top: 80px;
 			width: 650px;
@@ -1518,9 +1518,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 						<div class="row-fluid">
 							<div class="span12">
 								<div class="box well grad_colour_dark_blue">
-									<h2 class="box_head round_top">
-										<#menu5_16#> - ShadowSocksR Plus+
-									</h2>
+								<h2 class="box_head round_top"><#menu5_16#> - <#menu5_16_0#></h2>
 									<div class="round_bottom">
 										<div>
 											<ul class="nav nav-tabs" style="margin-bottom: 10px;">
@@ -1789,7 +1787,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 											<div id="wnd_ss_add">
 											<table width="100%" cellpadding="4" cellspacing="0" class="table">
 													<tr>
-														<th colspan="2" style="background-color: #E3E3E3;">
+														<th colspan="2" style="background-color: rgba(171, 168, 167,0.2);">
 															订阅节点:添加完地址请先点击一下保存设置按钮,再点击更新订阅按钮。</th>
 													</tr>
 													<tr>
@@ -1890,7 +1888,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 												
 										
 													<tr>
-														<th colspan="2" style="background-color: #E3E3E3;">
+														<th colspan="2" style="background-color: rgba(171, 168, 167,0.2);">
 															<select name="ss_list_mode" style="display: none"
 																id="ss_list_mode" class="input" style="width: 100px;">
 																<option value="a">全部节点</option>
@@ -1919,7 +1917,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 													<table width="100%" cellpadding="4" cellspacing="0" class="table"
 														id="sslist">
 														<tr>
-															<th id="ss_setting_title" colspan="2" style="background-color: #E3E3E3;">
+															<th id="ss_setting_title" colspan="2" style="background-color: rgba(171, 168, 167,0.2);">
 																添加/删除/编辑节点</th>
 														</tr>
 														<tr>
@@ -2382,7 +2380,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 											<div id="wnd_ss_ssl" style="display:none">
 												<table width="100%" cellpadding="4" cellspacing="0" class="table">
 													<tr>
-														<th colspan="2" style="background-color: #E3E3E3;">节点故障自动切换设置
+														<th colspan="2" style="background-color: rgba(171, 168, 167,0.2);">节点故障自动切换设置
 														</th>
 													</tr>
 													<tr>
@@ -2449,7 +2447,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 </tr>-->
 
 													<tr>
-														<th colspan="2" style="background-color: #E3E3E3;">SOCKS5代理</th>
+														<th colspan="2" style="background-color: rgba(171, 168, 167,0.2);">SOCKS5代理</th>
 													</tr>
 													<tr>
 														<th>服务器:
@@ -2484,7 +2482,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 											<div id="wnd_ss_cli" style="display:none">
 												<table width="100%" cellpadding="4" cellspacing="0" class="table">
 													<tr>
-														<th colspan="2" style="background-color: #E3E3E3;">Chnroute</th>
+														<th colspan="2" style="background-color: rgba(171, 168, 167,0.2);">Chnroute</th>
 													</tr>
 													<tr>
 														<th width="50%">
@@ -2495,7 +2493,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														</th>
 														<td style="border-top: 0 none;" colspan="2">
 															<input type="button" id="btn_connect_3" class="btn btn-info"
-																value=<#menu5_17_2#>
+																value=<#menu5_16_28#>
 															onclick="submitInternet('Update_chnroute');">
 														</td>
 													</tr>
@@ -2532,7 +2530,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														</td>
 													</tr>
 													<tr>
-														<th colspan="2" style="background-color: #E3E3E3;">gfwlist</th>
+														<th colspan="2" style="background-color: rgba(171, 168, 167,0.2);">gfwlist</th>
 													</tr>
 													<tr>
 														<th width="50%">
@@ -2543,7 +2541,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 														</th>
 														<td style="border-top: 0 none;" colspan="2">
 															<input type="button" id="btn_connect_4" class="btn btn-info"
-																value=<#menu5_17_2#>
+																value=<#menu5_16_28#>
 															onclick="submitInternet('Update_gfwlist');">
 														</td>
 													</tr>
@@ -2692,7 +2690,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 											<div id="wnd_ss_help" style="display:none">
 												<table width="100%" cellpadding="4" cellspacing="0" class="table">
 													<tr>
-														<th colspan="2" style="background-color: #E3E3E3;">
+														<th colspan="2" style="background-color: rgba(171, 168, 167,0.2);">
 															chinadns-ng说明:</th>
 													</tr>
 													<tr>
