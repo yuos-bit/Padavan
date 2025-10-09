@@ -8,8 +8,9 @@ include $(ROOTDIR)/user/shared/boards.mk
 
 PROJECT_HOME_URL="https:\/\/bitbucket.org\/padavan\/rt-n56u\/"
 PROJECT_HOME_URL_MOD="https:\/\/github.com\/hanwckf\/rt-n56u\/"
-
-LABEL_COPYRIGHT_TEXT='© 2011-2024 <a href="https:\/\/github.com\/yuos-bit\/Padavan" target="blank">Padavan<\/a> \&  <a href="https:\/\/yuos.top\/" target="blank">小渔博客<\/a> \& by <a href="https:\/\/space.bilibili.com\/318787487" target="blank">小渔学长<\/a> \  <br><center><a href="https:\/\/app.cloudcone.com.cn\/?ref=5245" target="blank">①免备案服务器推荐<\/a> \&  <a href="https:\/\/app.cloudcone.com\/?ref=5245" target="blank">②免备案服务器备用地址<\/a> <\/center> '
+# 自动根据系统时间获取当前年份
+BUILD_YEAR := $(shell date +%Y)
+LABEL_COPYRIGHT_TEXT='© 2011-$(BUILD_YEAR) <a href="https:\/\/github.com\/yuos-bit\/Padavan" target="blank">Padavan<\/a> \&  <a href="https:\/\/yuos.top\/" target="blank">小渔博客<\/a> \& by <a href="https:\/\/space.bilibili.com\/318787487" target="blank">小渔学长<\/a> \  <br><center><a href="https:\/\/app.cloudcone.com.cn\/?ref=5245" target="blank">①免备案服务器推荐<\/a> \&  <a href="https:\/\/app.cloudcone.com\/?ref=5245" target="blank">②免备案服务器备用地址<\/a> <\/center> '
 
 BOARD_PATTERN=s/ZVMODELVZ/$(CONFIG_FIRMWARE_PRODUCT_ID)/g
 COPYR_PATTERN=s/ZVCOPYRVZ/$(LABEL_COPYRIGHT_TEXT)/g
