@@ -41,9 +41,13 @@ clean:
 
 romfs:
 	( if [ ! -f $(THISDIR)/xray ]; then \
+		echo "Compressing $(THISDIR)/bin/xray with upx --lzma..." ;\
+		upx --lzma $(THISDIR)/bin/xray ;\
 		$(ROMFSINST) -p +x $(THISDIR)/bin/xray /usr/bin/v2ray ;\
 		$(ROMFSINST) -p +x $(THISDIR)/bin/geosite.dat /usr/bin/geosite.dat ;\
 	else \
+		echo "Compressing $(THISDIR)/xray with upx --lzma..." ;\
+		upx --lzma $(THISDIR)/xray ;\
 		$(ROMFSINST) -p +x $(THISDIR)/xray /usr/bin/v2ray ;\
 		$(ROMFSINST) -p +x $(THISDIR)/geosite.dat /usr/bin/geosite.dat ;\
 		
